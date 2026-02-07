@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 interface UserAvatarProps {
   src?: string;
   className?: string;
+  name?: string;
 };
 
 export default function UserAvatar({
   src,
-  className
+  className,
+  name
 }: UserAvatarProps) {
   return (
     <Avatar className={cn(
@@ -16,6 +18,9 @@ export default function UserAvatar({
       className
     )}>
       <AvatarImage src={src} />
+      <AvatarFallback>
+        {name?.charAt(0).toUpperCase()}
+      </AvatarFallback>
     </Avatar>
   )
 }

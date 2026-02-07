@@ -8,6 +8,8 @@ import LeaveServerModal from "../modals/leave-server-modal";
 import DeleteServerModal from "../modals/delete-server-modal";
 
 import CreateChannelModal from "@/components/modals/create-channel-modal";
+import { DeleteChannelModal } from "@/components/modals/delete-channel-modal";
+import { EditChannelModal } from "@/components/modals/edit-channel-modal";
 
 export default function ModalProvider() {
   return (
@@ -19,6 +21,8 @@ export default function ModalProvider() {
       <CreateChannelModal />
       <LeaveServerModal />
       <DeleteServerModal />
+      <DeleteChannelModal />
+      <EditChannelModal />
     </>
   )
 }

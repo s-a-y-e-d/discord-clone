@@ -9,6 +9,9 @@ import prisma from "@/lib/db";
 
 import { ServerHeader } from "./server-header";
 import { ServerSearch } from "./server-search";
+import { ServerSection } from "./server-section";
+import { ServerChannel } from "./server-channel";
+import UserAvatar from "@/components/user-avatar";
 
 interface ServerSidebarProps {
   serverId: string;
@@ -119,69 +122,90 @@ export const ServerSidebar = async ({
         <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
         {!!textChannels?.length && (
           <div className="mb-2">
-            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">
-              Text Channels
-            </div>
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.TEXT}
+              role={role}
+              label="Text Channels"
+            />
             <div className="space-y-[2px]">
               {textChannels.map((channel) => (
-                <div key={channel.id} className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1">
-                  <Hash className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
-                  <p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
-                    {channel.name}
-                  </p>
-                </div>
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  server={server}
+                />
               ))}
             </div>
           </div>
         )}
         {!!audioChannels?.length && (
           <div className="mb-2">
-            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">
-              Audio Channels
-            </div>
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.AUDIO}
+              role={role}
+              label="Audio Channels"
+            />
             <div className="space-y-[2px]">
               {audioChannels.map((channel) => (
-                <div key={channel.id} className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1">
-                  <Mic className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
-                  <p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
-                    {channel.name}
-                  </p>
-                </div>
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  server={server}
+                />
               ))}
             </div>
           </div>
         )}
         {!!videoChannels?.length && (
           <div className="mb-2">
-            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">
-              Video Channels
-            </div>
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.VIDEO}
+              role={role}
+              label="Video Channels"
+            />
             <div className="space-y-[2px]">
               {videoChannels.map((channel) => (
-                <div key={channel.id} className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1">
-                  <Video className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
-                  <p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
-                    {channel.name}
-                  </p>
-                </div>
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  server={server}
+                />
               ))}
             </div>
           </div>
         )}
         {!!members?.length && (
           <div className="mb-2">
-            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">
-              Members
-            </div>
+            <ServerSection
+              sectionType="members"
+              role={role}
+              label="Members"
+              server={server}
+            />
             <div className="space-y-[2px]">
               {members.map((member) => (
                 <div key={member.id} className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1">
-                  {member.role === "GUEST" && null}
-                  {member.role === "MODERATOR" && <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />}
-                  {member.role === "ADMIN" && <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />}
-                  <p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
-                    {member.user.name}
-                  </p>
+                  <UserAvatar
+                    src={member.user.image || ""}
+                    name={member.user.name}
+                    className="h-8 w-8 md:h-8 md:w-8"
+                  />
+                  <div className="flex flex-col gap-y-1">
+                    <div className="flex items-center gap-x-2">
+                      <p className="line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition">
+                        {member.user.name}
+                      </p>
+                      {member.role === "GUEST" && null}
+                      {member.role === "MODERATOR" && <ShieldCheck className="h-4 w-4 text-indigo-500" />}
+                      {member.role === "ADMIN" && <ShieldAlert className="h-4 w-4 text-rose-500" />}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
