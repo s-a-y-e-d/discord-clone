@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/theme-provider";
+import ModalProvider from "@/components/provider/modal-provider";
 
 export default function RootLayout({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <ModalProvider />
           {children}
           <Toaster />
         </ThemeProvider>
