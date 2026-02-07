@@ -6,7 +6,7 @@ import * as z from "zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +41,8 @@ const signUpSchema = z.object({
 
 export function SignUpCard() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackURL = searchParams.get("callbackURL");
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -60,6 +62,7 @@ export function SignUpCard() {
         email: values.email,
         password: values.password,
         name: values.name,
+        callbackURL: callbackURL || undefined,
       },
       {
         onSuccess: () => {
@@ -68,7 +71,12 @@ export function SignUpCard() {
             title: "Account created",
             description: "You have successfully created an account.",
           });
-          router.push("/");
+          if (callbackURL) {
+            window.location.href = callbackURL;
+          } else {
+            router.push("/");
+            router.refresh();
+          }
         },
         onError: (ctx) => {
           console.error("Sign up error:", ctx.error);

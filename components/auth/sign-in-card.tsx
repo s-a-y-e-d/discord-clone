@@ -6,7 +6,7 @@ import * as z from "zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -36,6 +36,8 @@ const signInSchema = z.object({
 
 export function SignInCard() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackURL = searchParams.get("callbackURL");
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signInSchema>>({
@@ -52,6 +54,7 @@ export function SignInCard() {
       {
         email: values.email,
         password: values.password,
+        callbackURL: callbackURL || undefined,
       },
       {
         onSuccess: () => {
@@ -60,7 +63,12 @@ export function SignInCard() {
             title: "Success",
             description: "You have successfully signed in.",
           });
-          router.push("/");
+          if (callbackURL) {
+            window.location.href = callbackURL;
+          } else {
+            router.push("/");
+            router.refresh();
+          }
         },
         onError: (ctx) => {
           setIsLoading(false);
