@@ -20,11 +20,11 @@ const iconMap = {
   [ChannelType.VIDEO]: Video,
 }
 
-export const ServerChannel = ({
+export function ServerChannel({
   channel,
   server,
   role
-}: ServerChannelProps) => {
+}: ServerChannelProps) {
   const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();

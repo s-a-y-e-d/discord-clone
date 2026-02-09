@@ -18,9 +18,15 @@ export default async function SetUpPage() {
       }
     }
   });
+  const generalChannel = await prisma.channel.findFirst({
+    where: {
+      serverId: server?.id,
+      name: 'general'
+    }
+  });
 
-  if (server) {
-    redirect(`/servers/${server.id}`)
+  if (server && generalChannel) {
+    redirect(`/servers/${server.id}/channels/${generalChannel.id}`)
   }
 
 
