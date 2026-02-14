@@ -28,8 +28,10 @@ import {
 } from "@/components/ui/form";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "@/hooks/use-toast";
+import FileUpload from "@/components/file-upload";
 
 const signUpSchema = z.object({
+  image: z.string().optional(),
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -52,6 +54,7 @@ export function SignUpCard() {
       email: "",
       password: "",
       confirmPassword: "",
+      image: "",
     },
   });
 
@@ -62,6 +65,7 @@ export function SignUpCard() {
         email: values.email,
         password: values.password,
         name: values.name,
+        image: values.image,
         callbackURL: callbackURL || undefined,
       },
       {
@@ -102,6 +106,24 @@ export function SignUpCard() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex items-center justify-center text-center">
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <FileUpload
+                        endpoint="userProfilePicture"
+                        value={field.value || ""}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="email"

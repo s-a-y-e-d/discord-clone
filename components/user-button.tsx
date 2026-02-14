@@ -9,8 +9,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { authClient } from "@/lib/auth-client";
+import UserAvatar from "./user-avatar";
 
 interface UserButtonProps {
   imageUrl?: string;
@@ -33,10 +33,11 @@ export const UserButton = ({ imageUrl, name }: UserButtonProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none">
-        <Avatar className="h-[48px] w-[48px] hover:opacity-75 transition">
-          <AvatarImage src={imageUrl} />
-          <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
-        </Avatar>
+        <UserAvatar
+          src={imageUrl}
+          name={name}
+          className="h-[48px] w-[48px] hover:opacity-75 transition"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" side="right" className="w-56">
         <DropdownMenuItem

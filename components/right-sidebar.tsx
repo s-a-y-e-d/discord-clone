@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Download, FileText, File as FileIcon, Image as ImageIcon, RotateCcw } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Member, MemberRole, Message, User } from "@/generated/prisma";
 
 import { Button } from "@/components/ui/button";
@@ -80,9 +80,6 @@ export const RightSidebar = ({
       goal.id === id ? { ...goal, completed: !goal.completed } : goal
     ));
   };
-
-  const isAdmin = role === MemberRole.ADMIN;
-  const isModerator = role === MemberRole.MODERATOR;
 
   return (
     <div className="flex flex-col h-full w-full bg-[rgb(35,36,40)] border-l border-[#1f2128] p-4 gap-4">
