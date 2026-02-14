@@ -4,8 +4,11 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: [
-      "kgywacjnd3.ufs.sh"
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "kgywacjnd3.ufs.sh",
+      }
     ]
   }
 };

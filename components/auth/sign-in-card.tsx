@@ -37,7 +37,7 @@ const signInSchema = z.object({
 export function SignInCard() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackURL = searchParams.get("callbackURL");
+  const callbackURL = searchParams?.get("callbackURL");
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signInSchema>>({
@@ -87,7 +87,7 @@ export function SignInCard() {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-white">Welcome Back!</CardTitle>
         <CardDescription className="text-[#b5bac1]">
-          We're so excited to see you again!
+          We&apos;re so excited to see you again!
         </CardDescription>
       </CardHeader>
       <CardContent>

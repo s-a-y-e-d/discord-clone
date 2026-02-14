@@ -1,7 +1,7 @@
 import { NextApiRequest } from "next";
 
 import { NextApiResponseServerIo } from "@/types";
-import { currentProfile } from "@/lib/current-profile";
+import { currentProfilePages } from "@/lib/current-profile-pages";
 import prisma from "@/lib/db";
 
 const db = prisma;
@@ -14,8 +14,8 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const profile = await currentProfile();
-    const { content, fileUrl } = req.body;
+    const profile = await currentProfilePages(req);
+    const { content, fileUrl, nonce } = req.body;
     const { conversationId } = req.query;
 
     if (!profile) return res.status(401).json({ error: "Unauthorized" });
@@ -73,7 +73,10 @@ export default async function handler(
 
     const channelKey = `chat:${conversationId}:messages`;
 
-    res?.socket?.server?.io?.emit(channelKey, message);
+    res?.socket?.server?.io?.emit(channelKey, {
+      ...message,
+      nonce,
+    });
 
     return res.status(200).json(message);
   } catch (error) {

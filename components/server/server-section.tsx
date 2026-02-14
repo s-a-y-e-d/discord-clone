@@ -1,10 +1,8 @@
 "use client";
 
 import { ChannelType, MemberRole, Server } from "@/generated/prisma";
-import { Plus, Settings, Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { Plus, Settings } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 

@@ -42,7 +42,7 @@ const signUpSchema = z.object({
 export function SignUpCard() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackURL = searchParams.get("callbackURL");
+  const callbackURL = searchParams?.get("callbackURL");
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -96,7 +96,7 @@ export function SignUpCard() {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-white">Create an account</CardTitle>
         <CardDescription className="text-[#b5bac1]">
-          We're excited to have you join us!
+          We&apos;re excited to have you join us!
         </CardDescription>
       </CardHeader>
       <CardContent>

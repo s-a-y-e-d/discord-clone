@@ -72,7 +72,7 @@ export const ServerSidebar = async ({
   }
 
   return (
-    <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
+    <div className="flex flex-col h-full text-primary w-full bg-[#F2F3F5] dark:bg-[rgb(35,36,40)]">
       <ServerHeader
         server={server}
         role={role}

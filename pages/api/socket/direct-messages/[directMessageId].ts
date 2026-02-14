@@ -2,7 +2,7 @@ import { NextApiRequest } from "next";
 import { MemberRole } from "@/generated/prisma";
 
 import { NextApiResponseServerIo } from "@/types";
-import { currentProfile } from "@/lib/current-profile";
+import { currentProfilePages } from "@/lib/current-profile-pages";
 import db from "@/lib/db";
 
 export default async function handler(
@@ -13,7 +13,7 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const profile = await currentProfile();
+    const profile = await currentProfilePages(req);
     const { content } = req.body;
     const { directMessageId, conversationId } = req.query;
 

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import { getSession } from "@/lib/auth-actions";
 import prisma from "@/lib/db";
-import { MemberRole } from "@/generated/prisma";
 
 export async function DELETE(
   req: Request,

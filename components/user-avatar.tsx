@@ -14,10 +14,11 @@ export default function UserAvatar({
 }: UserAvatarProps) {
   return (
     <Avatar className={cn(
-      "h-7 w-7 md:h-10 md:w-10",
+      "h-7 w-7 md:h-10 md:w-10 relative overflow-hidden",
       className
     )}>
-      <AvatarImage src={src} />
+      <AvatarImage src={src} className="object-cover" />
+      <div className="absolute inset-0 bg-primary/20 pointer-events-none" />
       <AvatarFallback>
         {name?.charAt(0).toUpperCase()}
       </AvatarFallback>

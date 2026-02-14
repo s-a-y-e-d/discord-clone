@@ -77,13 +77,13 @@ export default function MembersModal() {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black overflow-hidden">
+      <DialogContent className="bg-white text-black overflow-hidden dark:bg-card dark:text-zinc-100">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
+          <DialogTitle className="text-2xl text-center font-bold dark:text-zinc-100">
             Manage Members
           </DialogTitle>
           <DialogDescription
-            className="text-center text-zinc-500"
+            className="text-center text-zinc-500 dark:text-zinc-400"
           >
             {server?.members?.length} Members
           </DialogDescription>
@@ -91,7 +91,7 @@ export default function MembersModal() {
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
           {server?.members?.map((member) => (
             <div key={member.id} className="flex items-center gap-x-2 mb-6">
-              <UserAvatar src={member.user.imageUrl} />
+              <UserAvatar src={member.user.imageUrl || undefined} />
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center gap-x-1">
                   {member.user.name}
