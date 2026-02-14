@@ -69,6 +69,10 @@
     "typescript": "^5"
   },
   "overrides": {
-    "effect": "3.18.4"
+    "effect": "3.18.4",
+    "@emoji-mart/react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }

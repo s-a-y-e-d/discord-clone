@@ -17,7 +17,6 @@ interface RightSidebarProps {
 
 export const RightSidebar = ({
   serverFiles = [],
-  role,
 }: RightSidebarProps) => {
   // Pomodoro State
   const [time, setTime] = useState(25 * 60); // 25 minutes in seconds
