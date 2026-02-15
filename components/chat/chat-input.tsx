@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, SendHorizontal } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Member, Message, User, DirectMessage } from "@/generated/prisma";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   Form,
@@ -70,7 +71,7 @@ export const ChatInput = ({
       const now = new Date();
 
       const optimisticMessage: MessageWithMemberWithProfile = {
-        id: Date.now().toString(),
+        id: uuidv4(),
         content: values.content,
         fileUrl: null,
         memberId: member.id,
