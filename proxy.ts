@@ -23,7 +23,9 @@ export function proxy(request: NextRequest) {
   // check for session token
   // better-auth uses "better-auth.session_token" by default, or "better-auth.session_token.sig" etc.
   // We check for the main token.
-  const sessionCookie = request.cookies.get("better-auth.session_token");
+  const sessionCookie =
+    request.cookies.get("better-auth.session_token") ||
+    request.cookies.get("__Secure-better-auth.session_token");
 
   if (!sessionCookie) {
     const url = request.nextUrl.clone();
