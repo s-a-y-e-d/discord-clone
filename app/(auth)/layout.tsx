@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         <ModeToggle />
       </div>
       {/* Abstract Background */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-10 opacity-5" style={{ backgroundImage: "url('/discord-bg.png')" }} />
+      <div className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-10 opacity-5" />
       <div className="relative z-10 w-full max-w-md p-4">
         {children}
       </div>
