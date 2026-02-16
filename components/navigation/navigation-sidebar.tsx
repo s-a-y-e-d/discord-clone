@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { currentProfile } from "@/lib/current-profile";
 import prisma from "@/lib/db";
@@ -43,7 +42,6 @@ export const NavigationSidebar = async () => {
         ))}
       </ScrollArea>
       <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
-        <ModeToggle />
         <UserButton
           imageUrl={profile.image || undefined}
           name={profile.name}

@@ -1,9 +1,7 @@
-import { Hash } from "lucide-react";
+import { Hash, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
-import { MobileToggle } from "@/components/mobile-toggle";
 import UserAvatar from "@/components/user-avatar";
-import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
-import { ServerSidebar } from "@/components/server/server-sidebar";
 import { MobileRightSidebarToggle } from "@/components/mobile-right-sidebar-toggle";
 
 interface ChatHeaderProps {
@@ -23,10 +21,13 @@ export const ChatHeader = ({
 }: ChatHeaderProps) => {
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-[#1f2128] border-b-2">
-      <MobileToggle
-        navigationSidebar={<NavigationSidebar />}
-        serverSidebar={<ServerSidebar serverId={serverId} />}
-      />
+      {/* Mobile: Back arrow to server sidebar view */}
+      <Link
+        href={`/servers/${serverId}`}
+        className="md:hidden mr-2 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
+      >
+        <ArrowLeft className="h-5 w-5" />
+      </Link>
       {type === "channel" && (
         <Hash className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mr-2" />
       )}

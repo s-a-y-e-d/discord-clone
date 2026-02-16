@@ -1,6 +1,9 @@
 import { currentProfile } from "@/lib/current-profile";
 import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
+import { ServerSidebar } from "@/components/server/server-sidebar";
+import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
+import { DesktopRedirect } from "@/components/desktop-redirect";
 
 interface ServerIdPageProps {
   params: Promise<{
@@ -43,7 +46,29 @@ const ServerIdPage = async (props: ServerIdPageProps) => {
     return null;
   }
 
-  return redirect(`/servers/${params.serverId}/channels/${initialChannel?.id}`)
+  const channelUrl = `/servers/${params.serverId}/channels/${initialChannel?.id}`;
+
+  return (
+    <>
+      {/* On desktop, redirect to the general channel */}
+      <DesktopRedirect url={channelUrl} />
+
+      {/* On mobile, show NavigationSidebar + ServerSidebar side by side */}
+      <div className="md:hidden h-full flex">
+        <div className="w-18 flex-shrink-0">
+          <NavigationSidebar />
+        </div>
+        <div className="flex-1">
+          <ServerSidebar serverId={params.serverId} />
+        </div>
+      </div>
+
+      {/* On desktop, show nothing (redirect handles it) */}
+      <div className="hidden md:flex h-full items-center justify-center text-muted-foreground">
+        Redirecting...
+      </div>
+    </>
+  )
 }
 
 export default ServerIdPage;
