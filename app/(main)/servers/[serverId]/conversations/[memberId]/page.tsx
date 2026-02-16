@@ -7,6 +7,7 @@ import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
 import { MediaRoom } from "@/components/media-room";
+import { MobileRightSidebarContent } from "@/components/mobile-right-sidebar-content";
 
 interface MemberIdPageProps {
   params: Promise<{
@@ -55,12 +56,13 @@ const MemberIdPage = async (props: MemberIdPageProps) => {
   const otherMember = memberOne.id === currentMember.id ? memberTwo : memberOne;
 
   return (
-    <div className="bg-white dark:bg-background flex flex-col h-full">
+    <div className="bg-white dark:bg-background flex flex-col h-full overflow-hidden">
       <ChatHeader
         imageUrl={otherMember.user.imageUrl || undefined}
         name={otherMember.user.name}
         serverId={params.serverId}
         type="conversation"
+        rightSidebar={<MobileRightSidebarContent serverId={params.serverId} />}
       />
       {searchParams.video && (
         <MediaRoom

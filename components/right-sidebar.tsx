@@ -1,7 +1,7 @@
 "use client";
 
-import { Check, Download, FileText, File as FileIcon, Image as ImageIcon, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { Check, Download, FileText, File as FileIcon, Image as ImageIcon, RotateCcw, Trash2 } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Member, MemberRole, Message, User } from "@/generated/prisma";
 
 import { Button } from "@/components/ui/button";
@@ -22,10 +22,39 @@ export const RightSidebar = ({
   const [time, setTime] = useState(25 * 60); // 25 minutes in seconds
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Timer countdown effect
+  useEffect(() => {
+    if (isActive && !isPaused) {
+      intervalRef.current = setInterval(() => {
+        setTime((prev) => {
+          if (prev <= 1) {
+            clearInterval(intervalRef.current!);
+            setIsActive(false);
+            setIsPaused(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isActive, isPaused]);
 
   // Session Goals State
   const [goals, setGoals] = useState([
-    { id: 1, text: "Review Chapter 3", completed: false },
+    { id: 1, text: "GF", completed: false },
     { id: 2, text: "Solve Practice Problems 1-5", completed: false },
     { id: 3, text: "Outline Lab Report", completed: false },
   ]);
@@ -84,57 +113,56 @@ export const RightSidebar = ({
     <div className="flex flex-col h-full w-full bg-[rgb(35,36,40)] border-l border-[#1f2128] p-4 gap-4">
 
       {/* Pomodoro Timer */}
-      <Card className="bg-[#1a1b21] border-none shadow-lg">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium text-zinc-400">Pomodoro Timer</CardTitle>
+      <div className="bg-[#1a1b21] rounded-xl shadow-lg p-4 space-y-3 overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium text-zinc-400">Pomodoro Timer</span>
           <div className={cn("h-4 w-4 rounded-full transition-colors", isActive && !isPaused ? "bg-green-500 animate-pulse" : "bg-orange-500")} />
-        </CardHeader>
-        <CardContent>
-          {isEditingTime ? (
-            <div className="flex items-center justify-center py-4">
-              <Input
-                value={editTimeValue}
-                onChange={(e) => setEditTimeValue(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    saveTime();
-                  } else if (e.key === "Escape") {
-                    setIsEditingTime(false);
-                  }
-                }}
-                onBlur={saveTime}
-                placeholder="Mins"
-                className="w-24 text-center bg-zinc-900/50 border-zinc-700 text-white focus-visible:ring-primary"
-                autoFocus
-              />
-            </div>
-          ) : (
-            <div
-              onClick={() => {
-                setIsEditingTime(true);
-                setEditTimeValue(Math.floor(time / 60).toString());
-                setIsActive(false);
-                setIsPaused(true);
+        </div>
+        {isEditingTime ? (
+          <div className="flex items-center justify-center py-4">
+            <Input
+              value={editTimeValue}
+              onChange={(e) => setEditTimeValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  saveTime();
+                } else if (e.key === "Escape") {
+                  setIsEditingTime(false);
+                }
               }}
-              className="text-2xl font-bold text-white text-center py-4 tracking-widest tabular-nums cursor-pointer hover:text-primary transition-colors"
-            >
-              {formatTime(time)}
-            </div>
-          )}
-          <div className="flex gap-2">
-            <Button
-              onClick={toggleTimer}
-              className={cn("w-full transition-colors", isActive && !isPaused ? "bg-red-500 hover:bg-red-600 text-white" : "bg-primary hover:bg-primary/90 text-primary-foreground")}
-            >
-              {isActive && !isPaused ? "Pause" : "Start"}
-            </Button>
-            <Button onClick={resetTimer} variant="ghost" size="icon" className="text-zinc-400 hover:text-white hover:bg-zinc-800">
-              <RotateCcw className="h-4 w-4" />
-            </Button>
+              onBlur={saveTime}
+              placeholder="Mins"
+              className="w-24 text-center bg-zinc-900/50 border-zinc-700 text-white focus-visible:ring-primary"
+              autoFocus
+            />
           </div>
-          <p className="text-xs text-center text-zinc-500 mt-2">Current Phase: {isActive ? (isPaused ? "Paused" : "Focus") : "Ready"}</p>
-        </CardContent>
-      </Card>
+        ) : (
+          <div
+            onClick={() => {
+              if (isActive && !isPaused) return;
+              setIsEditingTime(true);
+              setEditTimeValue(Math.floor(time / 60).toString());
+              setIsActive(false);
+              setIsPaused(true);
+            }}
+            className={cn("text-2xl font-bold text-white text-center py-4 tracking-widest tabular-nums transition-colors", (isActive && !isPaused) ? "" : "cursor-pointer hover:text-primary")}
+          >
+            {formatTime(time)}
+          </div>
+        )}
+        <div className="flex gap-2">
+          <Button
+            onClick={toggleTimer}
+            className={cn("flex-1 transition-colors", isActive && !isPaused ? "bg-red-500 hover:bg-red-600 text-white" : "bg-primary hover:bg-primary/90 text-primary-foreground")}
+          >
+            {isActive && !isPaused ? "Pause" : "Start"}
+          </Button>
+          <Button onClick={resetTimer} variant="ghost" size="icon" className="text-zinc-400 hover:text-white hover:bg-zinc-800 flex-shrink-0">
+            <RotateCcw className="h-4 w-4" />
+          </Button>
+        </div>
+        <p className="text-xs text-center text-zinc-500">Current Phase: {isActive ? (isPaused ? "Paused" : "Focus") : "Ready"}</p>
+      </div>
 
       {/* Session Goals */}
       <Card className="bg-[#1a1b21] border-none shadow-lg">
@@ -177,11 +205,20 @@ export const RightSidebar = ({
                 <Check className="h-3 w-3" />
               </div>
               <span className={cn(
-                "text-sm transition-colors decoration-2 select-none",
+                "text-sm transition-colors decoration-2 select-none flex-1",
                 goal.completed ? "text-zinc-500 line-through decoration-zinc-500/50" : "text-zinc-300 group-hover:text-white"
               )}>
                 {goal.text}
               </span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setGoals(goals.filter((g) => g.id !== goal.id));
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity text-zinc-500 hover:text-red-400 flex-shrink-0 p-0.5"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+              </button>
             </div>
           ))}
         </CardContent>

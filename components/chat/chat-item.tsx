@@ -117,26 +117,33 @@ export const ChatItem = ({
     })
   }, [content, form]); // Adding 'form' dependency is usually safe for useForm
 
-  const fileType = fileUrl?.split(".").pop();
+  const fileType = fileUrl?.split(".").pop()?.toLowerCase();
+  const imageExtensions = ["png", "jpg", "jpeg", "gif", "webp", "svg", "bmp"];
 
   const isAdmin = currentMember.role === MemberRole.ADMIN;
   const isModerator = currentMember.role === MemberRole.MODERATOR;
   const isOwner = currentMember.id === member.id;
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
   const canEditMessage = !deleted && isOwner && !fileUrl;
-  const isPDF = fileType === "pdf" && fileUrl;
-  const isImage = !isPDF && fileUrl;
+  const isPDF = fileUrl && (fileType === "pdf" || content?.toLowerCase().endsWith(".pdf"));
+  const isKnownImage = fileUrl && !isPDF && (imageExtensions.includes(fileType || "") || imageExtensions.some(ext => content?.toLowerCase().endsWith(`.${ext}`)));
+
+  // For unknown file types (no extension), attempt to render as image with fallback
+  const [imgFailed, setImgFailed] = useState(false);
+  const shouldTryAsImage = fileUrl && !isPDF && !isKnownImage && !imgFailed;
+  const showAsImage = isKnownImage || shouldTryAsImage;
+  const showAsFile = fileUrl && !isPDF && !showAsImage;
 
   return (
-    <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
-      <div className="group flex gap-x-2 items-start w-full">
+    <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full min-w-0">
+      <div className="group flex gap-x-2 items-start w-full min-w-0">
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
           <UserAvatar
             src={member.user.image || undefined}
             name={member.user.name}
           />
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full min-w-0">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
               <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
@@ -150,31 +157,45 @@ export const ChatItem = ({
               {timestamp}
             </span>
           </div>
-          {isImage && (
+          {showAsImage && (
             <a
               href={fileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="relative aspect-square rounded-md mt-2 overflow-hidden border border-primary flex items-center bg-secondary h-48 w-48"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={fileUrl}
                 alt={content}
-                fill
-                className="object-cover"
+                onError={() => setImgFailed(true)}
+                className="object-cover w-full h-full"
               />
             </a>
           )}
           {isPDF && (
-            <div className="relative flex items-center p-2 mt-2 rounded-md bg-primary/10">
-              <FileIcon className="h-10 w-10 fill-primary/20 stroke-primary" />
+            <div className="relative flex items-center p-2 mt-2 rounded-md bg-primary/10 max-w-full overflow-hidden">
+              <FileIcon className="h-10 w-10 fill-primary/20 stroke-primary flex-shrink-0" />
               <a
                 href={fileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 text-sm text-primary hover:underline"
+                className="ml-2 text-sm text-primary hover:underline break-all min-w-0"
               >
                 PDF File
+              </a>
+            </div>
+          )}
+          {showAsFile && (
+            <div className="relative flex items-center p-2 mt-2 rounded-md bg-primary/10 max-w-full overflow-hidden">
+              <FileIcon className="h-10 w-10 fill-primary/20 stroke-primary flex-shrink-0" />
+              <a
+                href={fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 text-sm text-primary hover:underline break-all min-w-0"
+              >
+                {content || "Attached File"}
               </a>
             </div>
           )}

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import qs from "query-string";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import {
   Dialog,
@@ -34,6 +35,7 @@ const formSchema = z.object({
 export const MessageFileModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
+  const [fileName, setFileName] = useState("");
 
   const isModalOpen = isOpen && type === "messageFile";
   const { apiUrl, query } = data;
@@ -47,6 +49,7 @@ export const MessageFileModal = () => {
 
   const handleClose = () => {
     form.reset();
+    setFileName("");
     onClose();
   }
 
@@ -61,7 +64,7 @@ export const MessageFileModal = () => {
 
       await axios.post(url, {
         ...values,
-        content: values.fileUrl,
+        content: fileName || values.fileUrl,
       });
 
       form.reset();
@@ -97,6 +100,7 @@ export const MessageFileModal = () => {
                           endpoint="messageFile"
                           value={field.value}
                           onChange={field.onChange}
+                          onFileNameChange={setFileName}
                         />
                       </FormControl>
                     </FormItem>

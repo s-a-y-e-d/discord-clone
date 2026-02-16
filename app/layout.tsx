@@ -22,7 +22,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import ModalProvider from "@/components/provider/modal-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
-import { SocketIndicator } from "@/components/socket-indicator";
 
 export default function RootLayout({
   children,
@@ -45,7 +44,6 @@ export default function RootLayout({
             <QueryProvider>
               {children}
             </QueryProvider>
-            <SocketIndicator />
           </SocketProvider>
           <Toaster />
         </ThemeProvider>

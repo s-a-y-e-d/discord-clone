@@ -4,13 +4,14 @@ import { MobileToggle } from "@/components/mobile-toggle";
 import UserAvatar from "@/components/user-avatar";
 import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
 import { ServerSidebar } from "@/components/server/server-sidebar";
-import { ChatCloseButton } from "./chat-close-button";
+import { MobileRightSidebarToggle } from "@/components/mobile-right-sidebar-toggle";
 
 interface ChatHeaderProps {
   serverId: string;
   name: string;
   type: "channel" | "conversation";
   imageUrl?: string;
+  rightSidebar?: React.ReactNode;
 }
 
 export const ChatHeader = ({
@@ -18,6 +19,7 @@ export const ChatHeader = ({
   name,
   type,
   imageUrl,
+  rightSidebar,
 }: ChatHeaderProps) => {
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-[#1f2128] border-b-2">
@@ -39,8 +41,9 @@ export const ChatHeader = ({
         {name}
       </p>
       <div className="ml-auto flex items-center gap-x-2">
-
-        <ChatCloseButton />
+        {rightSidebar && (
+          <MobileRightSidebarToggle rightSidebar={rightSidebar} />
+        )}
       </div>
     </div>
   );

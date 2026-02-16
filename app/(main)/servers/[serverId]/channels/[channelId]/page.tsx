@@ -7,6 +7,7 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 import { ChannelType } from "@/generated/prisma"; // Or from @prisma/client
+import { MobileRightSidebarContent } from "@/components/mobile-right-sidebar-content";
 
 interface ChannelIdPageProps {
   params: Promise<{
@@ -44,11 +45,12 @@ const ChannelIdPage = async (props: ChannelIdPageProps) => {
   }
 
   return (
-    <div className="bg-white dark:bg-background flex flex-col h-full">
+    <div className="bg-white dark:bg-background flex flex-col h-full overflow-hidden">
       <ChatHeader
         name={channel.name}
         serverId={channel.serverId}
         type="channel"
+        rightSidebar={<MobileRightSidebarContent serverId={channel.serverId} />}
       />
       {channel.type === ChannelType.TEXT && (
         <>
