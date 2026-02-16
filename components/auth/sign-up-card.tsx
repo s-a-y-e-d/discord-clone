@@ -96,14 +96,14 @@ export function SignUpCard() {
   }
 
   return (
-    <Card className="w-full max-w-md border-none bg-[#313338] text-[#dbdee1] shadow-xl">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-white">Create an account</CardTitle>
-        <CardDescription className="text-[#b5bac1]">
+    <Card className="w-full max-w-md border-none bg-[#313338] text-[#dbdee1] shadow-xl mx-auto">
+      <CardHeader className="text-center px-4 sm:px-6">
+        <CardTitle className="text-xl sm:text-2xl font-bold text-white">Create an account</CardTitle>
+        <CardDescription className="text-[#b5bac1] text-sm">
           We&apos;re excited to have you join us!
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-4 sm:px-6 max-h-[65vh] overflow-y-auto">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex items-center justify-center text-center">

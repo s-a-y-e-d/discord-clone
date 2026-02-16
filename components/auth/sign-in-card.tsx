@@ -83,14 +83,14 @@ export function SignInCard() {
   }
 
   return (
-    <Card className="w-full max-w-md border-none bg-[#313338] text-[#dbdee1] shadow-xl">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-white">Welcome Back!</CardTitle>
-        <CardDescription className="text-[#b5bac1]">
+    <Card className="w-full max-w-md border-none bg-[#313338] text-[#dbdee1] shadow-xl mx-auto">
+      <CardHeader className="text-center px-4 sm:px-6">
+        <CardTitle className="text-xl sm:text-2xl font-bold text-white">Welcome Back!</CardTitle>
+        <CardDescription className="text-[#b5bac1] text-sm">
           We&apos;re so excited to see you again!
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-4 sm:px-6 max-h-[65vh] overflow-y-auto">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
