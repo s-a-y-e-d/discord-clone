@@ -23,6 +23,7 @@ import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 
 import { AutoRefreshProvider } from "@/components/providers/auto-refresh-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function RootLayout({
   children,
@@ -38,7 +39,9 @@ export default function RootLayout({
           <AutoRefreshProvider />
           <SocketProvider>
             <ModalProvider />
-            {children}
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
           </SocketProvider>
         </QueryProvider>
         <Toaster />

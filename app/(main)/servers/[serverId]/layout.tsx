@@ -49,9 +49,10 @@ export default async function ServerIdLayout({
       fileUrl: {
         not: null,
       },
+      isImportant: true,
       member: {
         role: {
-          in: ["ADMIN", "MODERATOR"]
+          in: ["ADMIN", "MODERATOR", "GUEST"]
         }
       }
     },

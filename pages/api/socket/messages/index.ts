@@ -13,7 +13,7 @@ export default async function handler(
 
   try {
     const profile = await currentProfilePages(req);
-    const { content, fileUrl, nonce } = req.body;
+    const { content, fileUrl, nonce, isImportant } = req.body;
     const { serverId, channelId } = req.query;
 
     if (!profile) return res.status(401).json({ error: "Unauthorized" });
@@ -66,7 +66,8 @@ export default async function handler(
         content,
         fileUrl,
         channelId: channelId as string,
-        memberId: member.id
+        memberId: member.id,
+        isImportant,
       },
       include: {
         member: {

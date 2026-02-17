@@ -8,6 +8,8 @@ import qs from "query-string";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +32,8 @@ const formSchema = z.object({
   fileUrl: z.string().min(1, {
     message: "Attachment is required.",
   }),
+  name: z.string().optional(),
+  isImportant: z.enum(["yes", "no"]),
 });
 
 export const MessageFileModal = () => {
@@ -44,6 +48,8 @@ export const MessageFileModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       fileUrl: "",
+      name: "",
+      isImportant: "no", // Using string for radio group value, will convert to boolean on submit
     },
   });
 
@@ -64,7 +70,8 @@ export const MessageFileModal = () => {
 
       await axios.post(url, {
         ...values,
-        content: fileName || values.fileUrl,
+        content: values.name || fileName || values.fileUrl,
+        isImportant: values.isImportant === "yes",
       });
 
       form.reset();
@@ -83,7 +90,7 @@ export const MessageFileModal = () => {
             Add an attachment
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500 dark:text-zinc-400">
-            Send a file or a message
+            Send a file or a image
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -107,6 +114,60 @@ export const MessageFileModal = () => {
                   )}
                 />
               </div>
+
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 dark:bg-zinc-800 dark:text-zinc-100"
+                        placeholder="File name (optional)"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="isImportant"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <label className="text-xs font-bold text-zinc-500 dark:text-zinc-200 uppercase">
+                      Is this file important?
+                    </label>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1"
+                      >
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="yes" />
+                          </FormControl>
+                          <label className="font-normal cursor-pointer text-zinc-600 dark:text-zinc-300">
+                            Yes
+                          </label>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="no" />
+                          </FormControl>
+                          <label className="font-normal cursor-pointer text-zinc-600 dark:text-zinc-300">
+                            No
+                          </label>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4 dark:bg-zinc-900/50">
               <Button variant="default" disabled={isLoading}>

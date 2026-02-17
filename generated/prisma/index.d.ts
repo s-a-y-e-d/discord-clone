@@ -10225,6 +10225,7 @@ export namespace Prisma {
     id: string | null
     content: string | null
     fileUrl: string | null
+    isImportant: boolean | null
     memberId: string | null
     channelId: string | null
     deleted: boolean | null
@@ -10236,6 +10237,7 @@ export namespace Prisma {
     id: string | null
     content: string | null
     fileUrl: string | null
+    isImportant: boolean | null
     memberId: string | null
     channelId: string | null
     deleted: boolean | null
@@ -10247,6 +10249,7 @@ export namespace Prisma {
     id: number
     content: number
     fileUrl: number
+    isImportant: number
     memberId: number
     channelId: number
     deleted: number
@@ -10260,6 +10263,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     memberId?: true
     channelId?: true
     deleted?: true
@@ -10271,6 +10275,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     memberId?: true
     channelId?: true
     deleted?: true
@@ -10282,6 +10287,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     memberId?: true
     channelId?: true
     deleted?: true
@@ -10366,6 +10372,7 @@ export namespace Prisma {
     id: string
     content: string
     fileUrl: string | null
+    isImportant: boolean
     memberId: string
     channelId: string
     deleted: boolean
@@ -10394,6 +10401,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     memberId?: boolean
     channelId?: boolean
     deleted?: boolean
@@ -10407,6 +10415,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     memberId?: boolean
     channelId?: boolean
     deleted?: boolean
@@ -10420,6 +10429,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     memberId?: boolean
     channelId?: boolean
     deleted?: boolean
@@ -10433,6 +10443,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     memberId?: boolean
     channelId?: boolean
     deleted?: boolean
@@ -10440,7 +10451,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "fileUrl" | "memberId" | "channelId" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "fileUrl" | "isImportant" | "memberId" | "channelId" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     member?: boolean | MemberDefaultArgs<ExtArgs>
     channel?: boolean | ChannelDefaultArgs<ExtArgs>
@@ -10464,6 +10475,7 @@ export namespace Prisma {
       id: string
       content: string
       fileUrl: string | null
+      isImportant: boolean
       memberId: string
       channelId: string
       deleted: boolean
@@ -10897,6 +10909,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Message", 'String'>
     readonly content: FieldRef<"Message", 'String'>
     readonly fileUrl: FieldRef<"Message", 'String'>
+    readonly isImportant: FieldRef<"Message", 'Boolean'>
     readonly memberId: FieldRef<"Message", 'String'>
     readonly channelId: FieldRef<"Message", 'String'>
     readonly deleted: FieldRef<"Message", 'Boolean'>
@@ -12428,6 +12441,7 @@ export namespace Prisma {
     id: string | null
     content: string | null
     fileUrl: string | null
+    isImportant: boolean | null
     conversationId: string | null
     memberId: string | null
     deleted: boolean | null
@@ -12439,6 +12453,7 @@ export namespace Prisma {
     id: string | null
     content: string | null
     fileUrl: string | null
+    isImportant: boolean | null
     conversationId: string | null
     memberId: string | null
     deleted: boolean | null
@@ -12450,6 +12465,7 @@ export namespace Prisma {
     id: number
     content: number
     fileUrl: number
+    isImportant: number
     conversationId: number
     memberId: number
     deleted: number
@@ -12463,6 +12479,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     conversationId?: true
     memberId?: true
     deleted?: true
@@ -12474,6 +12491,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     conversationId?: true
     memberId?: true
     deleted?: true
@@ -12485,6 +12503,7 @@ export namespace Prisma {
     id?: true
     content?: true
     fileUrl?: true
+    isImportant?: true
     conversationId?: true
     memberId?: true
     deleted?: true
@@ -12569,6 +12588,7 @@ export namespace Prisma {
     id: string
     content: string
     fileUrl: string | null
+    isImportant: boolean
     conversationId: string
     memberId: string
     deleted: boolean
@@ -12597,6 +12617,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     conversationId?: boolean
     memberId?: boolean
     deleted?: boolean
@@ -12610,6 +12631,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     conversationId?: boolean
     memberId?: boolean
     deleted?: boolean
@@ -12623,6 +12645,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     conversationId?: boolean
     memberId?: boolean
     deleted?: boolean
@@ -12636,6 +12659,7 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     fileUrl?: boolean
+    isImportant?: boolean
     conversationId?: boolean
     memberId?: boolean
     deleted?: boolean
@@ -12643,7 +12667,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DirectMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "fileUrl" | "conversationId" | "memberId" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["directMessage"]>
+  export type DirectMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "fileUrl" | "isImportant" | "conversationId" | "memberId" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["directMessage"]>
   export type DirectMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
@@ -12667,6 +12691,7 @@ export namespace Prisma {
       id: string
       content: string
       fileUrl: string | null
+      isImportant: boolean
       conversationId: string
       memberId: string
       deleted: boolean
@@ -13100,6 +13125,7 @@ export namespace Prisma {
     readonly id: FieldRef<"DirectMessage", 'String'>
     readonly content: FieldRef<"DirectMessage", 'String'>
     readonly fileUrl: FieldRef<"DirectMessage", 'String'>
+    readonly isImportant: FieldRef<"DirectMessage", 'Boolean'>
     readonly conversationId: FieldRef<"DirectMessage", 'String'>
     readonly memberId: FieldRef<"DirectMessage", 'String'>
     readonly deleted: FieldRef<"DirectMessage", 'Boolean'>
@@ -15742,6 +15768,7 @@ export namespace Prisma {
     id: 'id',
     content: 'content',
     fileUrl: 'fileUrl',
+    isImportant: 'isImportant',
     memberId: 'memberId',
     channelId: 'channelId',
     deleted: 'deleted',
@@ -15765,6 +15792,7 @@ export namespace Prisma {
     id: 'id',
     content: 'content',
     fileUrl: 'fileUrl',
+    isImportant: 'isImportant',
     conversationId: 'conversationId',
     memberId: 'memberId',
     deleted: 'deleted',
@@ -16451,6 +16479,7 @@ export namespace Prisma {
     id?: StringFilter<"Message"> | string
     content?: StringFilter<"Message"> | string
     fileUrl?: StringNullableFilter<"Message"> | string | null
+    isImportant?: BoolFilter<"Message"> | boolean
     memberId?: StringFilter<"Message"> | string
     channelId?: StringFilter<"Message"> | string
     deleted?: BoolFilter<"Message"> | boolean
@@ -16464,6 +16493,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrderInput | SortOrder
+    isImportant?: SortOrder
     memberId?: SortOrder
     channelId?: SortOrder
     deleted?: SortOrder
@@ -16480,6 +16510,7 @@ export namespace Prisma {
     NOT?: MessageWhereInput | MessageWhereInput[]
     content?: StringFilter<"Message"> | string
     fileUrl?: StringNullableFilter<"Message"> | string | null
+    isImportant?: BoolFilter<"Message"> | boolean
     memberId?: StringFilter<"Message"> | string
     channelId?: StringFilter<"Message"> | string
     deleted?: BoolFilter<"Message"> | boolean
@@ -16493,6 +16524,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrderInput | SortOrder
+    isImportant?: SortOrder
     memberId?: SortOrder
     channelId?: SortOrder
     deleted?: SortOrder
@@ -16510,6 +16542,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Message"> | string
     content?: StringWithAggregatesFilter<"Message"> | string
     fileUrl?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    isImportant?: BoolWithAggregatesFilter<"Message"> | boolean
     memberId?: StringWithAggregatesFilter<"Message"> | string
     channelId?: StringWithAggregatesFilter<"Message"> | string
     deleted?: BoolWithAggregatesFilter<"Message"> | boolean
@@ -16579,6 +16612,7 @@ export namespace Prisma {
     id?: StringFilter<"DirectMessage"> | string
     content?: StringFilter<"DirectMessage"> | string
     fileUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    isImportant?: BoolFilter<"DirectMessage"> | boolean
     conversationId?: StringFilter<"DirectMessage"> | string
     memberId?: StringFilter<"DirectMessage"> | string
     deleted?: BoolFilter<"DirectMessage"> | boolean
@@ -16592,6 +16626,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrderInput | SortOrder
+    isImportant?: SortOrder
     conversationId?: SortOrder
     memberId?: SortOrder
     deleted?: SortOrder
@@ -16608,6 +16643,7 @@ export namespace Prisma {
     NOT?: DirectMessageWhereInput | DirectMessageWhereInput[]
     content?: StringFilter<"DirectMessage"> | string
     fileUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    isImportant?: BoolFilter<"DirectMessage"> | boolean
     conversationId?: StringFilter<"DirectMessage"> | string
     memberId?: StringFilter<"DirectMessage"> | string
     deleted?: BoolFilter<"DirectMessage"> | boolean
@@ -16621,6 +16657,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrderInput | SortOrder
+    isImportant?: SortOrder
     conversationId?: SortOrder
     memberId?: SortOrder
     deleted?: SortOrder
@@ -16638,6 +16675,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"DirectMessage"> | string
     content?: StringWithAggregatesFilter<"DirectMessage"> | string
     fileUrl?: StringNullableWithAggregatesFilter<"DirectMessage"> | string | null
+    isImportant?: BoolWithAggregatesFilter<"DirectMessage"> | boolean
     conversationId?: StringWithAggregatesFilter<"DirectMessage"> | string
     memberId?: StringWithAggregatesFilter<"DirectMessage"> | string
     deleted?: BoolWithAggregatesFilter<"DirectMessage"> | boolean
@@ -17356,6 +17394,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17367,6 +17406,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     channelId: string
     deleted?: boolean
@@ -17378,6 +17418,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17389,6 +17430,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     channelId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -17400,6 +17442,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     channelId: string
     deleted?: boolean
@@ -17411,6 +17454,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17420,6 +17464,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     channelId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -17479,6 +17524,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17490,6 +17536,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     conversationId: string
     memberId: string
     deleted?: boolean
@@ -17501,6 +17548,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17512,6 +17560,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     conversationId?: StringFieldUpdateOperationsInput | string
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -17523,6 +17572,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     conversationId: string
     memberId: string
     deleted?: boolean
@@ -17534,6 +17584,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17543,6 +17594,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     conversationId?: StringFieldUpdateOperationsInput | string
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18170,6 +18222,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     memberId?: SortOrder
     channelId?: SortOrder
     deleted?: SortOrder
@@ -18181,6 +18234,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     memberId?: SortOrder
     channelId?: SortOrder
     deleted?: SortOrder
@@ -18192,6 +18246,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     memberId?: SortOrder
     channelId?: SortOrder
     deleted?: SortOrder
@@ -18231,6 +18286,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     conversationId?: SortOrder
     memberId?: SortOrder
     deleted?: SortOrder
@@ -18242,6 +18298,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     conversationId?: SortOrder
     memberId?: SortOrder
     deleted?: SortOrder
@@ -18253,6 +18310,7 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     fileUrl?: SortOrder
+    isImportant?: SortOrder
     conversationId?: SortOrder
     memberId?: SortOrder
     deleted?: SortOrder
@@ -20325,6 +20383,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20335,6 +20394,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     channelId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -20355,6 +20415,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20365,6 +20426,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     conversationId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -20532,6 +20594,7 @@ export namespace Prisma {
     id?: StringFilter<"Message"> | string
     content?: StringFilter<"Message"> | string
     fileUrl?: StringNullableFilter<"Message"> | string | null
+    isImportant?: BoolFilter<"Message"> | boolean
     memberId?: StringFilter<"Message"> | string
     channelId?: StringFilter<"Message"> | string
     deleted?: BoolFilter<"Message"> | boolean
@@ -20562,6 +20625,7 @@ export namespace Prisma {
     id?: StringFilter<"DirectMessage"> | string
     content?: StringFilter<"DirectMessage"> | string
     fileUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    isImportant?: BoolFilter<"DirectMessage"> | boolean
     conversationId?: StringFilter<"DirectMessage"> | string
     memberId?: StringFilter<"DirectMessage"> | string
     deleted?: BoolFilter<"DirectMessage"> | boolean
@@ -20682,6 +20746,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20692,6 +20757,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -21028,6 +21094,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21038,6 +21105,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -21922,6 +21990,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     channelId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -21932,6 +22001,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     conversationId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -21952,6 +22022,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21962,6 +22033,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     channelId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21972,6 +22044,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     channelId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21982,6 +22055,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21992,6 +22066,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     conversationId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22002,6 +22077,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     conversationId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22050,6 +22126,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -22066,6 +22143,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22076,6 +22154,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22086,6 +22165,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22114,6 +22194,7 @@ export namespace Prisma {
     id?: string
     content: string
     fileUrl?: string | null
+    isImportant?: boolean
     memberId: string
     deleted?: boolean
     createdAt?: Date | string
@@ -22130,6 +22211,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22140,6 +22222,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22150,6 +22233,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isImportant?: BoolFieldUpdateOperationsInput | boolean
     memberId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

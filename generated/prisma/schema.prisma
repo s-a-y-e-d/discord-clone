@@ -154,7 +154,8 @@ model Message {
   id      String @id @default(cuid())
   content String @db.Text
 
-  fileUrl String? @db.Text
+  fileUrl     String? @db.Text
+  isImportant Boolean @default(false)
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -187,9 +188,10 @@ model Conversation {
 }
 
 model DirectMessage {
-  id      String  @id @default(cuid())
-  content String  @db.Text
-  fileUrl String? @db.Text
+  id          String  @id @default(cuid())
+  content     String  @db.Text
+  fileUrl     String? @db.Text
+  isImportant Boolean @default(false)
 
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
