@@ -78,6 +78,19 @@ export default async function handler(
       nonce,
     });
 
+    // Emit server-level activity for unread tracking in sidebar
+    // The "other" member is the one who should see the badge
+    const otherMember =
+      conversation.memberOne.userId === profile.id
+        ? conversation.memberTwo
+        : conversation.memberOne;
+    const activityKey = `server:${member.serverId}:new-activity`;
+    res?.socket?.server?.io?.emit(activityKey, {
+      memberId: member.id,
+      otherMemberId: otherMember.id,
+      conversationId,
+    });
+
     return res.status(200).json(message);
   } catch (error) {
     console.error("[DIRECT_MESSAGES_POST]", error);

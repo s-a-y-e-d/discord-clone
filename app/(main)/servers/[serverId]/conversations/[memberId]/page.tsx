@@ -55,6 +55,22 @@ const MemberIdPage = async (props: MemberIdPageProps) => {
 
   const otherMember = memberOne.id === currentMember.id ? memberTwo : memberOne;
 
+  // Mark conversation as read on page load
+  await db.conversationReadStatus.upsert({
+    where: {
+      userId_conversationId: {
+        userId: profile.id,
+        conversationId: conversation.id,
+      },
+    },
+    update: { lastReadAt: new Date() },
+    create: {
+      userId: profile.id,
+      conversationId: conversation.id,
+      lastReadAt: new Date(),
+    },
+  });
+
   return (
     <div className="bg-white dark:bg-background flex flex-col h-full overflow-hidden">
       <ChatHeader

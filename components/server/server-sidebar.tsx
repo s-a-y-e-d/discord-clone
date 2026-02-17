@@ -11,6 +11,7 @@ import { ServerHeader } from "./server-header";
 import { ServerSearch } from "./server-search";
 import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
+import { UnreadProvider } from "@/components/providers/unread-provider";
 
 import ServerMember from "./server-member";
 
@@ -58,6 +59,88 @@ export const ServerSidebar = async ({
   const members = server.members.filter((member) => member.userId !== profile.id)
 
   const role = server.members.find((member) => member.userId === profile.id)?.role;
+  const currentMember = server.members.find((member) => member.userId === profile.id);
+
+  // Fetch initial unread counts server-side
+  const channelIds = server.channels.map((c) => c.id);
+
+  const channelReadStatuses = await prisma.channelReadStatus.findMany({
+    where: {
+      userId: profile.id,
+      channelId: { in: channelIds },
+    },
+  });
+
+  const channelReadMap = new Map(
+    channelReadStatuses.map((s) => [s.channelId, s.lastReadAt])
+  );
+
+  const channelUnreadCounts: Record<string, number> = {};
+  for (const channelId of channelIds) {
+    const lastReadAt = channelReadMap.get(channelId);
+    const count = await prisma.message.count({
+      where: {
+        channelId,
+        deleted: false,
+        member: { userId: { not: profile.id } },
+        ...(lastReadAt ? { createdAt: { gt: lastReadAt } } : {}),
+      },
+    });
+    if (count > 0) {
+      channelUnreadCounts[channelId] = count;
+    }
+  }
+
+  // Fetch DM unread counts
+  const memberUnreadCounts: Record<string, number> = {};
+  if (currentMember) {
+    const conversations = await prisma.conversation.findMany({
+      where: {
+        OR: [
+          { memberOneId: currentMember.id },
+          { memberTwoId: currentMember.id },
+        ],
+      },
+      select: { id: true, memberOneId: true, memberTwoId: true },
+    });
+
+    const conversationIds = conversations.map((c) => c.id);
+
+    const conversationReadStatuses = await prisma.conversationReadStatus.findMany({
+      where: {
+        userId: profile.id,
+        conversationId: { in: conversationIds },
+      },
+    });
+
+    const conversationReadMap = new Map(
+      conversationReadStatuses.map((s) => [s.conversationId, s.lastReadAt])
+    );
+
+    for (const conv of conversations) {
+      const lastReadAt = conversationReadMap.get(conv.id);
+      const count = await prisma.directMessage.count({
+        where: {
+          conversationId: conv.id,
+          deleted: false,
+          member: { userId: { not: profile.id } },
+          ...(lastReadAt ? { createdAt: { gt: lastReadAt } } : {}),
+        },
+      });
+      if (count > 0) {
+        const otherMemberId =
+          conv.memberOneId === currentMember.id
+            ? conv.memberTwoId
+            : conv.memberOneId;
+        memberUnreadCounts[otherMemberId] = count;
+      }
+    }
+  }
+
+  const initialCounts = {
+    channels: channelUnreadCounts,
+    members: memberUnreadCounts,
+  };
 
   const iconMap = {
     [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -121,84 +204,86 @@ export const ServerSidebar = async ({
           />
         </div>
         <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
-        {!!textChannels?.length && (
-          <div className="mb-2">
-            <ServerSection
-              sectionType="channels"
-              channelType={ChannelType.TEXT}
-              role={role}
-              label="Text Channels"
-            />
-            <div className="space-y-[2px]">
-              {textChannels.map((channel) => (
-                <ServerChannel
-                  key={channel.id}
-                  channel={channel}
-                  role={role}
-                  server={server}
-                />
-              ))}
+        <UnreadProvider serverId={serverId} currentMemberId={currentMember?.id || ""} initialCounts={initialCounts}>
+          {!!textChannels?.length && (
+            <div className="mb-2">
+              <ServerSection
+                sectionType="channels"
+                channelType={ChannelType.TEXT}
+                role={role}
+                label="Text Channels"
+              />
+              <div className="space-y-[2px]">
+                {textChannels.map((channel) => (
+                  <ServerChannel
+                    key={channel.id}
+                    channel={channel}
+                    role={role}
+                    server={server}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {!!audioChannels?.length && (
-          <div className="mb-2">
-            <ServerSection
-              sectionType="channels"
-              channelType={ChannelType.AUDIO}
-              role={role}
-              label="Audio Channels"
-            />
-            <div className="space-y-[2px]">
-              {audioChannels.map((channel) => (
-                <ServerChannel
-                  key={channel.id}
-                  channel={channel}
-                  role={role}
-                  server={server}
-                />
-              ))}
+          )}
+          {!!audioChannels?.length && (
+            <div className="mb-2">
+              <ServerSection
+                sectionType="channels"
+                channelType={ChannelType.AUDIO}
+                role={role}
+                label="Audio Channels"
+              />
+              <div className="space-y-[2px]">
+                {audioChannels.map((channel) => (
+                  <ServerChannel
+                    key={channel.id}
+                    channel={channel}
+                    role={role}
+                    server={server}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {!!videoChannels?.length && (
-          <div className="mb-2">
-            <ServerSection
-              sectionType="channels"
-              channelType={ChannelType.VIDEO}
-              role={role}
-              label="Video Channels"
-            />
-            <div className="space-y-[2px]">
-              {videoChannels.map((channel) => (
-                <ServerChannel
-                  key={channel.id}
-                  channel={channel}
-                  role={role}
-                  server={server}
-                />
-              ))}
+          )}
+          {!!videoChannels?.length && (
+            <div className="mb-2">
+              <ServerSection
+                sectionType="channels"
+                channelType={ChannelType.VIDEO}
+                role={role}
+                label="Video Channels"
+              />
+              <div className="space-y-[2px]">
+                {videoChannels.map((channel) => (
+                  <ServerChannel
+                    key={channel.id}
+                    channel={channel}
+                    role={role}
+                    server={server}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {!!members?.length && (
-          <div className="mb-2">
-            <ServerSection
-              sectionType="members"
-              role={role}
-              label="Members"
-              server={server}
-            />
-            <div className="space-y-0.5">
-              {members.map((member) => (
-                <ServerMember
-                  key={member.id}
-                  member={member}
-                />
-              ))}
+          )}
+          {!!members?.length && (
+            <div className="mb-2">
+              <ServerSection
+                sectionType="members"
+                role={role}
+                label="Members"
+                server={server}
+              />
+              <div className="space-y-0.5">
+                {members.map((member) => (
+                  <ServerMember
+                    key={member.id}
+                    member={member}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </UnreadProvider>
       </ScrollArea>
     </div>
   )

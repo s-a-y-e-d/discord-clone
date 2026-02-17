@@ -49,7 +49,7 @@ export const useChatScroll = ({
       }
 
       const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
-      return distanceFromBottom <= 100;
+      return true;
     }
 
     if (shouldAutoScroll()) {

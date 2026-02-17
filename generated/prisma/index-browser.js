@@ -226,6 +226,20 @@ exports.Prisma.DirectMessageScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ChannelReadStatusScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  channelId: 'channelId',
+  lastReadAt: 'lastReadAt'
+};
+
+exports.Prisma.ConversationReadStatusScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  conversationId: 'conversationId',
+  lastReadAt: 'lastReadAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -262,7 +276,9 @@ exports.Prisma.ModelName = {
   Channel: 'Channel',
   Message: 'Message',
   Conversation: 'Conversation',
-  DirectMessage: 'DirectMessage'
+  DirectMessage: 'DirectMessage',
+  ChannelReadStatus: 'ChannelReadStatus',
+  ConversationReadStatus: 'ConversationReadStatus'
 };
 
 /**

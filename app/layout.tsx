@@ -22,6 +22,8 @@ import ModalProvider from "@/components/provider/modal-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 
+import { AutoRefreshProvider } from "@/components/providers/auto-refresh-provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,12 +34,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SocketProvider>
-          <ModalProvider />
-          <QueryProvider>
+        <QueryProvider>
+          <AutoRefreshProvider />
+          <SocketProvider>
+            <ModalProvider />
             {children}
-          </QueryProvider>
-        </SocketProvider>
+          </SocketProvider>
+        </QueryProvider>
         <Toaster />
       </body>
     </html>

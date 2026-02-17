@@ -63,6 +63,16 @@ export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
  * 
  */
 export type DirectMessage = $Result.DefaultSelection<Prisma.$DirectMessagePayload>
+/**
+ * Model ChannelReadStatus
+ * 
+ */
+export type ChannelReadStatus = $Result.DefaultSelection<Prisma.$ChannelReadStatusPayload>
+/**
+ * Model ConversationReadStatus
+ * 
+ */
+export type ConversationReadStatus = $Result.DefaultSelection<Prisma.$ConversationReadStatusPayload>
 
 /**
  * Enums
@@ -311,6 +321,26 @@ export class PrismaClient<
     * ```
     */
   get directMessage(): Prisma.DirectMessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.channelReadStatus`: Exposes CRUD operations for the **ChannelReadStatus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChannelReadStatuses
+    * const channelReadStatuses = await prisma.channelReadStatus.findMany()
+    * ```
+    */
+  get channelReadStatus(): Prisma.ChannelReadStatusDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversationReadStatus`: Exposes CRUD operations for the **ConversationReadStatus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConversationReadStatuses
+    * const conversationReadStatuses = await prisma.conversationReadStatus.findMany()
+    * ```
+    */
+  get conversationReadStatus(): Prisma.ConversationReadStatusDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -541,7 +571,7 @@ export namespace Prisma {
   ? False
   : T extends Uint8Array
   ? False
-  : T extends bigint
+  : T extends BigInt
   ? False
   : T extends object
   ? True
@@ -754,7 +784,9 @@ export namespace Prisma {
     Channel: 'Channel',
     Message: 'Message',
     Conversation: 'Conversation',
-    DirectMessage: 'DirectMessage'
+    DirectMessage: 'DirectMessage',
+    ChannelReadStatus: 'ChannelReadStatus',
+    ConversationReadStatus: 'ConversationReadStatus'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -770,7 +802,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "server" | "member" | "channel" | "message" | "conversation" | "directMessage"
+      modelProps: "user" | "session" | "account" | "verification" | "server" | "member" | "channel" | "message" | "conversation" | "directMessage" | "channelReadStatus" | "conversationReadStatus"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1514,6 +1546,154 @@ export namespace Prisma {
           }
         }
       }
+      ChannelReadStatus: {
+        payload: Prisma.$ChannelReadStatusPayload<ExtArgs>
+        fields: Prisma.ChannelReadStatusFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChannelReadStatusFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChannelReadStatusFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          findFirst: {
+            args: Prisma.ChannelReadStatusFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChannelReadStatusFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          findMany: {
+            args: Prisma.ChannelReadStatusFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>[]
+          }
+          create: {
+            args: Prisma.ChannelReadStatusCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          createMany: {
+            args: Prisma.ChannelReadStatusCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChannelReadStatusCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>[]
+          }
+          delete: {
+            args: Prisma.ChannelReadStatusDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          update: {
+            args: Prisma.ChannelReadStatusUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChannelReadStatusDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChannelReadStatusUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChannelReadStatusUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>[]
+          }
+          upsert: {
+            args: Prisma.ChannelReadStatusUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelReadStatusPayload>
+          }
+          aggregate: {
+            args: Prisma.ChannelReadStatusAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChannelReadStatus>
+          }
+          groupBy: {
+            args: Prisma.ChannelReadStatusGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChannelReadStatusGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChannelReadStatusCountArgs<ExtArgs>
+            result: $Utils.Optional<ChannelReadStatusCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConversationReadStatus: {
+        payload: Prisma.$ConversationReadStatusPayload<ExtArgs>
+        fields: Prisma.ConversationReadStatusFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversationReadStatusFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversationReadStatusFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversationReadStatusFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversationReadStatusFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          findMany: {
+            args: Prisma.ConversationReadStatusFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>[]
+          }
+          create: {
+            args: Prisma.ConversationReadStatusCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          createMany: {
+            args: Prisma.ConversationReadStatusCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversationReadStatusCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversationReadStatusDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          update: {
+            args: Prisma.ConversationReadStatusUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversationReadStatusDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversationReadStatusUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversationReadStatusUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversationReadStatusUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationReadStatusPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversationReadStatusAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversationReadStatus>
+          }
+          groupBy: {
+            args: Prisma.ConversationReadStatusGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversationReadStatusGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversationReadStatusCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversationReadStatusCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1632,6 +1812,8 @@ export namespace Prisma {
     message?: MessageOmit
     conversation?: ConversationOmit
     directMessage?: DirectMessageOmit
+    channelReadStatus?: ChannelReadStatusOmit
+    conversationReadStatus?: ConversationReadStatusOmit
   }
 
   /* Types for Logging */
@@ -1717,6 +1899,8 @@ export namespace Prisma {
     servers: number
     members: number
     channels: number
+    channelReadStatuses: number
+    conversationReadStatuses: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1725,6 +1909,8 @@ export namespace Prisma {
     servers?: boolean | UserCountOutputTypeCountServersArgs
     members?: boolean | UserCountOutputTypeCountMembersArgs
     channels?: boolean | UserCountOutputTypeCountChannelsArgs
+    channelReadStatuses?: boolean | UserCountOutputTypeCountChannelReadStatusesArgs
+    conversationReadStatuses?: boolean | UserCountOutputTypeCountConversationReadStatusesArgs
   }
 
   // Custom InputTypes
@@ -1771,6 +1957,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountChannelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChannelWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountChannelReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChannelReadStatusWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountConversationReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationReadStatusWhereInput
   }
 
 
@@ -1878,10 +2078,12 @@ export namespace Prisma {
 
   export type ChannelCountOutputType = {
     messages: number
+    readStatuses: number
   }
 
   export type ChannelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | ChannelCountOutputTypeCountMessagesArgs
+    readStatuses?: boolean | ChannelCountOutputTypeCountReadStatusesArgs
   }
 
   // Custom InputTypes
@@ -1902,6 +2104,13 @@ export namespace Prisma {
     where?: MessageWhereInput
   }
 
+  /**
+   * ChannelCountOutputType without action
+   */
+  export type ChannelCountOutputTypeCountReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChannelReadStatusWhereInput
+  }
+
 
   /**
    * Count Type ConversationCountOutputType
@@ -1909,10 +2118,12 @@ export namespace Prisma {
 
   export type ConversationCountOutputType = {
     directMessages: number
+    readStatuses: number
   }
 
   export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     directMessages?: boolean | ConversationCountOutputTypeCountDirectMessagesArgs
+    readStatuses?: boolean | ConversationCountOutputTypeCountReadStatusesArgs
   }
 
   // Custom InputTypes
@@ -1931,6 +2142,13 @@ export namespace Prisma {
    */
   export type ConversationCountOutputTypeCountDirectMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DirectMessageWhereInput
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationReadStatusWhereInput
   }
 
 
@@ -2139,6 +2357,8 @@ export namespace Prisma {
     servers?: boolean | User$serversArgs<ExtArgs>
     members?: boolean | User$membersArgs<ExtArgs>
     channels?: boolean | User$channelsArgs<ExtArgs>
+    channelReadStatuses?: boolean | User$channelReadStatusesArgs<ExtArgs>
+    conversationReadStatuses?: boolean | User$conversationReadStatusesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2185,6 +2405,8 @@ export namespace Prisma {
     servers?: boolean | User$serversArgs<ExtArgs>
     members?: boolean | User$membersArgs<ExtArgs>
     channels?: boolean | User$channelsArgs<ExtArgs>
+    channelReadStatuses?: boolean | User$channelReadStatusesArgs<ExtArgs>
+    conversationReadStatuses?: boolean | User$conversationReadStatusesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2198,6 +2420,8 @@ export namespace Prisma {
       servers: Prisma.$ServerPayload<ExtArgs>[]
       members: Prisma.$MemberPayload<ExtArgs>[]
       channels: Prisma.$ChannelPayload<ExtArgs>[]
+      channelReadStatuses: Prisma.$ChannelReadStatusPayload<ExtArgs>[]
+      conversationReadStatuses: Prisma.$ConversationReadStatusPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2608,6 +2832,8 @@ export namespace Prisma {
     servers<T extends User$serversArgs<ExtArgs> = {}>(args?: Subset<T, User$serversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     members<T extends User$membersArgs<ExtArgs> = {}>(args?: Subset<T, User$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     channels<T extends User$channelsArgs<ExtArgs> = {}>(args?: Subset<T, User$channelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    channelReadStatuses<T extends User$channelReadStatusesArgs<ExtArgs> = {}>(args?: Subset<T, User$channelReadStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversationReadStatuses<T extends User$conversationReadStatusesArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationReadStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3151,6 +3377,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ChannelScalarFieldEnum | ChannelScalarFieldEnum[]
+  }
+
+  /**
+   * User.channelReadStatuses
+   */
+  export type User$channelReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    where?: ChannelReadStatusWhereInput
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    cursor?: ChannelReadStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChannelReadStatusScalarFieldEnum | ChannelReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * User.conversationReadStatuses
+   */
+  export type User$conversationReadStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    where?: ConversationReadStatusWhereInput
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    cursor?: ConversationReadStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationReadStatusScalarFieldEnum | ConversationReadStatusScalarFieldEnum[]
   }
 
   /**
@@ -8970,6 +9244,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     server?: boolean | ServerDefaultArgs<ExtArgs>
     messages?: boolean | Channel$messagesArgs<ExtArgs>
+    readStatuses?: boolean | Channel$readStatusesArgs<ExtArgs>
     _count?: boolean | ChannelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["channel"]>
 
@@ -9012,6 +9287,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     server?: boolean | ServerDefaultArgs<ExtArgs>
     messages?: boolean | Channel$messagesArgs<ExtArgs>
+    readStatuses?: boolean | Channel$readStatusesArgs<ExtArgs>
     _count?: boolean | ChannelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChannelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9029,6 +9305,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       server: Prisma.$ServerPayload<ExtArgs>
       messages: Prisma.$MessagePayload<ExtArgs>[]
+      readStatuses: Prisma.$ChannelReadStatusPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9435,6 +9712,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     server<T extends ServerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServerDefaultArgs<ExtArgs>>): Prisma__ServerClient<$Result.GetResult<Prisma.$ServerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     messages<T extends Channel$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Channel$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    readStatuses<T extends Channel$readStatusesArgs<ExtArgs> = {}>(args?: Subset<T, Channel$readStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9888,6 +10166,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Channel.readStatuses
+   */
+  export type Channel$readStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    where?: ChannelReadStatusWhereInput
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    cursor?: ChannelReadStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChannelReadStatusScalarFieldEnum | ChannelReadStatusScalarFieldEnum[]
   }
 
   /**
@@ -11165,6 +11467,7 @@ export namespace Prisma {
     memberOne?: boolean | MemberDefaultArgs<ExtArgs>
     memberTwo?: boolean | MemberDefaultArgs<ExtArgs>
     directMessages?: boolean | Conversation$directMessagesArgs<ExtArgs>
+    readStatuses?: boolean | Conversation$readStatusesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
 
@@ -11195,6 +11498,7 @@ export namespace Prisma {
     memberOne?: boolean | MemberDefaultArgs<ExtArgs>
     memberTwo?: boolean | MemberDefaultArgs<ExtArgs>
     directMessages?: boolean | Conversation$directMessagesArgs<ExtArgs>
+    readStatuses?: boolean | Conversation$readStatusesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11212,6 +11516,7 @@ export namespace Prisma {
       memberOne: Prisma.$MemberPayload<ExtArgs>
       memberTwo: Prisma.$MemberPayload<ExtArgs>
       directMessages: Prisma.$DirectMessagePayload<ExtArgs>[]
+      readStatuses: Prisma.$ConversationReadStatusPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11614,6 +11919,7 @@ export namespace Prisma {
     memberOne<T extends MemberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MemberDefaultArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     memberTwo<T extends MemberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MemberDefaultArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     directMessages<T extends Conversation$directMessagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$directMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    readStatuses<T extends Conversation$readStatusesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$readStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12063,6 +12369,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation.readStatuses
+   */
+  export type Conversation$readStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    where?: ConversationReadStatusWhereInput
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    cursor?: ConversationReadStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationReadStatusScalarFieldEnum | ConversationReadStatusScalarFieldEnum[]
   }
 
   /**
@@ -13190,6 +13520,2112 @@ export namespace Prisma {
 
 
   /**
+   * Model ChannelReadStatus
+   */
+
+  export type AggregateChannelReadStatus = {
+    _count: ChannelReadStatusCountAggregateOutputType | null
+    _min: ChannelReadStatusMinAggregateOutputType | null
+    _max: ChannelReadStatusMaxAggregateOutputType | null
+  }
+
+  export type ChannelReadStatusMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    channelId: string | null
+    lastReadAt: Date | null
+  }
+
+  export type ChannelReadStatusMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    channelId: string | null
+    lastReadAt: Date | null
+  }
+
+  export type ChannelReadStatusCountAggregateOutputType = {
+    id: number
+    userId: number
+    channelId: number
+    lastReadAt: number
+    _all: number
+  }
+
+
+  export type ChannelReadStatusMinAggregateInputType = {
+    id?: true
+    userId?: true
+    channelId?: true
+    lastReadAt?: true
+  }
+
+  export type ChannelReadStatusMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    channelId?: true
+    lastReadAt?: true
+  }
+
+  export type ChannelReadStatusCountAggregateInputType = {
+    id?: true
+    userId?: true
+    channelId?: true
+    lastReadAt?: true
+    _all?: true
+  }
+
+  export type ChannelReadStatusAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChannelReadStatus to aggregate.
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChannelReadStatuses to fetch.
+     */
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChannelReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChannelReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChannelReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChannelReadStatuses
+    **/
+    _count?: true | ChannelReadStatusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChannelReadStatusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChannelReadStatusMaxAggregateInputType
+  }
+
+  export type GetChannelReadStatusAggregateType<T extends ChannelReadStatusAggregateArgs> = {
+        [P in keyof T & keyof AggregateChannelReadStatus]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChannelReadStatus[P]>
+      : GetScalarType<T[P], AggregateChannelReadStatus[P]>
+  }
+
+
+
+
+  export type ChannelReadStatusGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChannelReadStatusWhereInput
+    orderBy?: ChannelReadStatusOrderByWithAggregationInput | ChannelReadStatusOrderByWithAggregationInput[]
+    by: ChannelReadStatusScalarFieldEnum[] | ChannelReadStatusScalarFieldEnum
+    having?: ChannelReadStatusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChannelReadStatusCountAggregateInputType | true
+    _min?: ChannelReadStatusMinAggregateInputType
+    _max?: ChannelReadStatusMaxAggregateInputType
+  }
+
+  export type ChannelReadStatusGroupByOutputType = {
+    id: string
+    userId: string
+    channelId: string
+    lastReadAt: Date
+    _count: ChannelReadStatusCountAggregateOutputType | null
+    _min: ChannelReadStatusMinAggregateOutputType | null
+    _max: ChannelReadStatusMaxAggregateOutputType | null
+  }
+
+  type GetChannelReadStatusGroupByPayload<T extends ChannelReadStatusGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChannelReadStatusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChannelReadStatusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChannelReadStatusGroupByOutputType[P]>
+            : GetScalarType<T[P], ChannelReadStatusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChannelReadStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    channelId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["channelReadStatus"]>
+
+  export type ChannelReadStatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    channelId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["channelReadStatus"]>
+
+  export type ChannelReadStatusSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    channelId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["channelReadStatus"]>
+
+  export type ChannelReadStatusSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    channelId?: boolean
+    lastReadAt?: boolean
+  }
+
+  export type ChannelReadStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "channelId" | "lastReadAt", ExtArgs["result"]["channelReadStatus"]>
+  export type ChannelReadStatusInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }
+  export type ChannelReadStatusIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }
+  export type ChannelReadStatusIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    channel?: boolean | ChannelDefaultArgs<ExtArgs>
+  }
+
+  export type $ChannelReadStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChannelReadStatus"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      channel: Prisma.$ChannelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      channelId: string
+      lastReadAt: Date
+    }, ExtArgs["result"]["channelReadStatus"]>
+    composites: {}
+  }
+
+  type ChannelReadStatusGetPayload<S extends boolean | null | undefined | ChannelReadStatusDefaultArgs> = $Result.GetResult<Prisma.$ChannelReadStatusPayload, S>
+
+  type ChannelReadStatusCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChannelReadStatusFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChannelReadStatusCountAggregateInputType | true
+    }
+
+  export interface ChannelReadStatusDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChannelReadStatus'], meta: { name: 'ChannelReadStatus' } }
+    /**
+     * Find zero or one ChannelReadStatus that matches the filter.
+     * @param {ChannelReadStatusFindUniqueArgs} args - Arguments to find a ChannelReadStatus
+     * @example
+     * // Get one ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChannelReadStatusFindUniqueArgs>(args: SelectSubset<T, ChannelReadStatusFindUniqueArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChannelReadStatus that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChannelReadStatusFindUniqueOrThrowArgs} args - Arguments to find a ChannelReadStatus
+     * @example
+     * // Get one ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChannelReadStatusFindUniqueOrThrowArgs>(args: SelectSubset<T, ChannelReadStatusFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChannelReadStatus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusFindFirstArgs} args - Arguments to find a ChannelReadStatus
+     * @example
+     * // Get one ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChannelReadStatusFindFirstArgs>(args?: SelectSubset<T, ChannelReadStatusFindFirstArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChannelReadStatus that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusFindFirstOrThrowArgs} args - Arguments to find a ChannelReadStatus
+     * @example
+     * // Get one ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChannelReadStatusFindFirstOrThrowArgs>(args?: SelectSubset<T, ChannelReadStatusFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChannelReadStatuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChannelReadStatuses
+     * const channelReadStatuses = await prisma.channelReadStatus.findMany()
+     * 
+     * // Get first 10 ChannelReadStatuses
+     * const channelReadStatuses = await prisma.channelReadStatus.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const channelReadStatusWithIdOnly = await prisma.channelReadStatus.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChannelReadStatusFindManyArgs>(args?: SelectSubset<T, ChannelReadStatusFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChannelReadStatus.
+     * @param {ChannelReadStatusCreateArgs} args - Arguments to create a ChannelReadStatus.
+     * @example
+     * // Create one ChannelReadStatus
+     * const ChannelReadStatus = await prisma.channelReadStatus.create({
+     *   data: {
+     *     // ... data to create a ChannelReadStatus
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChannelReadStatusCreateArgs>(args: SelectSubset<T, ChannelReadStatusCreateArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChannelReadStatuses.
+     * @param {ChannelReadStatusCreateManyArgs} args - Arguments to create many ChannelReadStatuses.
+     * @example
+     * // Create many ChannelReadStatuses
+     * const channelReadStatus = await prisma.channelReadStatus.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChannelReadStatusCreateManyArgs>(args?: SelectSubset<T, ChannelReadStatusCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ChannelReadStatuses and returns the data saved in the database.
+     * @param {ChannelReadStatusCreateManyAndReturnArgs} args - Arguments to create many ChannelReadStatuses.
+     * @example
+     * // Create many ChannelReadStatuses
+     * const channelReadStatus = await prisma.channelReadStatus.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ChannelReadStatuses and only return the `id`
+     * const channelReadStatusWithIdOnly = await prisma.channelReadStatus.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChannelReadStatusCreateManyAndReturnArgs>(args?: SelectSubset<T, ChannelReadStatusCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ChannelReadStatus.
+     * @param {ChannelReadStatusDeleteArgs} args - Arguments to delete one ChannelReadStatus.
+     * @example
+     * // Delete one ChannelReadStatus
+     * const ChannelReadStatus = await prisma.channelReadStatus.delete({
+     *   where: {
+     *     // ... filter to delete one ChannelReadStatus
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChannelReadStatusDeleteArgs>(args: SelectSubset<T, ChannelReadStatusDeleteArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChannelReadStatus.
+     * @param {ChannelReadStatusUpdateArgs} args - Arguments to update one ChannelReadStatus.
+     * @example
+     * // Update one ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChannelReadStatusUpdateArgs>(args: SelectSubset<T, ChannelReadStatusUpdateArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChannelReadStatuses.
+     * @param {ChannelReadStatusDeleteManyArgs} args - Arguments to filter ChannelReadStatuses to delete.
+     * @example
+     * // Delete a few ChannelReadStatuses
+     * const { count } = await prisma.channelReadStatus.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChannelReadStatusDeleteManyArgs>(args?: SelectSubset<T, ChannelReadStatusDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChannelReadStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChannelReadStatuses
+     * const channelReadStatus = await prisma.channelReadStatus.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChannelReadStatusUpdateManyArgs>(args: SelectSubset<T, ChannelReadStatusUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChannelReadStatuses and returns the data updated in the database.
+     * @param {ChannelReadStatusUpdateManyAndReturnArgs} args - Arguments to update many ChannelReadStatuses.
+     * @example
+     * // Update many ChannelReadStatuses
+     * const channelReadStatus = await prisma.channelReadStatus.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ChannelReadStatuses and only return the `id`
+     * const channelReadStatusWithIdOnly = await prisma.channelReadStatus.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChannelReadStatusUpdateManyAndReturnArgs>(args: SelectSubset<T, ChannelReadStatusUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ChannelReadStatus.
+     * @param {ChannelReadStatusUpsertArgs} args - Arguments to update or create a ChannelReadStatus.
+     * @example
+     * // Update or create a ChannelReadStatus
+     * const channelReadStatus = await prisma.channelReadStatus.upsert({
+     *   create: {
+     *     // ... data to create a ChannelReadStatus
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChannelReadStatus we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChannelReadStatusUpsertArgs>(args: SelectSubset<T, ChannelReadStatusUpsertArgs<ExtArgs>>): Prisma__ChannelReadStatusClient<$Result.GetResult<Prisma.$ChannelReadStatusPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChannelReadStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusCountArgs} args - Arguments to filter ChannelReadStatuses to count.
+     * @example
+     * // Count the number of ChannelReadStatuses
+     * const count = await prisma.channelReadStatus.count({
+     *   where: {
+     *     // ... the filter for the ChannelReadStatuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChannelReadStatusCountArgs>(
+      args?: Subset<T, ChannelReadStatusCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChannelReadStatusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChannelReadStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChannelReadStatusAggregateArgs>(args: Subset<T, ChannelReadStatusAggregateArgs>): Prisma.PrismaPromise<GetChannelReadStatusAggregateType<T>>
+
+    /**
+     * Group by ChannelReadStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelReadStatusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChannelReadStatusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChannelReadStatusGroupByArgs['orderBy'] }
+        : { orderBy?: ChannelReadStatusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChannelReadStatusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChannelReadStatusGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChannelReadStatus model
+   */
+  readonly fields: ChannelReadStatusFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChannelReadStatus.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChannelReadStatusClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    channel<T extends ChannelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChannelDefaultArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChannelReadStatus model
+   */
+  interface ChannelReadStatusFieldRefs {
+    readonly id: FieldRef<"ChannelReadStatus", 'String'>
+    readonly userId: FieldRef<"ChannelReadStatus", 'String'>
+    readonly channelId: FieldRef<"ChannelReadStatus", 'String'>
+    readonly lastReadAt: FieldRef<"ChannelReadStatus", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChannelReadStatus findUnique
+   */
+  export type ChannelReadStatusFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ChannelReadStatus to fetch.
+     */
+    where: ChannelReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ChannelReadStatus findUniqueOrThrow
+   */
+  export type ChannelReadStatusFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ChannelReadStatus to fetch.
+     */
+    where: ChannelReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ChannelReadStatus findFirst
+   */
+  export type ChannelReadStatusFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ChannelReadStatus to fetch.
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChannelReadStatuses to fetch.
+     */
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChannelReadStatuses.
+     */
+    cursor?: ChannelReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChannelReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChannelReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChannelReadStatuses.
+     */
+    distinct?: ChannelReadStatusScalarFieldEnum | ChannelReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ChannelReadStatus findFirstOrThrow
+   */
+  export type ChannelReadStatusFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ChannelReadStatus to fetch.
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChannelReadStatuses to fetch.
+     */
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChannelReadStatuses.
+     */
+    cursor?: ChannelReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChannelReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChannelReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChannelReadStatuses.
+     */
+    distinct?: ChannelReadStatusScalarFieldEnum | ChannelReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ChannelReadStatus findMany
+   */
+  export type ChannelReadStatusFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ChannelReadStatuses to fetch.
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChannelReadStatuses to fetch.
+     */
+    orderBy?: ChannelReadStatusOrderByWithRelationInput | ChannelReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChannelReadStatuses.
+     */
+    cursor?: ChannelReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChannelReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChannelReadStatuses.
+     */
+    skip?: number
+    distinct?: ChannelReadStatusScalarFieldEnum | ChannelReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ChannelReadStatus create
+   */
+  export type ChannelReadStatusCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChannelReadStatus.
+     */
+    data: XOR<ChannelReadStatusCreateInput, ChannelReadStatusUncheckedCreateInput>
+  }
+
+  /**
+   * ChannelReadStatus createMany
+   */
+  export type ChannelReadStatusCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChannelReadStatuses.
+     */
+    data: ChannelReadStatusCreateManyInput | ChannelReadStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChannelReadStatus createManyAndReturn
+   */
+  export type ChannelReadStatusCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * The data used to create many ChannelReadStatuses.
+     */
+    data: ChannelReadStatusCreateManyInput | ChannelReadStatusCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChannelReadStatus update
+   */
+  export type ChannelReadStatusUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChannelReadStatus.
+     */
+    data: XOR<ChannelReadStatusUpdateInput, ChannelReadStatusUncheckedUpdateInput>
+    /**
+     * Choose, which ChannelReadStatus to update.
+     */
+    where: ChannelReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ChannelReadStatus updateMany
+   */
+  export type ChannelReadStatusUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChannelReadStatuses.
+     */
+    data: XOR<ChannelReadStatusUpdateManyMutationInput, ChannelReadStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which ChannelReadStatuses to update
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * Limit how many ChannelReadStatuses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChannelReadStatus updateManyAndReturn
+   */
+  export type ChannelReadStatusUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * The data used to update ChannelReadStatuses.
+     */
+    data: XOR<ChannelReadStatusUpdateManyMutationInput, ChannelReadStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which ChannelReadStatuses to update
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * Limit how many ChannelReadStatuses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChannelReadStatus upsert
+   */
+  export type ChannelReadStatusUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChannelReadStatus to update in case it exists.
+     */
+    where: ChannelReadStatusWhereUniqueInput
+    /**
+     * In case the ChannelReadStatus found by the `where` argument doesn't exist, create a new ChannelReadStatus with this data.
+     */
+    create: XOR<ChannelReadStatusCreateInput, ChannelReadStatusUncheckedCreateInput>
+    /**
+     * In case the ChannelReadStatus was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChannelReadStatusUpdateInput, ChannelReadStatusUncheckedUpdateInput>
+  }
+
+  /**
+   * ChannelReadStatus delete
+   */
+  export type ChannelReadStatusDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter which ChannelReadStatus to delete.
+     */
+    where: ChannelReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ChannelReadStatus deleteMany
+   */
+  export type ChannelReadStatusDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChannelReadStatuses to delete
+     */
+    where?: ChannelReadStatusWhereInput
+    /**
+     * Limit how many ChannelReadStatuses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChannelReadStatus without action
+   */
+  export type ChannelReadStatusDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelReadStatus
+     */
+    select?: ChannelReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChannelReadStatus
+     */
+    omit?: ChannelReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelReadStatusInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConversationReadStatus
+   */
+
+  export type AggregateConversationReadStatus = {
+    _count: ConversationReadStatusCountAggregateOutputType | null
+    _min: ConversationReadStatusMinAggregateOutputType | null
+    _max: ConversationReadStatusMaxAggregateOutputType | null
+  }
+
+  export type ConversationReadStatusMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    conversationId: string | null
+    lastReadAt: Date | null
+  }
+
+  export type ConversationReadStatusMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    conversationId: string | null
+    lastReadAt: Date | null
+  }
+
+  export type ConversationReadStatusCountAggregateOutputType = {
+    id: number
+    userId: number
+    conversationId: number
+    lastReadAt: number
+    _all: number
+  }
+
+
+  export type ConversationReadStatusMinAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    lastReadAt?: true
+  }
+
+  export type ConversationReadStatusMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    lastReadAt?: true
+  }
+
+  export type ConversationReadStatusCountAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    lastReadAt?: true
+    _all?: true
+  }
+
+  export type ConversationReadStatusAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversationReadStatus to aggregate.
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversationReadStatuses to fetch.
+     */
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversationReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversationReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversationReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConversationReadStatuses
+    **/
+    _count?: true | ConversationReadStatusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversationReadStatusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversationReadStatusMaxAggregateInputType
+  }
+
+  export type GetConversationReadStatusAggregateType<T extends ConversationReadStatusAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversationReadStatus]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversationReadStatus[P]>
+      : GetScalarType<T[P], AggregateConversationReadStatus[P]>
+  }
+
+
+
+
+  export type ConversationReadStatusGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationReadStatusWhereInput
+    orderBy?: ConversationReadStatusOrderByWithAggregationInput | ConversationReadStatusOrderByWithAggregationInput[]
+    by: ConversationReadStatusScalarFieldEnum[] | ConversationReadStatusScalarFieldEnum
+    having?: ConversationReadStatusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversationReadStatusCountAggregateInputType | true
+    _min?: ConversationReadStatusMinAggregateInputType
+    _max?: ConversationReadStatusMaxAggregateInputType
+  }
+
+  export type ConversationReadStatusGroupByOutputType = {
+    id: string
+    userId: string
+    conversationId: string
+    lastReadAt: Date
+    _count: ConversationReadStatusCountAggregateOutputType | null
+    _min: ConversationReadStatusMinAggregateOutputType | null
+    _max: ConversationReadStatusMaxAggregateOutputType | null
+  }
+
+  type GetConversationReadStatusGroupByPayload<T extends ConversationReadStatusGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversationReadStatusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversationReadStatusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversationReadStatusGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversationReadStatusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversationReadStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversationReadStatus"]>
+
+  export type ConversationReadStatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversationReadStatus"]>
+
+  export type ConversationReadStatusSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    lastReadAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversationReadStatus"]>
+
+  export type ConversationReadStatusSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    lastReadAt?: boolean
+  }
+
+  export type ConversationReadStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "conversationId" | "lastReadAt", ExtArgs["result"]["conversationReadStatus"]>
+  export type ConversationReadStatusInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type ConversationReadStatusIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type ConversationReadStatusIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+
+  export type $ConversationReadStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConversationReadStatus"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      conversationId: string
+      lastReadAt: Date
+    }, ExtArgs["result"]["conversationReadStatus"]>
+    composites: {}
+  }
+
+  type ConversationReadStatusGetPayload<S extends boolean | null | undefined | ConversationReadStatusDefaultArgs> = $Result.GetResult<Prisma.$ConversationReadStatusPayload, S>
+
+  type ConversationReadStatusCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversationReadStatusFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversationReadStatusCountAggregateInputType | true
+    }
+
+  export interface ConversationReadStatusDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConversationReadStatus'], meta: { name: 'ConversationReadStatus' } }
+    /**
+     * Find zero or one ConversationReadStatus that matches the filter.
+     * @param {ConversationReadStatusFindUniqueArgs} args - Arguments to find a ConversationReadStatus
+     * @example
+     * // Get one ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversationReadStatusFindUniqueArgs>(args: SelectSubset<T, ConversationReadStatusFindUniqueArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConversationReadStatus that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversationReadStatusFindUniqueOrThrowArgs} args - Arguments to find a ConversationReadStatus
+     * @example
+     * // Get one ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversationReadStatusFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversationReadStatusFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversationReadStatus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusFindFirstArgs} args - Arguments to find a ConversationReadStatus
+     * @example
+     * // Get one ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversationReadStatusFindFirstArgs>(args?: SelectSubset<T, ConversationReadStatusFindFirstArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversationReadStatus that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusFindFirstOrThrowArgs} args - Arguments to find a ConversationReadStatus
+     * @example
+     * // Get one ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversationReadStatusFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversationReadStatusFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConversationReadStatuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConversationReadStatuses
+     * const conversationReadStatuses = await prisma.conversationReadStatus.findMany()
+     * 
+     * // Get first 10 ConversationReadStatuses
+     * const conversationReadStatuses = await prisma.conversationReadStatus.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversationReadStatusWithIdOnly = await prisma.conversationReadStatus.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversationReadStatusFindManyArgs>(args?: SelectSubset<T, ConversationReadStatusFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConversationReadStatus.
+     * @param {ConversationReadStatusCreateArgs} args - Arguments to create a ConversationReadStatus.
+     * @example
+     * // Create one ConversationReadStatus
+     * const ConversationReadStatus = await prisma.conversationReadStatus.create({
+     *   data: {
+     *     // ... data to create a ConversationReadStatus
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversationReadStatusCreateArgs>(args: SelectSubset<T, ConversationReadStatusCreateArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConversationReadStatuses.
+     * @param {ConversationReadStatusCreateManyArgs} args - Arguments to create many ConversationReadStatuses.
+     * @example
+     * // Create many ConversationReadStatuses
+     * const conversationReadStatus = await prisma.conversationReadStatus.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversationReadStatusCreateManyArgs>(args?: SelectSubset<T, ConversationReadStatusCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConversationReadStatuses and returns the data saved in the database.
+     * @param {ConversationReadStatusCreateManyAndReturnArgs} args - Arguments to create many ConversationReadStatuses.
+     * @example
+     * // Create many ConversationReadStatuses
+     * const conversationReadStatus = await prisma.conversationReadStatus.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConversationReadStatuses and only return the `id`
+     * const conversationReadStatusWithIdOnly = await prisma.conversationReadStatus.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversationReadStatusCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversationReadStatusCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConversationReadStatus.
+     * @param {ConversationReadStatusDeleteArgs} args - Arguments to delete one ConversationReadStatus.
+     * @example
+     * // Delete one ConversationReadStatus
+     * const ConversationReadStatus = await prisma.conversationReadStatus.delete({
+     *   where: {
+     *     // ... filter to delete one ConversationReadStatus
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversationReadStatusDeleteArgs>(args: SelectSubset<T, ConversationReadStatusDeleteArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConversationReadStatus.
+     * @param {ConversationReadStatusUpdateArgs} args - Arguments to update one ConversationReadStatus.
+     * @example
+     * // Update one ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversationReadStatusUpdateArgs>(args: SelectSubset<T, ConversationReadStatusUpdateArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConversationReadStatuses.
+     * @param {ConversationReadStatusDeleteManyArgs} args - Arguments to filter ConversationReadStatuses to delete.
+     * @example
+     * // Delete a few ConversationReadStatuses
+     * const { count } = await prisma.conversationReadStatus.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversationReadStatusDeleteManyArgs>(args?: SelectSubset<T, ConversationReadStatusDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversationReadStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConversationReadStatuses
+     * const conversationReadStatus = await prisma.conversationReadStatus.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversationReadStatusUpdateManyArgs>(args: SelectSubset<T, ConversationReadStatusUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversationReadStatuses and returns the data updated in the database.
+     * @param {ConversationReadStatusUpdateManyAndReturnArgs} args - Arguments to update many ConversationReadStatuses.
+     * @example
+     * // Update many ConversationReadStatuses
+     * const conversationReadStatus = await prisma.conversationReadStatus.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConversationReadStatuses and only return the `id`
+     * const conversationReadStatusWithIdOnly = await prisma.conversationReadStatus.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversationReadStatusUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversationReadStatusUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConversationReadStatus.
+     * @param {ConversationReadStatusUpsertArgs} args - Arguments to update or create a ConversationReadStatus.
+     * @example
+     * // Update or create a ConversationReadStatus
+     * const conversationReadStatus = await prisma.conversationReadStatus.upsert({
+     *   create: {
+     *     // ... data to create a ConversationReadStatus
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConversationReadStatus we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversationReadStatusUpsertArgs>(args: SelectSubset<T, ConversationReadStatusUpsertArgs<ExtArgs>>): Prisma__ConversationReadStatusClient<$Result.GetResult<Prisma.$ConversationReadStatusPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConversationReadStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusCountArgs} args - Arguments to filter ConversationReadStatuses to count.
+     * @example
+     * // Count the number of ConversationReadStatuses
+     * const count = await prisma.conversationReadStatus.count({
+     *   where: {
+     *     // ... the filter for the ConversationReadStatuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversationReadStatusCountArgs>(
+      args?: Subset<T, ConversationReadStatusCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversationReadStatusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConversationReadStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversationReadStatusAggregateArgs>(args: Subset<T, ConversationReadStatusAggregateArgs>): Prisma.PrismaPromise<GetConversationReadStatusAggregateType<T>>
+
+    /**
+     * Group by ConversationReadStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationReadStatusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversationReadStatusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversationReadStatusGroupByArgs['orderBy'] }
+        : { orderBy?: ConversationReadStatusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversationReadStatusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversationReadStatusGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConversationReadStatus model
+   */
+  readonly fields: ConversationReadStatusFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConversationReadStatus.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversationReadStatusClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConversationReadStatus model
+   */
+  interface ConversationReadStatusFieldRefs {
+    readonly id: FieldRef<"ConversationReadStatus", 'String'>
+    readonly userId: FieldRef<"ConversationReadStatus", 'String'>
+    readonly conversationId: FieldRef<"ConversationReadStatus", 'String'>
+    readonly lastReadAt: FieldRef<"ConversationReadStatus", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConversationReadStatus findUnique
+   */
+  export type ConversationReadStatusFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversationReadStatus to fetch.
+     */
+    where: ConversationReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ConversationReadStatus findUniqueOrThrow
+   */
+  export type ConversationReadStatusFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversationReadStatus to fetch.
+     */
+    where: ConversationReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ConversationReadStatus findFirst
+   */
+  export type ConversationReadStatusFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversationReadStatus to fetch.
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversationReadStatuses to fetch.
+     */
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversationReadStatuses.
+     */
+    cursor?: ConversationReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversationReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversationReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversationReadStatuses.
+     */
+    distinct?: ConversationReadStatusScalarFieldEnum | ConversationReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ConversationReadStatus findFirstOrThrow
+   */
+  export type ConversationReadStatusFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversationReadStatus to fetch.
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversationReadStatuses to fetch.
+     */
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversationReadStatuses.
+     */
+    cursor?: ConversationReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversationReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversationReadStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversationReadStatuses.
+     */
+    distinct?: ConversationReadStatusScalarFieldEnum | ConversationReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ConversationReadStatus findMany
+   */
+  export type ConversationReadStatusFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversationReadStatuses to fetch.
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversationReadStatuses to fetch.
+     */
+    orderBy?: ConversationReadStatusOrderByWithRelationInput | ConversationReadStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConversationReadStatuses.
+     */
+    cursor?: ConversationReadStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversationReadStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversationReadStatuses.
+     */
+    skip?: number
+    distinct?: ConversationReadStatusScalarFieldEnum | ConversationReadStatusScalarFieldEnum[]
+  }
+
+  /**
+   * ConversationReadStatus create
+   */
+  export type ConversationReadStatusCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConversationReadStatus.
+     */
+    data: XOR<ConversationReadStatusCreateInput, ConversationReadStatusUncheckedCreateInput>
+  }
+
+  /**
+   * ConversationReadStatus createMany
+   */
+  export type ConversationReadStatusCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConversationReadStatuses.
+     */
+    data: ConversationReadStatusCreateManyInput | ConversationReadStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConversationReadStatus createManyAndReturn
+   */
+  export type ConversationReadStatusCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConversationReadStatuses.
+     */
+    data: ConversationReadStatusCreateManyInput | ConversationReadStatusCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversationReadStatus update
+   */
+  export type ConversationReadStatusUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConversationReadStatus.
+     */
+    data: XOR<ConversationReadStatusUpdateInput, ConversationReadStatusUncheckedUpdateInput>
+    /**
+     * Choose, which ConversationReadStatus to update.
+     */
+    where: ConversationReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ConversationReadStatus updateMany
+   */
+  export type ConversationReadStatusUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConversationReadStatuses.
+     */
+    data: XOR<ConversationReadStatusUpdateManyMutationInput, ConversationReadStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversationReadStatuses to update
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * Limit how many ConversationReadStatuses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversationReadStatus updateManyAndReturn
+   */
+  export type ConversationReadStatusUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * The data used to update ConversationReadStatuses.
+     */
+    data: XOR<ConversationReadStatusUpdateManyMutationInput, ConversationReadStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversationReadStatuses to update
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * Limit how many ConversationReadStatuses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversationReadStatus upsert
+   */
+  export type ConversationReadStatusUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConversationReadStatus to update in case it exists.
+     */
+    where: ConversationReadStatusWhereUniqueInput
+    /**
+     * In case the ConversationReadStatus found by the `where` argument doesn't exist, create a new ConversationReadStatus with this data.
+     */
+    create: XOR<ConversationReadStatusCreateInput, ConversationReadStatusUncheckedCreateInput>
+    /**
+     * In case the ConversationReadStatus was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversationReadStatusUpdateInput, ConversationReadStatusUncheckedUpdateInput>
+  }
+
+  /**
+   * ConversationReadStatus delete
+   */
+  export type ConversationReadStatusDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+    /**
+     * Filter which ConversationReadStatus to delete.
+     */
+    where: ConversationReadStatusWhereUniqueInput
+  }
+
+  /**
+   * ConversationReadStatus deleteMany
+   */
+  export type ConversationReadStatusDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversationReadStatuses to delete
+     */
+    where?: ConversationReadStatusWhereInput
+    /**
+     * Limit how many ConversationReadStatuses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversationReadStatus without action
+   */
+  export type ConversationReadStatusDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationReadStatus
+     */
+    select?: ConversationReadStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversationReadStatus
+     */
+    omit?: ConversationReadStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationReadStatusInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13339,6 +15775,26 @@ export namespace Prisma {
   export type DirectMessageScalarFieldEnum = (typeof DirectMessageScalarFieldEnum)[keyof typeof DirectMessageScalarFieldEnum]
 
 
+  export const ChannelReadStatusScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    channelId: 'channelId',
+    lastReadAt: 'lastReadAt'
+  };
+
+  export type ChannelReadStatusScalarFieldEnum = (typeof ChannelReadStatusScalarFieldEnum)[keyof typeof ChannelReadStatusScalarFieldEnum]
+
+
+  export const ConversationReadStatusScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    conversationId: 'conversationId',
+    lastReadAt: 'lastReadAt'
+  };
+
+  export type ConversationReadStatusScalarFieldEnum = (typeof ConversationReadStatusScalarFieldEnum)[keyof typeof ConversationReadStatusScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -13466,6 +15922,8 @@ export namespace Prisma {
     servers?: ServerListRelationFilter
     members?: MemberListRelationFilter
     channels?: ChannelListRelationFilter
+    channelReadStatuses?: ChannelReadStatusListRelationFilter
+    conversationReadStatuses?: ConversationReadStatusListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -13483,6 +15941,8 @@ export namespace Prisma {
     servers?: ServerOrderByRelationAggregateInput
     members?: MemberOrderByRelationAggregateInput
     channels?: ChannelOrderByRelationAggregateInput
+    channelReadStatuses?: ChannelReadStatusOrderByRelationAggregateInput
+    conversationReadStatuses?: ConversationReadStatusOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -13503,6 +15963,8 @@ export namespace Prisma {
     servers?: ServerListRelationFilter
     members?: MemberListRelationFilter
     channels?: ChannelListRelationFilter
+    channelReadStatuses?: ChannelReadStatusListRelationFilter
+    conversationReadStatuses?: ConversationReadStatusListRelationFilter
   }, "id" | "uniqueId" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -13922,6 +16384,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     server?: XOR<ServerScalarRelationFilter, ServerWhereInput>
     messages?: MessageListRelationFilter
+    readStatuses?: ChannelReadStatusListRelationFilter
   }
 
   export type ChannelOrderByWithRelationInput = {
@@ -13935,6 +16398,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     server?: ServerOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
+    readStatuses?: ChannelReadStatusOrderByRelationAggregateInput
   }
 
   export type ChannelWhereUniqueInput = Prisma.AtLeast<{
@@ -13951,6 +16415,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     server?: XOR<ServerScalarRelationFilter, ServerWhereInput>
     messages?: MessageListRelationFilter
+    readStatuses?: ChannelReadStatusListRelationFilter
   }, "id">
 
   export type ChannelOrderByWithAggregationInput = {
@@ -14062,6 +16527,7 @@ export namespace Prisma {
     memberOne?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     memberTwo?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     directMessages?: DirectMessageListRelationFilter
+    readStatuses?: ConversationReadStatusListRelationFilter
   }
 
   export type ConversationOrderByWithRelationInput = {
@@ -14071,6 +16537,7 @@ export namespace Prisma {
     memberOne?: MemberOrderByWithRelationInput
     memberTwo?: MemberOrderByWithRelationInput
     directMessages?: DirectMessageOrderByRelationAggregateInput
+    readStatuses?: ConversationReadStatusOrderByRelationAggregateInput
   }
 
   export type ConversationWhereUniqueInput = Prisma.AtLeast<{
@@ -14084,6 +16551,7 @@ export namespace Prisma {
     memberOne?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     memberTwo?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     directMessages?: DirectMessageListRelationFilter
+    readStatuses?: ConversationReadStatusListRelationFilter
   }, "id" | "memberOneId_memberTwoId">
 
   export type ConversationOrderByWithAggregationInput = {
@@ -14177,6 +16645,114 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"DirectMessage"> | Date | string
   }
 
+  export type ChannelReadStatusWhereInput = {
+    AND?: ChannelReadStatusWhereInput | ChannelReadStatusWhereInput[]
+    OR?: ChannelReadStatusWhereInput[]
+    NOT?: ChannelReadStatusWhereInput | ChannelReadStatusWhereInput[]
+    id?: StringFilter<"ChannelReadStatus"> | string
+    userId?: StringFilter<"ChannelReadStatus"> | string
+    channelId?: StringFilter<"ChannelReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ChannelReadStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    channel?: XOR<ChannelScalarRelationFilter, ChannelWhereInput>
+  }
+
+  export type ChannelReadStatusOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    channelId?: SortOrder
+    lastReadAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    channel?: ChannelOrderByWithRelationInput
+  }
+
+  export type ChannelReadStatusWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_channelId?: ChannelReadStatusUserIdChannelIdCompoundUniqueInput
+    AND?: ChannelReadStatusWhereInput | ChannelReadStatusWhereInput[]
+    OR?: ChannelReadStatusWhereInput[]
+    NOT?: ChannelReadStatusWhereInput | ChannelReadStatusWhereInput[]
+    userId?: StringFilter<"ChannelReadStatus"> | string
+    channelId?: StringFilter<"ChannelReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ChannelReadStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    channel?: XOR<ChannelScalarRelationFilter, ChannelWhereInput>
+  }, "id" | "userId_channelId">
+
+  export type ChannelReadStatusOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    channelId?: SortOrder
+    lastReadAt?: SortOrder
+    _count?: ChannelReadStatusCountOrderByAggregateInput
+    _max?: ChannelReadStatusMaxOrderByAggregateInput
+    _min?: ChannelReadStatusMinOrderByAggregateInput
+  }
+
+  export type ChannelReadStatusScalarWhereWithAggregatesInput = {
+    AND?: ChannelReadStatusScalarWhereWithAggregatesInput | ChannelReadStatusScalarWhereWithAggregatesInput[]
+    OR?: ChannelReadStatusScalarWhereWithAggregatesInput[]
+    NOT?: ChannelReadStatusScalarWhereWithAggregatesInput | ChannelReadStatusScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChannelReadStatus"> | string
+    userId?: StringWithAggregatesFilter<"ChannelReadStatus"> | string
+    channelId?: StringWithAggregatesFilter<"ChannelReadStatus"> | string
+    lastReadAt?: DateTimeWithAggregatesFilter<"ChannelReadStatus"> | Date | string
+  }
+
+  export type ConversationReadStatusWhereInput = {
+    AND?: ConversationReadStatusWhereInput | ConversationReadStatusWhereInput[]
+    OR?: ConversationReadStatusWhereInput[]
+    NOT?: ConversationReadStatusWhereInput | ConversationReadStatusWhereInput[]
+    id?: StringFilter<"ConversationReadStatus"> | string
+    userId?: StringFilter<"ConversationReadStatus"> | string
+    conversationId?: StringFilter<"ConversationReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ConversationReadStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }
+
+  export type ConversationReadStatusOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    lastReadAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type ConversationReadStatusWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_conversationId?: ConversationReadStatusUserIdConversationIdCompoundUniqueInput
+    AND?: ConversationReadStatusWhereInput | ConversationReadStatusWhereInput[]
+    OR?: ConversationReadStatusWhereInput[]
+    NOT?: ConversationReadStatusWhereInput | ConversationReadStatusWhereInput[]
+    userId?: StringFilter<"ConversationReadStatus"> | string
+    conversationId?: StringFilter<"ConversationReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ConversationReadStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }, "id" | "userId_conversationId">
+
+  export type ConversationReadStatusOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    lastReadAt?: SortOrder
+    _count?: ConversationReadStatusCountOrderByAggregateInput
+    _max?: ConversationReadStatusMaxOrderByAggregateInput
+    _min?: ConversationReadStatusMinOrderByAggregateInput
+  }
+
+  export type ConversationReadStatusScalarWhereWithAggregatesInput = {
+    AND?: ConversationReadStatusScalarWhereWithAggregatesInput | ConversationReadStatusScalarWhereWithAggregatesInput[]
+    OR?: ConversationReadStatusScalarWhereWithAggregatesInput[]
+    NOT?: ConversationReadStatusScalarWhereWithAggregatesInput | ConversationReadStatusScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConversationReadStatus"> | string
+    userId?: StringWithAggregatesFilter<"ConversationReadStatus"> | string
+    conversationId?: StringWithAggregatesFilter<"ConversationReadStatus"> | string
+    lastReadAt?: DateTimeWithAggregatesFilter<"ConversationReadStatus"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -14192,6 +16768,8 @@ export namespace Prisma {
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
     channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -14209,6 +16787,8 @@ export namespace Prisma {
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
     channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -14226,6 +16806,8 @@ export namespace Prisma {
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
     channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14243,6 +16825,8 @@ export namespace Prisma {
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
     channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -14701,6 +17285,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutChannelsInput
     server: ServerCreateNestedOneWithoutChannelsInput
     messages?: MessageCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateInput = {
@@ -14712,6 +17297,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUpdateInput = {
@@ -14723,6 +17309,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutChannelsNestedInput
     server?: ServerUpdateOneRequiredWithoutChannelsNestedInput
     messages?: MessageUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateInput = {
@@ -14734,6 +17321,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelCreateManyInput = {
@@ -14844,6 +17432,7 @@ export namespace Prisma {
     memberOne: MemberCreateNestedOneWithoutConversationsInitiatedInput
     memberTwo: MemberCreateNestedOneWithoutConversationsReceivedInput
     directMessages?: DirectMessageCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateInput = {
@@ -14851,6 +17440,7 @@ export namespace Prisma {
     memberOneId: string
     memberTwoId: string
     directMessages?: DirectMessageUncheckedCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUpdateInput = {
@@ -14858,6 +17448,7 @@ export namespace Prisma {
     memberOne?: MemberUpdateOneRequiredWithoutConversationsInitiatedNestedInput
     memberTwo?: MemberUpdateOneRequiredWithoutConversationsReceivedNestedInput
     directMessages?: DirectMessageUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateInput = {
@@ -14865,6 +17456,7 @@ export namespace Prisma {
     memberOneId?: StringFieldUpdateOperationsInput | string
     memberTwoId?: StringFieldUpdateOperationsInput | string
     directMessages?: DirectMessageUncheckedUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationCreateManyInput = {
@@ -14958,6 +17550,100 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChannelReadStatusCreateInput = {
+    id?: string
+    lastReadAt?: Date | string
+    user: UserCreateNestedOneWithoutChannelReadStatusesInput
+    channel: ChannelCreateNestedOneWithoutReadStatusesInput
+  }
+
+  export type ChannelReadStatusUncheckedCreateInput = {
+    id?: string
+    userId: string
+    channelId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ChannelReadStatusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChannelReadStatusesNestedInput
+    channel?: ChannelUpdateOneRequiredWithoutReadStatusesNestedInput
+  }
+
+  export type ChannelReadStatusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChannelReadStatusCreateManyInput = {
+    id?: string
+    userId: string
+    channelId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ChannelReadStatusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChannelReadStatusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusCreateInput = {
+    id?: string
+    lastReadAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationReadStatusesInput
+    conversation: ConversationCreateNestedOneWithoutReadStatusesInput
+  }
+
+  export type ConversationReadStatusUncheckedCreateInput = {
+    id?: string
+    userId: string
+    conversationId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ConversationReadStatusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationReadStatusesNestedInput
+    conversation?: ConversationUpdateOneRequiredWithoutReadStatusesNestedInput
+  }
+
+  export type ConversationReadStatusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusCreateManyInput = {
+    id?: string
+    userId: string
+    conversationId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ConversationReadStatusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15034,6 +17720,18 @@ export namespace Prisma {
     none?: ChannelWhereInput
   }
 
+  export type ChannelReadStatusListRelationFilter = {
+    every?: ChannelReadStatusWhereInput
+    some?: ChannelReadStatusWhereInput
+    none?: ChannelReadStatusWhereInput
+  }
+
+  export type ConversationReadStatusListRelationFilter = {
+    every?: ConversationReadStatusWhereInput
+    some?: ConversationReadStatusWhereInput
+    none?: ConversationReadStatusWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -15056,6 +17754,14 @@ export namespace Prisma {
   }
 
   export type ChannelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChannelReadStatusOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationReadStatusOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15554,6 +18260,58 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type ChannelReadStatusUserIdChannelIdCompoundUniqueInput = {
+    userId: string
+    channelId: string
+  }
+
+  export type ChannelReadStatusCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    channelId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
+  export type ChannelReadStatusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    channelId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
+  export type ChannelReadStatusMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    channelId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
+  export type ConversationReadStatusUserIdConversationIdCompoundUniqueInput = {
+    userId: string
+    conversationId: string
+  }
+
+  export type ConversationReadStatusCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
+  export type ConversationReadStatusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
+  export type ConversationReadStatusMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    lastReadAt?: SortOrder
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -15589,6 +18347,20 @@ export namespace Prisma {
     connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
   }
 
+  export type ChannelReadStatusCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput> | ChannelReadStatusCreateWithoutUserInput[] | ChannelReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutUserInput | ChannelReadStatusCreateOrConnectWithoutUserInput[]
+    createMany?: ChannelReadStatusCreateManyUserInputEnvelope
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+  }
+
+  export type ConversationReadStatusCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput> | ConversationReadStatusCreateWithoutUserInput[] | ConversationReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutUserInput | ConversationReadStatusCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationReadStatusCreateManyUserInputEnvelope
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -15622,6 +18394,20 @@ export namespace Prisma {
     connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
     createMany?: ChannelCreateManyUserInputEnvelope
     connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+  }
+
+  export type ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput> | ChannelReadStatusCreateWithoutUserInput[] | ChannelReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutUserInput | ChannelReadStatusCreateOrConnectWithoutUserInput[]
+    createMany?: ChannelReadStatusCreateManyUserInputEnvelope
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+  }
+
+  export type ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput> | ConversationReadStatusCreateWithoutUserInput[] | ConversationReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutUserInput | ConversationReadStatusCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationReadStatusCreateManyUserInputEnvelope
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -15710,6 +18496,34 @@ export namespace Prisma {
     deleteMany?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
   }
 
+  export type ChannelReadStatusUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput> | ChannelReadStatusCreateWithoutUserInput[] | ChannelReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutUserInput | ChannelReadStatusCreateOrConnectWithoutUserInput[]
+    upsert?: ChannelReadStatusUpsertWithWhereUniqueWithoutUserInput | ChannelReadStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChannelReadStatusCreateManyUserInputEnvelope
+    set?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    disconnect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    delete?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    update?: ChannelReadStatusUpdateWithWhereUniqueWithoutUserInput | ChannelReadStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChannelReadStatusUpdateManyWithWhereWithoutUserInput | ChannelReadStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
+  }
+
+  export type ConversationReadStatusUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput> | ConversationReadStatusCreateWithoutUserInput[] | ConversationReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutUserInput | ConversationReadStatusCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationReadStatusUpsertWithWhereUniqueWithoutUserInput | ConversationReadStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationReadStatusCreateManyUserInputEnvelope
+    set?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    disconnect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    delete?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    update?: ConversationReadStatusUpdateWithWhereUniqueWithoutUserInput | ConversationReadStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationReadStatusUpdateManyWithWhereWithoutUserInput | ConversationReadStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -15778,6 +18592,34 @@ export namespace Prisma {
     update?: ChannelUpdateWithWhereUniqueWithoutUserInput | ChannelUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ChannelUpdateManyWithWhereWithoutUserInput | ChannelUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
+  }
+
+  export type ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput> | ChannelReadStatusCreateWithoutUserInput[] | ChannelReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutUserInput | ChannelReadStatusCreateOrConnectWithoutUserInput[]
+    upsert?: ChannelReadStatusUpsertWithWhereUniqueWithoutUserInput | ChannelReadStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChannelReadStatusCreateManyUserInputEnvelope
+    set?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    disconnect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    delete?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    update?: ChannelReadStatusUpdateWithWhereUniqueWithoutUserInput | ChannelReadStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChannelReadStatusUpdateManyWithWhereWithoutUserInput | ChannelReadStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
+  }
+
+  export type ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput> | ConversationReadStatusCreateWithoutUserInput[] | ConversationReadStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutUserInput | ConversationReadStatusCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationReadStatusUpsertWithWhereUniqueWithoutUserInput | ConversationReadStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationReadStatusCreateManyUserInputEnvelope
+    set?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    disconnect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    delete?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    update?: ConversationReadStatusUpdateWithWhereUniqueWithoutUserInput | ConversationReadStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationReadStatusUpdateManyWithWhereWithoutUserInput | ConversationReadStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -16129,11 +18971,25 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type ChannelReadStatusCreateNestedManyWithoutChannelInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput> | ChannelReadStatusCreateWithoutChannelInput[] | ChannelReadStatusUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutChannelInput | ChannelReadStatusCreateOrConnectWithoutChannelInput[]
+    createMany?: ChannelReadStatusCreateManyChannelInputEnvelope
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutChannelInput = {
     create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
     createMany?: MessageCreateManyChannelInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ChannelReadStatusUncheckedCreateNestedManyWithoutChannelInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput> | ChannelReadStatusCreateWithoutChannelInput[] | ChannelReadStatusUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutChannelInput | ChannelReadStatusCreateOrConnectWithoutChannelInput[]
+    createMany?: ChannelReadStatusCreateManyChannelInputEnvelope
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
   }
 
   export type EnumChannelTypeFieldUpdateOperationsInput = {
@@ -16170,6 +19026,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type ChannelReadStatusUpdateManyWithoutChannelNestedInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput> | ChannelReadStatusCreateWithoutChannelInput[] | ChannelReadStatusUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutChannelInput | ChannelReadStatusCreateOrConnectWithoutChannelInput[]
+    upsert?: ChannelReadStatusUpsertWithWhereUniqueWithoutChannelInput | ChannelReadStatusUpsertWithWhereUniqueWithoutChannelInput[]
+    createMany?: ChannelReadStatusCreateManyChannelInputEnvelope
+    set?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    disconnect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    delete?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    update?: ChannelReadStatusUpdateWithWhereUniqueWithoutChannelInput | ChannelReadStatusUpdateWithWhereUniqueWithoutChannelInput[]
+    updateMany?: ChannelReadStatusUpdateManyWithWhereWithoutChannelInput | ChannelReadStatusUpdateManyWithWhereWithoutChannelInput[]
+    deleteMany?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
+  }
+
   export type MessageUncheckedUpdateManyWithoutChannelNestedInput = {
     create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
@@ -16182,6 +19052,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutChannelInput | MessageUpdateWithWhereUniqueWithoutChannelInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutChannelInput | MessageUpdateManyWithWhereWithoutChannelInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ChannelReadStatusUncheckedUpdateManyWithoutChannelNestedInput = {
+    create?: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput> | ChannelReadStatusCreateWithoutChannelInput[] | ChannelReadStatusUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: ChannelReadStatusCreateOrConnectWithoutChannelInput | ChannelReadStatusCreateOrConnectWithoutChannelInput[]
+    upsert?: ChannelReadStatusUpsertWithWhereUniqueWithoutChannelInput | ChannelReadStatusUpsertWithWhereUniqueWithoutChannelInput[]
+    createMany?: ChannelReadStatusCreateManyChannelInputEnvelope
+    set?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    disconnect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    delete?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    connect?: ChannelReadStatusWhereUniqueInput | ChannelReadStatusWhereUniqueInput[]
+    update?: ChannelReadStatusUpdateWithWhereUniqueWithoutChannelInput | ChannelReadStatusUpdateWithWhereUniqueWithoutChannelInput[]
+    updateMany?: ChannelReadStatusUpdateManyWithWhereWithoutChannelInput | ChannelReadStatusUpdateManyWithWhereWithoutChannelInput[]
+    deleteMany?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
   }
 
   export type MemberCreateNestedOneWithoutMessagesInput = {
@@ -16231,11 +19115,25 @@ export namespace Prisma {
     connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
   }
 
+  export type ConversationReadStatusCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput> | ConversationReadStatusCreateWithoutConversationInput[] | ConversationReadStatusUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutConversationInput | ConversationReadStatusCreateOrConnectWithoutConversationInput[]
+    createMany?: ConversationReadStatusCreateManyConversationInputEnvelope
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+  }
+
   export type DirectMessageUncheckedCreateNestedManyWithoutConversationInput = {
     create?: XOR<DirectMessageCreateWithoutConversationInput, DirectMessageUncheckedCreateWithoutConversationInput> | DirectMessageCreateWithoutConversationInput[] | DirectMessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: DirectMessageCreateOrConnectWithoutConversationInput | DirectMessageCreateOrConnectWithoutConversationInput[]
     createMany?: DirectMessageCreateManyConversationInputEnvelope
     connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+  }
+
+  export type ConversationReadStatusUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput> | ConversationReadStatusCreateWithoutConversationInput[] | ConversationReadStatusUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutConversationInput | ConversationReadStatusCreateOrConnectWithoutConversationInput[]
+    createMany?: ConversationReadStatusCreateManyConversationInputEnvelope
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
   }
 
   export type MemberUpdateOneRequiredWithoutConversationsInitiatedNestedInput = {
@@ -16268,6 +19166,20 @@ export namespace Prisma {
     deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
   }
 
+  export type ConversationReadStatusUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput> | ConversationReadStatusCreateWithoutConversationInput[] | ConversationReadStatusUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutConversationInput | ConversationReadStatusCreateOrConnectWithoutConversationInput[]
+    upsert?: ConversationReadStatusUpsertWithWhereUniqueWithoutConversationInput | ConversationReadStatusUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ConversationReadStatusCreateManyConversationInputEnvelope
+    set?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    disconnect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    delete?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    update?: ConversationReadStatusUpdateWithWhereUniqueWithoutConversationInput | ConversationReadStatusUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ConversationReadStatusUpdateManyWithWhereWithoutConversationInput | ConversationReadStatusUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
+  }
+
   export type DirectMessageUncheckedUpdateManyWithoutConversationNestedInput = {
     create?: XOR<DirectMessageCreateWithoutConversationInput, DirectMessageUncheckedCreateWithoutConversationInput> | DirectMessageCreateWithoutConversationInput[] | DirectMessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: DirectMessageCreateOrConnectWithoutConversationInput | DirectMessageCreateOrConnectWithoutConversationInput[]
@@ -16280,6 +19192,20 @@ export namespace Prisma {
     update?: DirectMessageUpdateWithWhereUniqueWithoutConversationInput | DirectMessageUpdateWithWhereUniqueWithoutConversationInput[]
     updateMany?: DirectMessageUpdateManyWithWhereWithoutConversationInput | DirectMessageUpdateManyWithWhereWithoutConversationInput[]
     deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+  }
+
+  export type ConversationReadStatusUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput> | ConversationReadStatusCreateWithoutConversationInput[] | ConversationReadStatusUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ConversationReadStatusCreateOrConnectWithoutConversationInput | ConversationReadStatusCreateOrConnectWithoutConversationInput[]
+    upsert?: ConversationReadStatusUpsertWithWhereUniqueWithoutConversationInput | ConversationReadStatusUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ConversationReadStatusCreateManyConversationInputEnvelope
+    set?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    disconnect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    delete?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    connect?: ConversationReadStatusWhereUniqueInput | ConversationReadStatusWhereUniqueInput[]
+    update?: ConversationReadStatusUpdateWithWhereUniqueWithoutConversationInput | ConversationReadStatusUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ConversationReadStatusUpdateManyWithWhereWithoutConversationInput | ConversationReadStatusUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
   }
 
   export type ConversationCreateNestedOneWithoutDirectMessagesInput = {
@@ -16308,6 +19234,62 @@ export namespace Prisma {
     upsert?: MemberUpsertWithoutDirectMessagesInput
     connect?: MemberWhereUniqueInput
     update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutDirectMessagesInput, MemberUpdateWithoutDirectMessagesInput>, MemberUncheckedUpdateWithoutDirectMessagesInput>
+  }
+
+  export type UserCreateNestedOneWithoutChannelReadStatusesInput = {
+    create?: XOR<UserCreateWithoutChannelReadStatusesInput, UserUncheckedCreateWithoutChannelReadStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChannelReadStatusesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ChannelCreateNestedOneWithoutReadStatusesInput = {
+    create?: XOR<ChannelCreateWithoutReadStatusesInput, ChannelUncheckedCreateWithoutReadStatusesInput>
+    connectOrCreate?: ChannelCreateOrConnectWithoutReadStatusesInput
+    connect?: ChannelWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutChannelReadStatusesNestedInput = {
+    create?: XOR<UserCreateWithoutChannelReadStatusesInput, UserUncheckedCreateWithoutChannelReadStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChannelReadStatusesInput
+    upsert?: UserUpsertWithoutChannelReadStatusesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChannelReadStatusesInput, UserUpdateWithoutChannelReadStatusesInput>, UserUncheckedUpdateWithoutChannelReadStatusesInput>
+  }
+
+  export type ChannelUpdateOneRequiredWithoutReadStatusesNestedInput = {
+    create?: XOR<ChannelCreateWithoutReadStatusesInput, ChannelUncheckedCreateWithoutReadStatusesInput>
+    connectOrCreate?: ChannelCreateOrConnectWithoutReadStatusesInput
+    upsert?: ChannelUpsertWithoutReadStatusesInput
+    connect?: ChannelWhereUniqueInput
+    update?: XOR<XOR<ChannelUpdateToOneWithWhereWithoutReadStatusesInput, ChannelUpdateWithoutReadStatusesInput>, ChannelUncheckedUpdateWithoutReadStatusesInput>
+  }
+
+  export type UserCreateNestedOneWithoutConversationReadStatusesInput = {
+    create?: XOR<UserCreateWithoutConversationReadStatusesInput, UserUncheckedCreateWithoutConversationReadStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationReadStatusesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedOneWithoutReadStatusesInput = {
+    create?: XOR<ConversationCreateWithoutReadStatusesInput, ConversationUncheckedCreateWithoutReadStatusesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutReadStatusesInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutConversationReadStatusesNestedInput = {
+    create?: XOR<UserCreateWithoutConversationReadStatusesInput, UserUncheckedCreateWithoutConversationReadStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationReadStatusesInput
+    upsert?: UserUpsertWithoutConversationReadStatusesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConversationReadStatusesInput, UserUpdateWithoutConversationReadStatusesInput>, UserUncheckedUpdateWithoutConversationReadStatusesInput>
+  }
+
+  export type ConversationUpdateOneRequiredWithoutReadStatusesNestedInput = {
+    create?: XOR<ConversationCreateWithoutReadStatusesInput, ConversationUncheckedCreateWithoutReadStatusesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutReadStatusesInput
+    upsert?: ConversationUpsertWithoutReadStatusesInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutReadStatusesInput, ConversationUpdateWithoutReadStatusesInput>, ConversationUncheckedUpdateWithoutReadStatusesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -16637,6 +19619,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     server: ServerCreateNestedOneWithoutChannelsInput
     messages?: MessageCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateWithoutUserInput = {
@@ -16647,6 +19630,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelCreateOrConnectWithoutUserInput = {
@@ -16656,6 +19640,50 @@ export namespace Prisma {
 
   export type ChannelCreateManyUserInputEnvelope = {
     data: ChannelCreateManyUserInput | ChannelCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChannelReadStatusCreateWithoutUserInput = {
+    id?: string
+    lastReadAt?: Date | string
+    channel: ChannelCreateNestedOneWithoutReadStatusesInput
+  }
+
+  export type ChannelReadStatusUncheckedCreateWithoutUserInput = {
+    id?: string
+    channelId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ChannelReadStatusCreateOrConnectWithoutUserInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    create: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChannelReadStatusCreateManyUserInputEnvelope = {
+    data: ChannelReadStatusCreateManyUserInput | ChannelReadStatusCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationReadStatusCreateWithoutUserInput = {
+    id?: string
+    lastReadAt?: Date | string
+    conversation: ConversationCreateNestedOneWithoutReadStatusesInput
+  }
+
+  export type ConversationReadStatusUncheckedCreateWithoutUserInput = {
+    id?: string
+    conversationId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ConversationReadStatusCreateOrConnectWithoutUserInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    create: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationReadStatusCreateManyUserInputEnvelope = {
+    data: ConversationReadStatusCreateManyUserInput | ConversationReadStatusCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -16811,6 +19839,58 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Channel"> | Date | string
   }
 
+  export type ChannelReadStatusUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    update: XOR<ChannelReadStatusUpdateWithoutUserInput, ChannelReadStatusUncheckedUpdateWithoutUserInput>
+    create: XOR<ChannelReadStatusCreateWithoutUserInput, ChannelReadStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChannelReadStatusUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    data: XOR<ChannelReadStatusUpdateWithoutUserInput, ChannelReadStatusUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChannelReadStatusUpdateManyWithWhereWithoutUserInput = {
+    where: ChannelReadStatusScalarWhereInput
+    data: XOR<ChannelReadStatusUpdateManyMutationInput, ChannelReadStatusUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChannelReadStatusScalarWhereInput = {
+    AND?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
+    OR?: ChannelReadStatusScalarWhereInput[]
+    NOT?: ChannelReadStatusScalarWhereInput | ChannelReadStatusScalarWhereInput[]
+    id?: StringFilter<"ChannelReadStatus"> | string
+    userId?: StringFilter<"ChannelReadStatus"> | string
+    channelId?: StringFilter<"ChannelReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ChannelReadStatus"> | Date | string
+  }
+
+  export type ConversationReadStatusUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    update: XOR<ConversationReadStatusUpdateWithoutUserInput, ConversationReadStatusUncheckedUpdateWithoutUserInput>
+    create: XOR<ConversationReadStatusCreateWithoutUserInput, ConversationReadStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationReadStatusUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    data: XOR<ConversationReadStatusUpdateWithoutUserInput, ConversationReadStatusUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConversationReadStatusUpdateManyWithWhereWithoutUserInput = {
+    where: ConversationReadStatusScalarWhereInput
+    data: XOR<ConversationReadStatusUpdateManyMutationInput, ConversationReadStatusUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConversationReadStatusScalarWhereInput = {
+    AND?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
+    OR?: ConversationReadStatusScalarWhereInput[]
+    NOT?: ConversationReadStatusScalarWhereInput | ConversationReadStatusScalarWhereInput[]
+    id?: StringFilter<"ConversationReadStatus"> | string
+    userId?: StringFilter<"ConversationReadStatus"> | string
+    conversationId?: StringFilter<"ConversationReadStatus"> | string
+    lastReadAt?: DateTimeFilter<"ConversationReadStatus"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -16825,6 +19905,8 @@ export namespace Prisma {
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
     channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -16841,6 +19923,8 @@ export namespace Prisma {
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
     channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -16873,6 +19957,8 @@ export namespace Prisma {
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
     channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -16889,6 +19975,8 @@ export namespace Prisma {
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
     channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -16905,6 +19993,8 @@ export namespace Prisma {
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
     channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -16921,6 +20011,8 @@ export namespace Prisma {
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
     channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -16953,6 +20045,8 @@ export namespace Prisma {
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
     channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -16969,6 +20063,8 @@ export namespace Prisma {
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
     channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutServersInput = {
@@ -16985,6 +20081,8 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
     channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutServersInput = {
@@ -17001,6 +20099,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
     channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutServersInput = {
@@ -17050,6 +20150,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutChannelsInput
     messages?: MessageCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateWithoutServerInput = {
@@ -17060,6 +20161,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutChannelInput
+    readStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelCreateOrConnectWithoutServerInput = {
@@ -17097,6 +20199,8 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
     channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutServersInput = {
@@ -17113,6 +20217,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
     channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MemberUpsertWithWhereUniqueWithoutServerInput = {
@@ -17161,6 +20267,8 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
     channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMembersInput = {
@@ -17177,6 +20285,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMembersInput = {
@@ -17275,12 +20385,14 @@ export namespace Prisma {
     id?: string
     memberTwo: MemberCreateNestedOneWithoutConversationsReceivedInput
     directMessages?: DirectMessageCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutMemberOneInput = {
     id?: string
     memberTwoId: string
     directMessages?: DirectMessageUncheckedCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutMemberOneInput = {
@@ -17297,12 +20409,14 @@ export namespace Prisma {
     id?: string
     memberOne: MemberCreateNestedOneWithoutConversationsInitiatedInput
     directMessages?: DirectMessageCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutMemberTwoInput = {
     id?: string
     memberOneId: string
     directMessages?: DirectMessageUncheckedCreateNestedManyWithoutConversationInput
+    readStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutMemberTwoInput = {
@@ -17340,6 +20454,8 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
     channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMembersInput = {
@@ -17356,6 +20472,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ServerUpsertWithoutMembersInput = {
@@ -17506,6 +20624,8 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelsInput = {
@@ -17522,6 +20642,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelsInput = {
@@ -17586,6 +20708,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChannelReadStatusCreateWithoutChannelInput = {
+    id?: string
+    lastReadAt?: Date | string
+    user: UserCreateNestedOneWithoutChannelReadStatusesInput
+  }
+
+  export type ChannelReadStatusUncheckedCreateWithoutChannelInput = {
+    id?: string
+    userId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ChannelReadStatusCreateOrConnectWithoutChannelInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    create: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput>
+  }
+
+  export type ChannelReadStatusCreateManyChannelInputEnvelope = {
+    data: ChannelReadStatusCreateManyChannelInput | ChannelReadStatusCreateManyChannelInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutChannelsInput = {
     update: XOR<UserUpdateWithoutChannelsInput, UserUncheckedUpdateWithoutChannelsInput>
     create: XOR<UserCreateWithoutChannelsInput, UserUncheckedCreateWithoutChannelsInput>
@@ -17611,6 +20755,8 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelsInput = {
@@ -17627,6 +20773,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ServerUpsertWithoutChannelsInput = {
@@ -17678,6 +20826,22 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutChannelInput>
   }
 
+  export type ChannelReadStatusUpsertWithWhereUniqueWithoutChannelInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    update: XOR<ChannelReadStatusUpdateWithoutChannelInput, ChannelReadStatusUncheckedUpdateWithoutChannelInput>
+    create: XOR<ChannelReadStatusCreateWithoutChannelInput, ChannelReadStatusUncheckedCreateWithoutChannelInput>
+  }
+
+  export type ChannelReadStatusUpdateWithWhereUniqueWithoutChannelInput = {
+    where: ChannelReadStatusWhereUniqueInput
+    data: XOR<ChannelReadStatusUpdateWithoutChannelInput, ChannelReadStatusUncheckedUpdateWithoutChannelInput>
+  }
+
+  export type ChannelReadStatusUpdateManyWithWhereWithoutChannelInput = {
+    where: ChannelReadStatusScalarWhereInput
+    data: XOR<ChannelReadStatusUpdateManyMutationInput, ChannelReadStatusUncheckedUpdateManyWithoutChannelInput>
+  }
+
   export type MemberCreateWithoutMessagesInput = {
     id?: string
     role?: $Enums.MemberRole
@@ -17715,6 +20879,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutChannelsInput
     server: ServerCreateNestedOneWithoutChannelsInput
+    readStatuses?: ChannelReadStatusCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateWithoutMessagesInput = {
@@ -17725,6 +20890,7 @@ export namespace Prisma {
     serverId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    readStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelCreateOrConnectWithoutMessagesInput = {
@@ -17786,6 +20952,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutChannelsNestedInput
     server?: ServerUpdateOneRequiredWithoutChannelsNestedInput
+    readStatuses?: ChannelReadStatusUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateWithoutMessagesInput = {
@@ -17796,6 +20963,7 @@ export namespace Prisma {
     serverId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type MemberCreateWithoutConversationsInitiatedInput = {
@@ -17886,6 +21054,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ConversationReadStatusCreateWithoutConversationInput = {
+    id?: string
+    lastReadAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationReadStatusesInput
+  }
+
+  export type ConversationReadStatusUncheckedCreateWithoutConversationInput = {
+    id?: string
+    userId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ConversationReadStatusCreateOrConnectWithoutConversationInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    create: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ConversationReadStatusCreateManyConversationInputEnvelope = {
+    data: ConversationReadStatusCreateManyConversationInput | ConversationReadStatusCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MemberUpsertWithoutConversationsInitiatedInput = {
     update: XOR<MemberUpdateWithoutConversationsInitiatedInput, MemberUncheckedUpdateWithoutConversationsInitiatedInput>
     create: XOR<MemberCreateWithoutConversationsInitiatedInput, MemberUncheckedCreateWithoutConversationsInitiatedInput>
@@ -17972,16 +21162,34 @@ export namespace Prisma {
     data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyWithoutConversationInput>
   }
 
+  export type ConversationReadStatusUpsertWithWhereUniqueWithoutConversationInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    update: XOR<ConversationReadStatusUpdateWithoutConversationInput, ConversationReadStatusUncheckedUpdateWithoutConversationInput>
+    create: XOR<ConversationReadStatusCreateWithoutConversationInput, ConversationReadStatusUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ConversationReadStatusUpdateWithWhereUniqueWithoutConversationInput = {
+    where: ConversationReadStatusWhereUniqueInput
+    data: XOR<ConversationReadStatusUpdateWithoutConversationInput, ConversationReadStatusUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type ConversationReadStatusUpdateManyWithWhereWithoutConversationInput = {
+    where: ConversationReadStatusScalarWhereInput
+    data: XOR<ConversationReadStatusUpdateManyMutationInput, ConversationReadStatusUncheckedUpdateManyWithoutConversationInput>
+  }
+
   export type ConversationCreateWithoutDirectMessagesInput = {
     id?: string
     memberOne: MemberCreateNestedOneWithoutConversationsInitiatedInput
     memberTwo: MemberCreateNestedOneWithoutConversationsReceivedInput
+    readStatuses?: ConversationReadStatusCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutDirectMessagesInput = {
     id?: string
     memberOneId: string
     memberTwoId: string
+    readStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutDirectMessagesInput = {
@@ -18033,12 +21241,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     memberOne?: MemberUpdateOneRequiredWithoutConversationsInitiatedNestedInput
     memberTwo?: MemberUpdateOneRequiredWithoutConversationsReceivedNestedInput
+    readStatuses?: ConversationReadStatusUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutDirectMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     memberOneId?: StringFieldUpdateOperationsInput | string
     memberTwoId?: StringFieldUpdateOperationsInput | string
+    readStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type MemberUpsertWithoutDirectMessagesInput = {
@@ -18074,6 +21284,286 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutMemberNestedInput
     conversationsInitiated?: ConversationUncheckedUpdateManyWithoutMemberOneNestedInput
     conversationsReceived?: ConversationUncheckedUpdateManyWithoutMemberTwoNestedInput
+  }
+
+  export type UserCreateWithoutChannelReadStatusesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uniqueId?: string | null
+    imageUrl?: string | null
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    servers?: ServerCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    channels?: ChannelCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChannelReadStatusesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uniqueId?: string | null
+    imageUrl?: string | null
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    servers?: ServerUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChannelReadStatusesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutChannelReadStatusesInput, UserUncheckedCreateWithoutChannelReadStatusesInput>
+  }
+
+  export type ChannelCreateWithoutReadStatusesInput = {
+    id?: string
+    name: string
+    type?: $Enums.ChannelType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutChannelsInput
+    server: ServerCreateNestedOneWithoutChannelsInput
+    messages?: MessageCreateNestedManyWithoutChannelInput
+  }
+
+  export type ChannelUncheckedCreateWithoutReadStatusesInput = {
+    id?: string
+    name: string
+    type?: $Enums.ChannelType
+    userId: string
+    serverId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutChannelInput
+  }
+
+  export type ChannelCreateOrConnectWithoutReadStatusesInput = {
+    where: ChannelWhereUniqueInput
+    create: XOR<ChannelCreateWithoutReadStatusesInput, ChannelUncheckedCreateWithoutReadStatusesInput>
+  }
+
+  export type UserUpsertWithoutChannelReadStatusesInput = {
+    update: XOR<UserUpdateWithoutChannelReadStatusesInput, UserUncheckedUpdateWithoutChannelReadStatusesInput>
+    create: XOR<UserCreateWithoutChannelReadStatusesInput, UserUncheckedCreateWithoutChannelReadStatusesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutChannelReadStatusesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChannelReadStatusesInput, UserUncheckedUpdateWithoutChannelReadStatusesInput>
+  }
+
+  export type UserUpdateWithoutChannelReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    servers?: ServerUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    channels?: ChannelUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChannelReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    conversationReadStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ChannelUpsertWithoutReadStatusesInput = {
+    update: XOR<ChannelUpdateWithoutReadStatusesInput, ChannelUncheckedUpdateWithoutReadStatusesInput>
+    create: XOR<ChannelCreateWithoutReadStatusesInput, ChannelUncheckedCreateWithoutReadStatusesInput>
+    where?: ChannelWhereInput
+  }
+
+  export type ChannelUpdateToOneWithWhereWithoutReadStatusesInput = {
+    where?: ChannelWhereInput
+    data: XOR<ChannelUpdateWithoutReadStatusesInput, ChannelUncheckedUpdateWithoutReadStatusesInput>
+  }
+
+  export type ChannelUpdateWithoutReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChannelsNestedInput
+    server?: ServerUpdateOneRequiredWithoutChannelsNestedInput
+    messages?: MessageUpdateManyWithoutChannelNestedInput
+  }
+
+  export type ChannelUncheckedUpdateWithoutReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    userId?: StringFieldUpdateOperationsInput | string
+    serverId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutChannelNestedInput
+  }
+
+  export type UserCreateWithoutConversationReadStatusesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uniqueId?: string | null
+    imageUrl?: string | null
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    servers?: ServerCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    channels?: ChannelCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutConversationReadStatusesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uniqueId?: string | null
+    imageUrl?: string | null
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    servers?: ServerUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    channels?: ChannelUncheckedCreateNestedManyWithoutUserInput
+    channelReadStatuses?: ChannelReadStatusUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutConversationReadStatusesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutConversationReadStatusesInput, UserUncheckedCreateWithoutConversationReadStatusesInput>
+  }
+
+  export type ConversationCreateWithoutReadStatusesInput = {
+    id?: string
+    memberOne: MemberCreateNestedOneWithoutConversationsInitiatedInput
+    memberTwo: MemberCreateNestedOneWithoutConversationsReceivedInput
+    directMessages?: DirectMessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutReadStatusesInput = {
+    id?: string
+    memberOneId: string
+    memberTwoId: string
+    directMessages?: DirectMessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutReadStatusesInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutReadStatusesInput, ConversationUncheckedCreateWithoutReadStatusesInput>
+  }
+
+  export type UserUpsertWithoutConversationReadStatusesInput = {
+    update: XOR<UserUpdateWithoutConversationReadStatusesInput, UserUncheckedUpdateWithoutConversationReadStatusesInput>
+    create: XOR<UserCreateWithoutConversationReadStatusesInput, UserUncheckedCreateWithoutConversationReadStatusesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutConversationReadStatusesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutConversationReadStatusesInput, UserUncheckedUpdateWithoutConversationReadStatusesInput>
+  }
+
+  export type UserUpdateWithoutConversationReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    servers?: ServerUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    channels?: ChannelUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutConversationReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    channels?: ChannelUncheckedUpdateManyWithoutUserNestedInput
+    channelReadStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ConversationUpsertWithoutReadStatusesInput = {
+    update: XOR<ConversationUpdateWithoutReadStatusesInput, ConversationUncheckedUpdateWithoutReadStatusesInput>
+    create: XOR<ConversationCreateWithoutReadStatusesInput, ConversationUncheckedCreateWithoutReadStatusesInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutReadStatusesInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutReadStatusesInput, ConversationUncheckedUpdateWithoutReadStatusesInput>
+  }
+
+  export type ConversationUpdateWithoutReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    memberOne?: MemberUpdateOneRequiredWithoutConversationsInitiatedNestedInput
+    memberTwo?: MemberUpdateOneRequiredWithoutConversationsReceivedNestedInput
+    directMessages?: DirectMessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutReadStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    memberOneId?: StringFieldUpdateOperationsInput | string
+    memberTwoId?: StringFieldUpdateOperationsInput | string
+    directMessages?: DirectMessageUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -18126,6 +21616,18 @@ export namespace Prisma {
     serverId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ChannelReadStatusCreateManyUserInput = {
+    id?: string
+    channelId: string
+    lastReadAt?: Date | string
+  }
+
+  export type ConversationReadStatusCreateManyUserInput = {
+    id?: string
+    conversationId: string
+    lastReadAt?: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -18277,6 +21779,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     server?: ServerUpdateOneRequiredWithoutChannelsNestedInput
     messages?: MessageUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateWithoutUserInput = {
@@ -18287,6 +21790,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateManyWithoutUserInput = {
@@ -18296,6 +21800,42 @@ export namespace Prisma {
     serverId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChannelReadStatusUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    channel?: ChannelUpdateOneRequiredWithoutReadStatusesNestedInput
+  }
+
+  export type ChannelReadStatusUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChannelReadStatusUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneRequiredWithoutReadStatusesNestedInput
+  }
+
+  export type ConversationReadStatusUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberCreateManyServerInput = {
@@ -18355,6 +21895,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutChannelsNestedInput
     messages?: MessageUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateWithoutServerInput = {
@@ -18365,6 +21906,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutChannelNestedInput
+    readStatuses?: ChannelReadStatusUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateManyWithoutServerInput = {
@@ -18470,12 +22012,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     memberTwo?: MemberUpdateOneRequiredWithoutConversationsReceivedNestedInput
     directMessages?: DirectMessageUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutMemberOneInput = {
     id?: StringFieldUpdateOperationsInput | string
     memberTwoId?: StringFieldUpdateOperationsInput | string
     directMessages?: DirectMessageUncheckedUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateManyWithoutMemberOneInput = {
@@ -18487,12 +22031,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     memberOne?: MemberUpdateOneRequiredWithoutConversationsInitiatedNestedInput
     directMessages?: DirectMessageUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutMemberTwoInput = {
     id?: StringFieldUpdateOperationsInput | string
     memberOneId?: StringFieldUpdateOperationsInput | string
     directMessages?: DirectMessageUncheckedUpdateManyWithoutConversationNestedInput
+    readStatuses?: ConversationReadStatusUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateManyWithoutMemberTwoInput = {
@@ -18508,6 +22054,12 @@ export namespace Prisma {
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ChannelReadStatusCreateManyChannelInput = {
+    id?: string
+    userId: string
+    lastReadAt?: Date | string
   }
 
   export type MessageUpdateWithoutChannelInput = {
@@ -18540,6 +22092,24 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChannelReadStatusUpdateWithoutChannelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChannelReadStatusesNestedInput
+  }
+
+  export type ChannelReadStatusUncheckedUpdateWithoutChannelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChannelReadStatusUncheckedUpdateManyWithoutChannelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DirectMessageCreateManyConversationInput = {
     id?: string
     content: string
@@ -18548,6 +22118,12 @@ export namespace Prisma {
     deleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ConversationReadStatusCreateManyConversationInput = {
+    id?: string
+    userId: string
+    lastReadAt?: Date | string
   }
 
   export type DirectMessageUpdateWithoutConversationInput = {
@@ -18578,6 +22154,24 @@ export namespace Prisma {
     deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationReadStatusesNestedInput
+  }
+
+  export type ConversationReadStatusUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationReadStatusUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    lastReadAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

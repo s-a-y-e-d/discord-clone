@@ -84,6 +84,13 @@ export default async function handler(
       nonce,
     });
 
+    // Emit server-level activity for unread tracking in sidebar
+    const activityKey = `server:${serverId}:new-activity`;
+    res?.socket?.server?.io?.emit(activityKey, {
+      channelId,
+      senderMemberId: member.id,
+    });
+
     return res.status(200).json(message);
   } catch (error) {
     console.error("[MESSAGES_POST]", error);

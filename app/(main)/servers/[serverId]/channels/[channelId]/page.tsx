@@ -44,6 +44,22 @@ const ChannelIdPage = async (props: ChannelIdPageProps) => {
     redirect("/");
   }
 
+  // Mark channel as read on page load
+  await db.channelReadStatus.upsert({
+    where: {
+      userId_channelId: {
+        userId: profile.id,
+        channelId: channel.id,
+      },
+    },
+    update: { lastReadAt: new Date() },
+    create: {
+      userId: profile.id,
+      channelId: channel.id,
+      lastReadAt: new Date(),
+    },
+  });
+
   return (
     <div className="bg-white dark:bg-background flex flex-col h-full overflow-hidden">
       <ChatHeader
