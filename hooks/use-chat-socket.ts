@@ -74,9 +74,9 @@ export const useChatSocket = ({
         const newData = [...oldData.pages];
 
         if (message.nonce) {
-          const optimisticIndex = newData[0].items.findIndex(
-            (item: MessageWithMemberWithProfile) => item.nonce === message.nonce
-          );
+          // const optimisticIndex = newData[0].items.findIndex(
+          //   (item: MessageWithMemberWithProfile) => item.nonce === message.nonce
+          // );
           // Note: previously was item.id === message.nonce, but nonce is on message.
           // Wait, optimistic message might have ID == nonce?
           // Usually optimistic msg has ID = valid CUID or temp ID?

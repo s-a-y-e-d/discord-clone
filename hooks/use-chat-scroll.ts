@@ -48,7 +48,7 @@ export const useChatScroll = ({
         return false;
       }
 
-      const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+      // const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
       return true;
     }
 

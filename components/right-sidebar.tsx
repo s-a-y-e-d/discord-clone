@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Download, FileText, File as FileIcon, Image as ImageIcon, RotateCcw, Trash2 } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Member, MemberRole, Message, User } from "@/generated/prisma";
 
 import { Button } from "@/components/ui/button";

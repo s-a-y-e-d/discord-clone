@@ -28,7 +28,7 @@ export const SocketProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [socket, setSocket] = useState(() => {
+  const [socket] = useState(() => {
     return ClientIO(process.env.NEXT_PUBLIC_SITE_URL!, {
       path: "/api/socket/io",
       addTrailingSlash: false,
@@ -48,7 +48,7 @@ export const SocketProvider = ({
       setIsConnected(false);
     });
 
-    socket.on("connect_error", (err: any) => {
+    socket.on("connect_error", (err: Error) => {
       console.log("[DEBUG] Socket Connection Error:", err);
       setIsConnected(false);
     });

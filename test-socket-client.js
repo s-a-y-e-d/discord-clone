@@ -34,6 +34,6 @@ socket.on(messageKey, (data) => {
   console.log("RECEIVED MESSAGE EVENT:", data.content ? data.content.substring(0, 50) + "..." : "No content");
 });
 
-socket.onAny((event, ...args) => {
+socket.onAny((event) => {
   console.log(`[ANY] Event: ${event}`);
 });

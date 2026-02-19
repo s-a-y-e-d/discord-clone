@@ -210,6 +210,7 @@ export async function generateBotResponse(prompt: string, history: any[] = []): 
         throw new Error("Empty response from Gemini");
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(`[Gemini] Error with model ${modelToUse}:`, error.message);
 
