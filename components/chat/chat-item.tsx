@@ -7,9 +7,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Member, MemberRole, User } from "@/generated/prisma";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 import UserAvatar from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
@@ -200,17 +203,28 @@ export const ChatItem = ({
             </div>
           )}
           {!fileUrl && !isEditing && (
-            <p className={cn(
+            <div className={cn(
               "text-sm text-zinc-600 dark:text-zinc-300",
               deleted && "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
             )}>
-              {content}
+              <ReactMarkdown
+                remarkPlugins={[remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+                components={{
+                  p: ({ node: _node, ...props }) => <p className="mb-1" {...props} />, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  a: ({ node: _node, ...props }) => <a className="text-indigo-500 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  code: ({ node: _node, ...props }) => <code className="bg-zinc-200 dark:bg-zinc-700 rounded px-1" {...props} />, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  // Add more custom components as needed for styling
+                }}
+              >
+                {content}
+              </ReactMarkdown>
               {isUpdated && !deleted && (
                 <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
                   (edited)
                 </span>
               )}
-            </p>
+            </div>
           )}
           {!fileUrl && isEditing && (
             <Form {...form}>

@@ -39,10 +39,17 @@ export const SocketProvider = ({
 
   useEffect(() => {
     socket.on("connect", () => {
+      console.log("[DEBUG] Socket Connected!", socket.id);
       setIsConnected(true);
     });
 
     socket.on("disconnect", () => {
+      console.log("[DEBUG] Socket Disconnected");
+      setIsConnected(false);
+    });
+
+    socket.on("connect_error", (err: any) => {
+      console.log("[DEBUG] Socket Connection Error:", err);
       setIsConnected(false);
     });
 

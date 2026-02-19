@@ -3,6 +3,8 @@ import { NextApiRequest } from "next";
 import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import db from "@/lib/db";
+import { getBotMember, getChatHistory } from "@/lib/bot-utils";
+import { generateBotResponse, formatHistory } from "@/lib/gemini";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +16,8 @@ export default async function handler(
   try {
     const profile = await currentProfilePages(req);
     const { content, fileUrl, nonce, isImportant } = req.body;
-    const { serverId, channelId } = req.query;
+    const { serverId, channelId: queryChannelId } = req.query;
+    const channelId = queryChannelId as string;
 
     if (!profile) return res.status(401).json({ error: "Unauthorized" });
 
@@ -46,7 +49,7 @@ export default async function handler(
 
     const channel = await db.channel.findFirst({
       where: {
-        id: channelId as string,
+        id: channelId,
         serverId: serverId as string
       }
     });
@@ -65,9 +68,9 @@ export default async function handler(
       data: {
         content,
         fileUrl,
-        channelId: channelId as string,
+        channelId: channelId,
         memberId: member.id,
-        isImportant,
+        isImportant: isImportant as boolean,
       },
       include: {
         member: {
@@ -78,21 +81,85 @@ export default async function handler(
       }
     });
 
+    // Capture IO instance early to ensure availability
+    const io = res?.socket?.server?.io;
     const channelKey = `chat:${channelId}:messages`;
 
-    res?.socket?.server?.io?.emit(channelKey, {
+    io?.emit(channelKey, {
       ...message,
       nonce,
     });
 
     // Emit server-level activity for unread tracking in sidebar
     const activityKey = `server:${serverId}:new-activity`;
-    res?.socket?.server?.io?.emit(activityKey, {
+    io?.emit(activityKey, {
       channelId,
       senderMemberId: member.id,
     });
 
-    return res.status(200).json(message);
+    res.status(200).json(message);
+
+    // Bot Interception Logic
+    if (content.includes("@StudyBot") || content.startsWith("/study")) {
+      const typingKey = `chat:${channelId}:typing`;
+      let botMember;
+
+      try {
+        botMember = await getBotMember(serverId as string);
+        const prompt = content.replace("@StudyBot", "").replace("/study", "").trim();
+
+        console.log("[DEBUG] Emitting typing event:", typingKey, { memberId: botMember.id, isTyping: true });
+        io?.emit(typingKey, {
+          memberId: botMember.id,
+          isTyping: true
+        });
+
+        // Phase 2: Fetch and format history
+        const history = await getChatHistory(channelId);
+        const formattedHistory = await formatHistory(history, botMember.id);
+
+        const botResponseText = await generateBotResponse(prompt, formattedHistory);
+
+        const botMessage = await db.message.create({
+          data: {
+            content: botResponseText,
+            channelId: channelId,
+            memberId: botMember.id,
+          },
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        });
+
+        io?.emit(channelKey, botMessage);
+
+        // Emit activity for bot message
+        io?.emit(activityKey, {
+          channelId,
+          senderMemberId: botMember.id,
+        });
+
+        console.log("[DEBUG] Emitting stop typing event (success):", typingKey);
+        io?.emit(typingKey, {
+          memberId: botMember.id,
+          isTyping: false
+        });
+
+      } catch (botError) {
+        console.error("[BOT_ERROR]", botError);
+        if (botMember) {
+          console.log("[DEBUG] Emitting stop typing event (error):", typingKey);
+          io?.emit(typingKey, {
+            memberId: botMember.id,
+            isTyping: false
+          });
+        }
+      }
+    }
   } catch (error) {
     console.error("[MESSAGES_POST]", error);
     return res.status(500).json({ error: "Internal Server Error" });

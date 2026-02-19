@@ -8,6 +8,7 @@ import { Loader2, ServerCrash } from "lucide-react";
 import { useChatQuery } from "@/hooks/use-chat-query";
 import { useChatSocket } from "@/hooks/use-chat-socket";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { useChatTyping } from "@/hooks/use-chat-typing";
 
 import { ChatWelcome } from "./chat-welcome";
 import { ChatItem } from "./chat-item";
@@ -61,6 +62,11 @@ export const ChatMessages = ({
     apiUrl,
     paramKey,
     paramValue,
+  });
+
+  const { isTyping } = useChatTyping({
+    socketUrl,
+    socketQuery,
   });
 
   useChatSocket({ queryKey, addKey, updateKey });
@@ -138,6 +144,14 @@ export const ChatMessages = ({
           </Fragment>
         ))}
       </div>
+      {isTyping && (
+        <div className="flex items-center px-4 py-2">
+          <Loader2 className="h-4 w-4 text-zinc-500 animate-spin mr-2" />
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Bot is thinking...
+          </p>
+        </div>
+      )}
       <div ref={bottomRef} />
     </div>
   )

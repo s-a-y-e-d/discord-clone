@@ -1,0 +1,41 @@
+
+> discord-clone@0.1.0 lint
+> eslint
+
+
+D:\Dev\discord-clone\components\chat\chat-item.tsx
+  214:25  warning  'node' is defined but never used  @typescript-eslint/no-unused-vars
+  215:25  warning  'node' is defined but never used  @typescript-eslint/no-unused-vars
+  216:28  warning  'node' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\components\chat\chat-messages.tsx
+  67:21  warning  'typingMemberId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\components\providers\socket-provider.tsx
+  31:18  warning  'setSocket' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\components\right-sidebar.tsx
+  4:39  warning  'useCallback' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\hooks\use-chat-scroll.ts
+  51:13  warning  'distanceFromBottom' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\hooks\use-chat-socket.ts
+  35:7  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+  42:9  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+
+D:\Dev\discord-clone\hooks\use-chat-typing.ts
+  10:3  warning  'socketUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Dev\discord-clone\lib\gemini.ts
+  39:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  82:68  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Dev\discord-clone\test-gemini.js
+  1:1   error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:25  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+??? 15 problems (5 errors, 10 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
