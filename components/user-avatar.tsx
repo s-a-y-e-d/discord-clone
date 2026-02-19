@@ -18,7 +18,6 @@ export default function UserAvatar({
       className
     )}>
       <AvatarImage src={src} className="object-cover" />
-      <div className="absolute inset-0 bg-primary/20 pointer-events-none" />
       <AvatarFallback>
         {name?.charAt(0).toUpperCase()}
       </AvatarFallback>

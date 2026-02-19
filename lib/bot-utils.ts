@@ -3,7 +3,7 @@ import { Member, MemberRole } from "@/generated/prisma/index";
 
 export const BOT_EMAIL = "bot@studybot.ai";
 export const BOT_NAME = "StudyBot";
-export const BOT_AVATAR = "https://utfs.io/f/ae2db94d-3df6-419c-845e-1815c1031d23-icon.png"; // Placeholder or specific bot avatar
+export const BOT_AVATAR = "/bot.png";
 
 /**
  * Ensures the StudyBot user exists in the database.
@@ -18,12 +18,19 @@ export async function getOrCreateBotUser() {
   if (!botUser) {
     botUser = await db.user.create({
       data: {
-        id: "study-bot-id", // Fixed ID for easier reference if needed, or let cuid generate it. Let's use a fixed one for consistency if possible, or just let DB handle it. Actually, fixed ID might conflict if using cuid elsewhere. Let's use a specific CUIDish string or let it auto-generate.
-        // Actually, let's use a specific ID so we can hardcode it if needed, but safe to let Prisma generate.
-        // Let's stick to auto-generated to be safe with CUID collisions, but we search by email.
+        id: "study-bot-id",
         name: BOT_NAME,
         email: BOT_EMAIL,
         imageUrl: BOT_AVATAR,
+        image: BOT_AVATAR,
+      },
+    });
+  } else if (botUser.imageUrl !== BOT_AVATAR || botUser.image !== BOT_AVATAR) {
+    botUser = await db.user.update({
+      where: { id: botUser.id },
+      data: {
+        imageUrl: BOT_AVATAR,
+        image: BOT_AVATAR,
       },
     });
   }

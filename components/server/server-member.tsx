@@ -15,6 +15,7 @@ type ServerMemberProps = {
     user: {
       name: string;
       image?: string | null;
+      imageUrl?: string | null;
     };
   };
 };
@@ -43,7 +44,7 @@ export default function ServerMember({ member }: ServerMemberProps) {
       onClick={onClick}
       className="group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1 cursor-pointer">
       <UserAvatar
-        src={member.user.image || ""}
+        src={member.user.imageUrl || member.user.image || ""}
         name={member.user.name}
         className="h-8 w-8 md:h-8 md:w-8"
       />
