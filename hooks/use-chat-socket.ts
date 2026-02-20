@@ -31,7 +31,7 @@ export const useChatSocket = ({
       return;
     }
 
-    socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
+    const handleUpdate = (message: MessageWithMemberWithProfile) => {
       console.log(`[DEBUG] ChatSocket RECEIVED UPDATE: ${updateKey}`, message);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       queryClient.setQueryData([queryKey], (oldData: any) => {
@@ -57,9 +57,11 @@ export const useChatSocket = ({
           pages: newData,
         }
       })
-    });
+    };
 
-    socket.on(addKey, (message: MessageWithMemberWithProfile) => {
+    socket.on(updateKey, handleUpdate);
+
+    const handleAdd = (message: MessageWithMemberWithProfile) => {
       console.log(`[DEBUG] ChatSocket RECEIVED ADD: ${addKey}`, message);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       queryClient.setQueryData([queryKey], (oldData: any) => {
@@ -74,17 +76,24 @@ export const useChatSocket = ({
         const newData = [...oldData.pages];
 
         if (message.nonce) {
-          // const optimisticIndex = newData[0].items.findIndex(
-          //   (item: MessageWithMemberWithProfile) => item.nonce === message.nonce
-          // );
-          // Note: previously was item.id === message.nonce, but nonce is on message.
-          // Wait, optimistic message might have ID == nonce?
-          // Usually optimistic msg has ID = valid CUID or temp ID?
-          // Let's keep logic as is but add logging.
-          // actually, the previous logic was: item.id === message.nonce
-        }
+          const optimisticIndex = newData[0].items.findIndex(
+            (item: MessageWithMemberWithProfile) => item.id === message.nonce
+          );
 
-        // ... (rest of logic)
+          if (optimisticIndex !== -1) {
+            console.log(`[DEBUG] Replacing optimistic message: ${message.nonce} with ${message.id}`);
+            const newItems = [...newData[0].items];
+            newItems[optimisticIndex] = message;
+            newData[0] = {
+              ...newData[0],
+              items: newItems,
+            };
+            return {
+              ...oldData,
+              pages: newData,
+            };
+          }
+        }
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const alreadyExists = oldData.pages.some((page: any) =>
@@ -106,11 +115,13 @@ export const useChatSocket = ({
           pages: newData,
         };
       });
-    });
+    };
+
+    socket.on(addKey, handleAdd);
 
     return () => {
-      socket.off(addKey);
-      socket.off(updateKey);
-    }
+      socket.off(updateKey, handleUpdate);
+      socket.off(addKey, handleAdd);
+    };
   }, [queryClient, addKey, updateKey, queryKey, socket]);
 }
