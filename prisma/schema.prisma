@@ -17,6 +17,7 @@ model User {
   updatedAt                DateTime                 @default(now()) @updatedAt
   uniqueId                 String?                  @unique
   imageUrl                 String?                  @db.Text
+  encryptedGeminiApiKey    String?                  @db.Text
   sessions                 Session[]
   accounts                 Account[]
   servers                  Server[]

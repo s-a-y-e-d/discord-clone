@@ -3,7 +3,7 @@ import { NextApiRequest } from "next";
 import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import db from "@/lib/db";
-import { getBotMember, getChatHistory } from "@/lib/bot-utils";
+import { getBotMember, getChatHistory, getServerImportantFiles } from "@/lib/bot-utils";
 import { generateBotResponse, formatHistory } from "@/lib/gemini";
 
 export default async function handler(
@@ -116,9 +116,42 @@ export default async function handler(
 
         // Phase 2: Fetch and format history
         const history = await getChatHistory(channelId);
-        const formattedHistory = await formatHistory(history, botMember.id);
+        const serverImportantFiles = await getServerImportantFiles(serverId as string);
 
-        const botResponseText = await generateBotResponse(prompt, formattedHistory);
+        const combinedHistory = [...serverImportantFiles, ...history];
+        const formattedHistory = await formatHistory(combinedHistory, botMember.id);
+
+        let decryptedKey: string | undefined = undefined;
+
+        if (server.userId) {
+          const owner = await db.user.findUnique({
+            where: { id: server.userId },
+            select: { encryptedGeminiApiKey: true },
+          });
+
+          if (owner?.encryptedGeminiApiKey) {
+            const { decrypt } = await import("@/lib/encrypt");
+            decryptedKey = decrypt(owner.encryptedGeminiApiKey);
+          }
+        }
+
+        if (!decryptedKey) {
+          // If the admin hasn't set an API key, we should inform the user
+          const botMessage = await db.message.create({
+            data: {
+              content: "The Server Admin must configure their Gemini API Key to use AI features. Please contact them.",
+              channelId: channelId,
+              memberId: botMember.id,
+            },
+            include: { member: { include: { user: true } } },
+          });
+          io?.emit(channelKey, botMessage);
+          io?.emit(activityKey, { channelId, senderMemberId: botMember.id });
+          io?.emit(typingKey, { memberId: botMember.id, isTyping: false });
+          return;
+        }
+
+        const botResponseText = await generateBotResponse(prompt, formattedHistory, decryptedKey);
 
         const botMessage = await db.message.create({
           data: {

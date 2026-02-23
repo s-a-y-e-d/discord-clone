@@ -16,10 +16,10 @@ export const useChatTyping = ({
   useEffect(() => {
     if (!socket) return;
 
-    const channelId = socketQuery.channelId;
-    const typingKey = `chat:${channelId}:typing`;
+    const id = socketQuery.channelId || socketQuery.conversationId;
+    const typingKey = `chat:${id}:typing`;
 
-    console.log("[DEBUG] useChatTyping mounted", { channelId, typingKey, socketConnected: socket.connected });
+    console.log("[DEBUG] useChatTyping mounted", { id, typingKey, socketConnected: socket.connected });
 
     // Debug all events
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

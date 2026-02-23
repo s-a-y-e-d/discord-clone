@@ -1,8 +1,13 @@
+"use client";
+
 import { Hash, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 import UserAvatar from "@/components/user-avatar";
 import { MobileRightSidebarToggle } from "@/components/mobile-right-sidebar-toggle";
+
+import { useModal } from "@/hooks/use-modal-store";
+import { Member, User } from "@/generated/prisma";
 
 interface ChatHeaderProps {
   serverId: string;
@@ -10,6 +15,8 @@ interface ChatHeaderProps {
   type: "channel" | "conversation";
   imageUrl?: string;
   rightSidebar?: React.ReactNode;
+  showUnlockAi?: boolean;
+  profile?: User;
 }
 
 export const ChatHeader = ({
@@ -18,7 +25,11 @@ export const ChatHeader = ({
   type,
   imageUrl,
   rightSidebar,
+  showUnlockAi,
+  profile,
 }: ChatHeaderProps) => {
+  const { onOpen } = useModal();
+
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-[#1f2128] border-b-2">
       {/* Mobile: Back arrow to server sidebar view */}
@@ -42,6 +53,14 @@ export const ChatHeader = ({
         {name}
       </p>
       <div className="ml-auto flex items-center gap-x-2">
+        {showUnlockAi && profile && (
+          <button
+            onClick={() => onOpen("unlockAi", { profile })}
+            className="px-3 py-1 mr-2 text-xs font-semibold rounded-md bg-indigo-500 hover:bg-indigo-500/90 text-white transition-colors"
+          >
+            Unlock AI Features
+          </button>
+        )}
         {rightSidebar && (
           <MobileRightSidebarToggle rightSidebar={rightSidebar} />
         )}

@@ -44,6 +44,15 @@ const ChannelIdPage = async (props: ChannelIdPageProps) => {
     redirect("/");
   }
 
+  const server = await db.server.findUnique({
+    where: {
+      id: params.serverId,
+    }
+  });
+
+  const isServerOwner = server?.userId === profile.id;
+  const showUnlockAi = isServerOwner && !profile.encryptedGeminiApiKey;
+
   // Mark channel as read on page load
   await db.channelReadStatus.upsert({
     where: {
@@ -66,6 +75,8 @@ const ChannelIdPage = async (props: ChannelIdPageProps) => {
         name={channel.name}
         serverId={channel.serverId}
         type="channel"
+        showUnlockAi={showUnlockAi}
+        profile={profile}
         rightSidebar={<MobileRightSidebarContent serverId={channel.serverId} />}
       />
       {channel.type === ChannelType.TEXT && (

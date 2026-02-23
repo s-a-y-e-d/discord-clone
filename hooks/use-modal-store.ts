@@ -1,7 +1,7 @@
 import { Channel, ChannelType, Server } from '@/generated/prisma'
 import { create } from 'zustand'
 
-export type ModalType = "createServer" | "invite" | "updateServer" | "members" | "createChannel" | "leaveServer" | "deleteServer" | "editChannel" | "deleteChannel" | "messageFile" | "deleteMessage";
+export type ModalType = "createServer" | "invite" | "updateServer" | "members" | "createChannel" | "leaveServer" | "deleteServer" | "editChannel" | "deleteChannel" | "messageFile" | "deleteMessage" | "unlockAi";
 
 type ModalData = {
   server?: Server;
@@ -10,6 +10,7 @@ type ModalData = {
   apiUrl?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   query?: Record<string, any>;
+  profile?: { id: string, name: string, encryptedGeminiApiKey?: string | null };
 }
 
 type ModalStore = {

@@ -2,6 +2,8 @@ import { NextApiRequest } from "next";
 
 import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
+import { getOrCreateBotUser, getDirectMessageHistory, getServerImportantFiles } from "@/lib/bot-utils";
+import { generateBotResponse, formatHistory } from "@/lib/gemini";
 import prisma from "@/lib/db";
 
 const db = prisma;
@@ -92,7 +94,91 @@ export default async function handler(
       conversationId,
     });
 
-    return res.status(200).json(message);
+    res.status(200).json(message);
+
+    // Bot Interception Logic for DMs
+    const botUser = await getOrCreateBotUser();
+    if (otherMember.userId === botUser.id) {
+      const typingKey = `chat:${conversationId}:typing`;
+
+      try {
+        console.log("[DEBUG] Emitting typing event:", typingKey, { memberId: otherMember.id, isTyping: true });
+        res?.socket?.server?.io?.emit(typingKey, {
+          memberId: otherMember.id,
+          isTyping: true
+        });
+
+        // Phase 2: Fetch and format history including server important files
+        const history = await getDirectMessageHistory(conversationId as string);
+        const serverImportantFiles = await getServerImportantFiles(member.serverId);
+
+        const combinedHistory = [...serverImportantFiles, ...history];
+        const formattedHistory = await formatHistory(combinedHistory, otherMember.id);
+
+        let decryptedKey: string | undefined = undefined;
+
+        // In DMs, the messaging user must provide their own API key
+        if (profile.encryptedGeminiApiKey) {
+          const { decrypt } = await import("@/lib/encrypt");
+          decryptedKey = decrypt(profile.encryptedGeminiApiKey);
+        }
+
+        if (!decryptedKey) {
+          const botMessage = await db.directMessage.create({
+            data: {
+              content: "You must configure your own Gemini API Key to use AI features in Direct Messages. Click 'Unlock AI Features' or visit your profile.",
+              conversationId: conversationId as string,
+              memberId: otherMember.id,
+            },
+            include: { member: { include: { user: true } } },
+          });
+          res?.socket?.server?.io?.emit(channelKey, botMessage);
+          res?.socket?.server?.io?.emit(activityKey, { memberId: otherMember.id, otherMemberId: member.id, conversationId });
+          res?.socket?.server?.io?.emit(typingKey, { memberId: otherMember.id, isTyping: false });
+          return;
+        }
+
+        const botResponseText = await generateBotResponse(content, formattedHistory, decryptedKey);
+
+        const botMessage = await db.directMessage.create({
+          data: {
+            content: botResponseText,
+            conversationId: conversationId as string,
+            memberId: otherMember.id,
+          },
+          include: {
+            member: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        });
+
+        res?.socket?.server?.io?.emit(channelKey, botMessage);
+
+        // Emit activity for bot message
+        res?.socket?.server?.io?.emit(activityKey, {
+          memberId: otherMember.id,
+          otherMemberId: member.id,
+          conversationId,
+        });
+
+        console.log("[DEBUG] Emitting stop typing event (success):", typingKey);
+        res?.socket?.server?.io?.emit(typingKey, {
+          memberId: otherMember.id,
+          isTyping: false
+        });
+
+      } catch (botError) {
+        console.error("[BOT_ERROR]", botError);
+        console.log("[DEBUG] Emitting stop typing event (error):", typingKey);
+        res?.socket?.server?.io?.emit(typingKey, {
+          memberId: otherMember.id,
+          isTyping: false
+        });
+      }
+    }
   } catch (error) {
     console.error("[DIRECT_MESSAGES_POST]", error);
     return res.status(500).json({ error: "Internal Server Error" });

@@ -173,7 +173,36 @@ export async function formatHistory(messages: any[], botMemberId: string) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateBotResponse(prompt: string, history: any[] = []): Promise<string> {
+export async function generateBotResponse(prompt: string, history: any[] = [], customApiKey?: string): Promise<string> {
+  // If a custom API key is provided from a user, use it directly and bypass the internal usage tracker
+  if (customApiKey) {
+    try {
+      const customAi = new GoogleGenAI({ apiKey: customApiKey });
+      const response = await customAi.models.generateContent({
+        model: "gemini-2.5-flash", // Default model for user keys
+        contents: [
+          ...history,
+          {
+            role: "user",
+            parts: [{ text: prompt }]
+          }
+        ],
+        config: {
+          systemInstruction: SYSTEM_PROMPT,
+        }
+      });
+
+      if (response.text) {
+        return response.text;
+      } else {
+        throw new Error("Empty response from Gemini with custom API key");
+      }
+    } catch (error: any) {
+      console.error("[Gemini Custom Key Error]:", error.message);
+      return "There was an issue connecting to your Gemini API Key. Please verify that it is correct and has billing enabled.";
+    }
+  }
+
   const availableModel = modelManager.getAvailableModel();
 
   // If we strictly enforce limits and all are used up:
@@ -201,6 +230,19 @@ export async function generateBotResponse(prompt: string, history: any[] = []): 
           systemInstruction: SYSTEM_PROMPT,
         }
       });
+
+      const usage = response.usageMetadata;
+
+      console.log("\n================ GEMINI USAGE ================");
+      if (usage) {
+        console.log("Prompt (input) tokens:     ", usage.promptTokenCount);
+        console.log("Candidates (output) tokens:", usage.candidatesTokenCount);
+        console.log("Thoughts tokens:           ", usage.thoughtsTokenCount || 0);
+        console.log("Total tokens used:         ", usage.totalTokenCount);
+      } else {
+        console.log("No usage metadata returned.");
+      }
+      console.log("==============================================\n");
 
       if (response.text) {
         // Success! Increment usage for this model

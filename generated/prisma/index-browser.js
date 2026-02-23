@@ -129,7 +129,8 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   uniqueId: 'uniqueId',
-  imageUrl: 'imageUrl'
+  imageUrl: 'imageUrl',
+  encryptedGeminiApiKey: 'encryptedGeminiApiKey'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {

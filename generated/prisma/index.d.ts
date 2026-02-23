@@ -2176,6 +2176,7 @@ export namespace Prisma {
     updatedAt: Date | null
     uniqueId: string | null
     imageUrl: string | null
+    encryptedGeminiApiKey: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2188,6 +2189,7 @@ export namespace Prisma {
     updatedAt: Date | null
     uniqueId: string | null
     imageUrl: string | null
+    encryptedGeminiApiKey: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2200,6 +2202,7 @@ export namespace Prisma {
     updatedAt: number
     uniqueId: number
     imageUrl: number
+    encryptedGeminiApiKey: number
     _all: number
   }
 
@@ -2214,6 +2217,7 @@ export namespace Prisma {
     updatedAt?: true
     uniqueId?: true
     imageUrl?: true
+    encryptedGeminiApiKey?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2226,6 +2230,7 @@ export namespace Prisma {
     updatedAt?: true
     uniqueId?: true
     imageUrl?: true
+    encryptedGeminiApiKey?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2238,6 +2243,7 @@ export namespace Prisma {
     updatedAt?: true
     uniqueId?: true
     imageUrl?: true
+    encryptedGeminiApiKey?: true
     _all?: true
   }
 
@@ -2323,6 +2329,7 @@ export namespace Prisma {
     updatedAt: Date
     uniqueId: string | null
     imageUrl: string | null
+    encryptedGeminiApiKey: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2352,6 +2359,7 @@ export namespace Prisma {
     updatedAt?: boolean
     uniqueId?: boolean
     imageUrl?: boolean
+    encryptedGeminiApiKey?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     servers?: boolean | User$serversArgs<ExtArgs>
@@ -2372,6 +2380,7 @@ export namespace Prisma {
     updatedAt?: boolean
     uniqueId?: boolean
     imageUrl?: boolean
+    encryptedGeminiApiKey?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2384,6 +2393,7 @@ export namespace Prisma {
     updatedAt?: boolean
     uniqueId?: boolean
     imageUrl?: boolean
+    encryptedGeminiApiKey?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2396,9 +2406,10 @@ export namespace Prisma {
     updatedAt?: boolean
     uniqueId?: boolean
     imageUrl?: boolean
+    encryptedGeminiApiKey?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "uniqueId" | "imageUrl", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "uniqueId" | "imageUrl" | "encryptedGeminiApiKey", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -2433,6 +2444,7 @@ export namespace Prisma {
       updatedAt: Date
       uniqueId: string | null
       imageUrl: string | null
+      encryptedGeminiApiKey: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2872,6 +2884,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly uniqueId: FieldRef<"User", 'String'>
     readonly imageUrl: FieldRef<"User", 'String'>
+    readonly encryptedGeminiApiKey: FieldRef<"User", 'String'>
   }
     
 
@@ -15674,7 +15687,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     uniqueId: 'uniqueId',
-    imageUrl: 'imageUrl'
+    imageUrl: 'imageUrl',
+    encryptedGeminiApiKey: 'encryptedGeminiApiKey'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -15945,6 +15959,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     uniqueId?: StringNullableFilter<"User"> | string | null
     imageUrl?: StringNullableFilter<"User"> | string | null
+    encryptedGeminiApiKey?: StringNullableFilter<"User"> | string | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     servers?: ServerListRelationFilter
@@ -15964,6 +15979,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     uniqueId?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    encryptedGeminiApiKey?: SortOrderInput | SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     servers?: ServerOrderByRelationAggregateInput
@@ -15986,6 +16002,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     imageUrl?: StringNullableFilter<"User"> | string | null
+    encryptedGeminiApiKey?: StringNullableFilter<"User"> | string | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     servers?: ServerListRelationFilter
@@ -16005,6 +16022,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     uniqueId?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    encryptedGeminiApiKey?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -16023,6 +16041,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     uniqueId?: StringNullableWithAggregatesFilter<"User"> | string | null
     imageUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
+    encryptedGeminiApiKey?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -16801,6 +16820,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
@@ -16820,6 +16840,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
@@ -16839,6 +16860,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
@@ -16858,6 +16880,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
@@ -16877,6 +16900,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -16889,6 +16913,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -16901,6 +16926,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -17827,6 +17853,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     uniqueId?: SortOrder
     imageUrl?: SortOrder
+    encryptedGeminiApiKey?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -17839,6 +17866,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     uniqueId?: SortOrder
     imageUrl?: SortOrder
+    encryptedGeminiApiKey?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -17851,6 +17879,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     uniqueId?: SortOrder
     imageUrl?: SortOrder
+    encryptedGeminiApiKey?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -19959,6 +19988,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
@@ -19977,6 +20007,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
@@ -20011,6 +20042,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
@@ -20029,6 +20061,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
@@ -20047,6 +20080,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
@@ -20065,6 +20099,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
@@ -20099,6 +20134,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
@@ -20117,6 +20153,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
@@ -20135,6 +20172,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
@@ -20153,6 +20191,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
@@ -20253,6 +20292,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
@@ -20271,6 +20311,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
@@ -20321,6 +20362,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
@@ -20339,6 +20381,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
@@ -20512,6 +20555,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
@@ -20530,6 +20574,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
@@ -20684,6 +20729,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
@@ -20702,6 +20748,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
@@ -20817,6 +20864,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
@@ -20835,6 +20883,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
@@ -21364,6 +21413,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
@@ -21382,6 +21432,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
@@ -21443,6 +21494,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
@@ -21461,6 +21513,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput
@@ -21512,6 +21565,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     servers?: ServerCreateNestedManyWithoutUserInput
@@ -21530,6 +21584,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     uniqueId?: string | null
     imageUrl?: string | null
+    encryptedGeminiApiKey?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     servers?: ServerUncheckedCreateNestedManyWithoutUserInput
@@ -21583,6 +21638,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     servers?: ServerUpdateManyWithoutUserNestedInput
@@ -21601,6 +21657,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uniqueId?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    encryptedGeminiApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     servers?: ServerUncheckedUpdateManyWithoutUserNestedInput

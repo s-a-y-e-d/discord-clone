@@ -62,6 +62,11 @@ export const ChatInput = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      if (type === "conversation" && name === "StudyBot" && !member.user.encryptedGeminiApiKey) {
+        onOpen("unlockAi", { profile: member.user });
+        return;
+      }
+
       const url = qs.stringifyUrl({
         url: apiUrl,
         query,

@@ -87,3 +87,54 @@ export async function getChatHistory(channelId: string, limit: number = 20) {
 
   return messages.reverse();
 }
+
+/**
+ * Fetches the recent chat history for a direct message conversation.
+ */
+export async function getDirectMessageHistory(conversationId: string, limit: number = 20) {
+  const messages = await db.directMessage.findMany({
+    where: {
+      conversationId,
+    },
+    take: limit,
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      member: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
+  return messages.reverse();
+}
+
+/**
+ * Fetches all important messages/files from a specific server.
+ */
+export async function getServerImportantFiles(serverId: string) {
+  const importantMessages = await db.message.findMany({
+    where: {
+      channel: {
+        serverId: serverId,
+      },
+      isImportant: true,
+      deleted: false,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      member: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
+  return importantMessages.reverse();
+}

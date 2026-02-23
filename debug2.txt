@@ -1,0 +1,74 @@
+﻿[dotenv@17.2.3] injecting env (0) from .env -- tip: ÔÜÖ´©Å  write to custom object with { processEnv: myObject }
+Testing Gemini Fallback Logic...
+[Gemini] Attempting to use model: gemini-3-flash-preview
+GenerateContentResponse {
+  sdkHttpResponse: {
+    headers: {
+      'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000',
+      'content-encoding': 'gzip',
+      'content-type': 'application/json; charset=UTF-8',
+      date: 'Sat, 21 Feb 2026 10:02:47 GMT',
+      server: 'scaffolding on HTTPServer2',
+      'server-timing': 'gfet4t7; dur=11140',
+      'transfer-encoding': 'chunked',
+      vary: 'Origin, X-Origin, Referer',
+      'x-content-type-options': 'nosniff',
+      'x-frame-options': 'SAMEORIGIN',
+      'x-xss-protection': '0'
+    }
+  },
+  candidates: [
+    {
+      content: {
+        parts: [
+          {
+            text: 'Hello! ­ƒæï I am your **AI Tutor**, here to help you master your **NCTB curriculum** (Classes 9-12).\n' +
+              '\n' +
+              'I can help you with:\n' +
+              '*   **Physics** ­ƒìÄ\n' +
+              '*   **Chemistry** ­ƒº¬\n' +
+              '*   **Mathematics** ­ƒôÉ\n' +
+              '*   **Biology** ­ƒº¼\n' +
+              '*   **ICT** ­ƒÆ╗\n' +
+              '\n' +
+              'What topic are we studying today? Feel free to ask a question or send a math problem! ­ƒôÜÔ£¿',
+            thoughtSignature: 'EoEICv4HAb4+9vs0+4ll31QnSlt2yXkq8gp5jXNlZY8yMLMDwR3E7o5rE67GPmGPoTehURD1xJh5G5GFOiod6AZ6XXATDEfcG1zl+2CTyQyV4h+aHvyCfv7po7264FjVOFo25KE838db0B3h6C6UcNs/MFRTPrZQJkoi1GmbYPd8t77A7ExFHHTOGS3cplbHrf0l2ELAuoWBK88yDcShv69FENFFnL0Pc93ufkAkvKvfy6IwqBrz76XBEkX7mNohFx8kX8jPT9w9k22XO/WCYzX9Hu4wCSdwNmMcHFg8bUh25TzdtcllFgffAlJjMyJVmnQTlT2XUyPDDl65wiZOBK7+K7wl2Z/9fonHLEN+zkI/PFJcWQVjHsC/fJ2EBgm8aocelpE3QwdgSWxwUmoulljfgRKjC1/1veFLq/KnZveo1IhVLoL/XjTSOjBXF2hdfPbMXJitY0eYgeXqXpyA5SwGapJHB5LcYP2JA8zSep1HR7UnppUEmrZTmPB+CfrL+AzaEoxEIL+4tevASz5pqud9Q1Kvo1QJT8Rx1LjxRkcdu///Vkrw4JRiZl/PDaEXV/D6hGyv2eS0JLft/Aw64klCG/9w4whPGuUkHvzZsV5Gul7G1KkrKFbTXaD3pG6CLXHUbpPwKMbKAboHPopBG18nojocA1C4dCx3hAkZXFHKUrhqtGM2gmP8uOpkHFiuB3UtMhfc6zb27y8wKrpKENgiinEYaPqe5c+EWw+168/HiYrKGr5q502FcbRR3BVTygeinQGBWR0gtUCNqyVjnUVzlu/qHSPB0MfcIhEUtdm3Bk7D8Vx80Zq39+zs/6S/bJ1fByovQfasxmL95OIEgG8wLD5Po1gcvtoTMzLoEV4CjD2SKwYdEOMtpKd2bqwnzvk9qstb4FV4OD4DJiQfQauQsCoKIZT5DVSoIJm17Za1924YHs8UmjQ4LCouZg7bnp53YiHATjWR11YRImve1jiLZqkukDu73R8dVG+lVxqnCRnR/T7N9PKC9zfBULYTJ1zmKV7xFRIdzmuJ2bSO9aAWrlkwNlYtHCSVDKto+b7Nmvlc3Il2HUxqFJIwtiY2UiMIxyxhEhvJusE4fzMLqBaw/bduD83eonKOcl3nOb++RXtW8LWs02nsSg7LaniJ054D0rItF77R72pkbiQ0Hs9oDjWAHbzwoRRUNuruBC0u0sFLayRkz7z9+58N2vOgc2+dQU9njTatpbNbdHMU3arTGFb9/IoPF9zmdtJic+sTHzzMtyQs4oTid6LI2QOASSuD0zdD1TuOLeCJk3x5b71+lNRZgstO+n1bn8AHjGI9tjUeaZQ6fqeaQCE17dzfxORmgpyYEzYbmuzUxfD4mZDWARs='
+          }
+        ],
+        role: 'model'
+      },
+      finishReason: 'STOP',
+      index: 0
+    }
+  ],
+  modelVersion: 'gemini-3-flash-preview',
+  responseId: 'x4KZaYH8KMKBqfkPpcmvgAE',
+  usageMetadata: {
+    promptTokenCount: 329,
+    candidatesTokenCount: 99,
+    totalTokenCount: 700,
+    promptTokensDetails: [ { modality: 'TEXT', tokenCount: 329 } ],
+    thoughtsTokenCount: 272
+  }
+}
+Prompt (input) tokens:      329
+Candidates (output) tokens: 99
+Total tokens used:          700
+
+Response received: Hello! ­ƒæï I am your **AI Tutor**, here to help you master your **NCTB curriculum** (Classes 9-12).
+
+I can help you with:
+*   **Physics** ­ƒìÄ
+*   **Chemistry** ­ƒº¬
+*   **Mathematics** ­ƒôÉ
+*   **Biology** ­ƒº¼
+*   **ICT** ­ƒÆ╗
+
+What topic are we studying today? Feel free to ask a question or send a math problem! ­ƒôÜÔ£¿
+
+Usage file created: {
+  "gemini-3-flash-preview": {
+    "count": 6,
+    "lastReset": 1771667778369
+  }
+}

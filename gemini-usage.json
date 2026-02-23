@@ -1,6 +1,10 @@
 {
   "gemini-3-flash-preview": {
     "count": 3,
-    "lastReset": 1771533481870
+    "lastReset": 1771873088353
+  },
+  "gemini-2.5-flash": {
+    "count": 1,
+    "lastReset": 1771874034036
   }
 }
