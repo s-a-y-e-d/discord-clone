@@ -6,6 +6,7 @@ type ChatScrollProps = {
   shouldLoadMore: boolean;
   loadMore: () => void;
   count: number;
+  lastMessageIsFromCurrentUser?: boolean;
 };
 
 export const useChatScroll = ({
@@ -14,8 +15,16 @@ export const useChatScroll = ({
   shouldLoadMore,
   loadMore,
   count,
+  lastMessageIsFromCurrentUser,
 }: ChatScrollProps) => {
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [hasNewMessages, setHasNewMessages] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(true);
+
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    setHasNewMessages(false);
+  };
 
   useEffect(() => {
     const topDiv = chatRef?.current;
@@ -25,6 +34,15 @@ export const useChatScroll = ({
 
       if (scrollTop === 0 && shouldLoadMore) {
         loadMore();
+      }
+
+      if (topDiv) {
+        const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+        const atBottom = distanceFromBottom <= 100;
+        setIsAtBottom(atBottom);
+        if (atBottom) {
+          setHasNewMessages(false);
+        }
       }
     };
 
@@ -48,8 +66,13 @@ export const useChatScroll = ({
         return false;
       }
 
-      // const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
-      return true;
+      const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+      if (distanceFromBottom <= 100 || lastMessageIsFromCurrentUser) {
+        return true;
+      }
+
+      setHasNewMessages(true);
+      return false;
     }
 
     if (shouldAutoScroll()) {
@@ -59,5 +82,7 @@ export const useChatScroll = ({
         });
       }, 100);
     }
-  }, [bottomRef, chatRef, count, hasInitialized]);
+  }, [bottomRef, chatRef, count, hasInitialized, lastMessageIsFromCurrentUser]);
+
+  return { hasNewMessages, scrollToBottom, isAtBottom };
 }

@@ -5,9 +5,16 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Member, MemberRole, User } from "@/generated/prisma";
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { Member, MemberRole, User, Reaction } from "@/generated/prisma";
+import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash, SmilePlus, Reply, Pin, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import { useRouter, useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
@@ -16,6 +23,7 @@ import "katex/dist/katex.min.css";
 
 import UserAvatar from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
+import { EmojiPicker } from "@/components/emoji-picker";
 import { cn } from "@/lib/utils";
 import {
   Form,
@@ -26,6 +34,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
+import { useReplyStore } from "@/hooks/use-reply-store";
 
 interface ChatItemProps {
   id: string;
@@ -40,6 +49,12 @@ interface ChatItemProps {
   isUpdated: boolean;
   socketUrl: string;
   socketQuery: Record<string, string>;
+  isPinned: boolean;
+  reactions?: (Reaction & {
+    member: Member & {
+      user: User
+    }
+  })[];
 };
 
 const roleIconMap = {
@@ -63,13 +78,37 @@ export const ChatItem = ({
   isUpdated,
   socketUrl,
   socketQuery,
+  isPinned,
+  reactions = [],
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPos, setMenuPos] = useState({ x: 0, y: 0 });
   const { onOpen } = useModal();
+  const setReplyingTo = useReplyStore((state) => state.setReplyingTo);
   const params = useParams();
   const router = useRouter();
 
-  const onMemberClick = () => {
+  const onContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMenuPos({ x: e.clientX, y: e.clientY });
+    setMenuOpen(true);
+  };
+
+  const onClickMessage = (e: React.MouseEvent) => {
+    if (window.innerWidth <= 768) {
+      setMenuPos({ x: e.clientX, y: e.clientY });
+      setMenuOpen(true);
+    }
+  };
+
+  const onCopyText = () => {
+    navigator.clipboard.writeText(content);
+    setMenuOpen(false);
+  };
+
+  const onMemberClick = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (member.id === currentMember.id) {
       return;
     }
@@ -89,10 +128,26 @@ export const ChatItem = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  let isReply = false;
+  let replyName = "";
+  let replyContent = "";
+  let rawReplyContent = "";
+  let mainContent = content;
+
+  // Pattern: matches our chat-input template `> **Name**: Content\n\nActualMessage`
+  const replyMatch = content.match(/^> \*\*([^*<]+)\*\*: ([\s\S]*?)\n\n([\s\S]*)$/);
+  if (replyMatch) {
+    isReply = true;
+    replyName = replyMatch[1];
+    rawReplyContent = replyMatch[2];
+    replyContent = rawReplyContent.replace(/\n> ?/g, '\n');
+    mainContent = replyMatch[3];
+  }
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: content,
+      content: mainContent,
     }
   });
 
@@ -105,7 +160,11 @@ export const ChatItem = ({
         query: socketQuery,
       });
 
-      await axios.patch(url, values);
+      const finalContent = isReply
+        ? `> **${replyName}**: ${rawReplyContent}\n\n${values.content}`
+        : values.content;
+
+      await axios.patch(url, { content: finalContent });
 
       form.reset();
       setIsEditing(false);
@@ -114,11 +173,38 @@ export const ChatItem = ({
     }
   }
 
+  const onPinToggle = async () => {
+    try {
+      const url = qs.stringifyUrl({
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
+      });
+
+      await axios.patch(url, { isPinned: !isPinned });
+      setMenuOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onReactionToggle = async (emoji: string) => {
+    try {
+      const url = qs.stringifyUrl({
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
+      });
+
+      await axios.patch(url, { emoji });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     form.reset({
-      content: content,
+      content: mainContent,
     })
-  }, [content, form]); // Adding 'form' dependency is usually safe for useForm
+  }, [mainContent, form]);
 
   const fileType = fileUrl?.split(".").pop()?.toLowerCase();
   const imageExtensions = ["png", "jpg", "jpeg", "gif", "webp", "svg", "bmp"];
@@ -137,8 +223,116 @@ export const ChatItem = ({
   const showAsImage = isKnownImage || shouldTryAsImage;
   const showAsFile = fileUrl && !isPDF && !showAsImage;
 
+  // Group reactions by emoji
+  const groupedReactions = reactions.reduce((acc, reaction) => {
+    if (!acc[reaction.emoji]) {
+      acc[reaction.emoji] = [];
+    }
+    acc[reaction.emoji].push(reaction);
+    return acc;
+  }, {} as Record<string, typeof reactions>);
+
   return (
-    <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full min-w-0">
+    <div
+      data-message-id={id}
+      onContextMenu={onContextMenu}
+      onClick={onClickMessage}
+      className="relative group flex flex-col items-start hover:bg-black/5 p-4 transition w-full min-w-0"
+    >
+      <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+        <DropdownMenuTrigger asChild>
+          <div className="fixed" style={{ left: menuPos.x, top: menuPos.y, width: 0, height: 0 }} />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="start"
+          className="bg-transparent border-none shadow-none p-0 overflow-visible min-w-0 w-auto"
+          sideOffset={8}
+        >
+          <div className="flex flex-col items-center">
+            <div className="flex items-center px-1.5 py-1.5 mb-2 bg-white/70 dark:bg-[rgb(40,40,45)] backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/50 shadow-md rounded-full w-max">
+              {["❤️", "👍", "😆", "😢", "🔥", "😲"].map((emoji) => (
+                <button
+                  key={emoji}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onReactionToggle(emoji);
+                    setMenuOpen(false);
+                  }}
+                  className="hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50 w-9 h-9 rounded-full transition text-lg flex items-center justify-center shrink-0 leading-none cursor-pointer"
+                >
+                  {emoji}
+                </button>
+              ))}
+              <div className="h-6 w-[1px] bg-zinc-300 dark:bg-zinc-700 mx-1.5 shrink-0" />
+              <EmojiPicker onChange={(emoji) => {
+                onReactionToggle(emoji);
+                setMenuOpen(false);
+              }}>
+                <button type="button" className="hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50 w-9 h-9 rounded-full transition flex items-center justify-center shrink-0 cursor-pointer">
+                  <SmilePlus className="w-5 h-5 text-zinc-500" />
+                </button>
+              </EmojiPicker>
+            </div>
+            <div className="bg-[rgb(40,40,45)] border shadow-md rounded-md p-1 flex flex-col w-56 text-white">
+              <DropdownMenuItem onClick={() => { setReplyingTo({ name: member.user.name, content }); setMenuOpen(false); }} className="cursor-pointer font-medium hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                <Reply className="w-4 h-4 mr-2" />
+                Reply
+              </DropdownMenuItem>
+              {canEditMessage && (
+                <DropdownMenuItem
+                  onClick={() => {
+                    setIsEditing(true);
+                    setMenuOpen(false);
+                  }}
+                  className="cursor-pointer font-medium hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                >
+                  <Edit className="w-4 h-4 mr-2" />
+                  Edit
+                </DropdownMenuItem>
+              )}
+              {canDeleteMessage && (
+                <DropdownMenuItem onClick={onPinToggle} className="cursor-pointer font-medium hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                  <Pin className="w-4 h-4 mr-2" />
+                  {isPinned ? "Unpin" : "Pin"}
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuItem onClick={onCopyText} className="cursor-pointer font-medium hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                <Copy className="w-4 h-4 mr-2" />
+                Copy Text
+              </DropdownMenuItem>
+              {canDeleteMessage && (
+                <>
+                  <DropdownMenuSeparator className="bg-zinc-200 dark:bg-zinc-700" />
+                  <DropdownMenuItem
+                    onClick={() => {
+                      onOpen("deleteMessage", {
+                        apiUrl: `${socketUrl}/${id}`,
+                        query: socketQuery,
+                      });
+                      setMenuOpen(false);
+                    }}
+                    className="text-rose-500 focus:text-rose-500 cursor-pointer font-medium hover:bg-rose-500/10 dark:hover:bg-rose-500/10"
+                  >
+                    <Trash className="w-4 h-4 mr-2" />
+                    Delete
+                  </DropdownMenuItem>
+                </>
+              )}
+            </div>
+          </div>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {isReply && (
+        <div className="flex items-center gap-x-2 text-xs text-zinc-500 dark:text-zinc-400 mb-1 relative w-full pl-[48px] pr-4">
+          <div className="absolute left-[18px] top-[calc(50%-1px)] w-[26px] h-[24px] border-l-2 border-t-2 border-zinc-400 dark:border-zinc-500 rounded-tl-md" />
+          <span className="font-semibold text-zinc-600 dark:text-zinc-300 hover:underline cursor-pointer flex-shrink-0">
+            @{replyName}
+          </span>
+          <span className="truncate min-w-0">
+            {replyContent}
+          </span>
+        </div>
+      )}
       <div className="group flex gap-x-2 items-start w-full min-w-0">
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
           <UserAvatar
@@ -159,6 +353,11 @@ export const ChatItem = ({
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               {timestamp}
             </span>
+            {isPinned && (
+              <ActionTooltip label="Pinned">
+                <Pin className="h-4 w-4 ml-2 fill-zinc-500 text-zinc-500" />
+              </ActionTooltip>
+            )}
           </div>
           {showAsImage && (
             <a
@@ -217,7 +416,7 @@ export const ChatItem = ({
                   // Add more custom components as needed for styling
                 }}
               >
-                {content}
+                {mainContent}
               </ReactMarkdown>
               {isUpdated && !deleted && (
                 <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
@@ -258,29 +457,31 @@ export const ChatItem = ({
               </span>
             </Form>
           )}
+
+          {Object.keys(groupedReactions).length > 0 && (
+            <div className="flex items-center gap-1 mt-2 flex-wrap">
+              {Object.entries(groupedReactions).map(([emoji, rList]) => {
+                const hasReacted = rList.some(r => r.memberId === currentMember.id);
+                return (
+                  <button
+                    key={emoji}
+                    onClick={() => onReactionToggle(emoji)}
+                    className={cn(
+                      "flex items-center gap-x-1 px-1.5 py-0.5 rounded-md text-xs border bg-secondary/50 hover:bg-secondary/80 transition",
+                      hasReacted ? "border-indigo-500 bg-indigo-500/10 dark:bg-indigo-500/20" : "border-zinc-300 dark:border-zinc-700"
+                    )}
+                  >
+                    <span>{emoji}</span>
+                    <span className={cn("font-medium", hasReacted ? "text-indigo-500" : "text-zinc-500")}>
+                      {rList.length}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
-      {canDeleteMessage && (
-        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
-          {canEditMessage && (
-            <ActionTooltip label="Edit">
-              <Edit
-                onClick={() => setIsEditing(true)}
-                className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-              />
-            </ActionTooltip>
-          )}
-          <ActionTooltip label="Delete">
-            <Trash
-              onClick={() => onOpen("deleteMessage", {
-                apiUrl: `${socketUrl}/${id}`,
-                query: socketQuery,
-              })}
-              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-            />
-          </ActionTooltip>
-        </div>
-      )}
     </div>
   )
 }

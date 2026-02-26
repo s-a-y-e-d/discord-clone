@@ -41,6 +41,15 @@ export async function GET(
             include: {
               user: true,
             }
+          },
+          reactions: {
+            include: {
+              member: {
+                include: {
+                  user: true,
+                }
+              }
+            }
           }
         },
         orderBy: {
@@ -57,6 +66,15 @@ export async function GET(
           member: {
             include: {
               user: true,
+            }
+          },
+          reactions: {
+            include: {
+              member: {
+                include: {
+                  user: true,
+                }
+              }
             }
           }
         },

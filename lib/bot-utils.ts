@@ -123,6 +123,9 @@ export async function getServerImportantFiles(serverId: string) {
       },
       isImportant: true,
       deleted: false,
+      fileUrl: {
+        not: null,
+      }
     },
     orderBy: {
       createdAt: "desc",

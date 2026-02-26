@@ -77,6 +77,15 @@ export default async function handler(
           include: {
             user: true
           }
+        },
+        reactions: {
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            }
+          }
         }
       }
     });
@@ -143,7 +152,10 @@ export default async function handler(
               channelId: channelId,
               memberId: botMember.id,
             },
-            include: { member: { include: { user: true } } },
+            include: {
+              member: { include: { user: true } },
+              reactions: { include: { member: { include: { user: true } } } }
+            },
           });
           io?.emit(channelKey, botMessage);
           io?.emit(activityKey, { channelId, senderMemberId: botMember.id });
@@ -151,7 +163,12 @@ export default async function handler(
           return;
         }
 
-        const botResponseText = await generateBotResponse(prompt, formattedHistory, decryptedKey);
+        const messageMember = await db.member.findUnique({
+          where: { id: member.id },
+          include: { user: true }
+        });
+        const senderName = messageMember?.user?.name || "User";
+        const botResponseText = await generateBotResponse(`${senderName}: ${prompt}`, formattedHistory, decryptedKey);
 
         const botMessage = await db.message.create({
           data: {
@@ -165,6 +182,15 @@ export default async function handler(
                 user: true,
               },
             },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
+            }
           },
         });
 

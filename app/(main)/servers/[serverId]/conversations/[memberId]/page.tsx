@@ -8,6 +8,7 @@ import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
 import { MediaRoom } from "@/components/media-room";
 import { MobileRightSidebarContent } from "@/components/mobile-right-sidebar-content";
+import { ChatPinnedMessages } from "@/components/chat/chat-pinned-messages";
 
 interface MemberIdPageProps {
   params: Promise<{
@@ -79,6 +80,18 @@ const MemberIdPage = async (props: MemberIdPageProps) => {
         serverId={params.serverId}
         type="conversation"
         rightSidebar={<MobileRightSidebarContent serverId={params.serverId} />}
+        pinnedMessagesSidebar={
+          <ChatPinnedMessages
+            chatId={conversation.id}
+            type="conversation"
+            apiUrl={`/api/conversations/${conversation.id}/pinned`}
+            socketUrl="/api/socket/direct-messages"
+            socketQuery={{
+              conversationId: conversation.id,
+            }}
+            currentMember={currentMember}
+          />
+        }
       />
       {searchParams.video && (
         <MediaRoom

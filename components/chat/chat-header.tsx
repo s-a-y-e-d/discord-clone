@@ -1,13 +1,17 @@
 "use client";
 
-import { Hash, ArrowLeft } from "lucide-react";
+import { Hash, ArrowLeft, Pin } from "lucide-react";
 import Link from "next/link";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useState, useEffect } from "react";
 
 import UserAvatar from "@/components/user-avatar";
 import { MobileRightSidebarToggle } from "@/components/mobile-right-sidebar-toggle";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 import { useModal } from "@/hooks/use-modal-store";
-import { Member, User } from "@/generated/prisma";
+import { useScrollToMessage } from "@/hooks/use-scroll-to-message";
+import { User } from "@/generated/prisma";
 
 interface ChatHeaderProps {
   serverId: string;
@@ -15,6 +19,7 @@ interface ChatHeaderProps {
   type: "channel" | "conversation";
   imageUrl?: string;
   rightSidebar?: React.ReactNode;
+  pinnedMessagesSidebar?: React.ReactNode;
   showUnlockAi?: boolean;
   profile?: User;
 }
@@ -25,10 +30,22 @@ export const ChatHeader = ({
   type,
   imageUrl,
   rightSidebar,
+  pinnedMessagesSidebar,
   showUnlockAi,
   profile,
 }: ChatHeaderProps) => {
   const { onOpen } = useModal();
+  const [pinOpen, setPinOpen] = useState(false);
+
+  // Close the pinned messages sheet when a pinned message is clicked
+  useEffect(() => {
+    const unsub = useScrollToMessage.subscribe((state) => {
+      if (state.targetMessageId) {
+        setPinOpen(false);
+      }
+    });
+    return unsub;
+  }, []);
 
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-[#1f2128] border-b-2">
@@ -60,6 +77,21 @@ export const ChatHeader = ({
           >
             Unlock AI Features
           </button>
+        )}
+        {pinnedMessagesSidebar && (
+          <Sheet open={pinOpen} onOpenChange={setPinOpen}>
+            <SheetTrigger asChild>
+              <button className="mr-2 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition">
+                <Pin className="h-5 w-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="p-0 w-80">
+              <VisuallyHidden>
+                <SheetTitle>Pinned Messages</SheetTitle>
+              </VisuallyHidden>
+              {pinnedMessagesSidebar}
+            </SheetContent>
+          </Sheet>
         )}
         {rightSidebar && (
           <MobileRightSidebarToggle rightSidebar={rightSidebar} />

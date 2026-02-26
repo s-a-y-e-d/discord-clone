@@ -120,6 +120,7 @@ model Member {
 
   conversationsInitiated Conversation[] @relation("MemberOne")
   conversationsReceived  Conversation[] @relation("MemberTwo")
+  reactions              Reaction[]
 
   @@index([userId])
   @@index([serverId])
@@ -157,6 +158,7 @@ model Message {
 
   fileUrl     String? @db.Text
   isImportant Boolean @default(false)
+  isPinned    Boolean @default(false)
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -168,6 +170,8 @@ model Message {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  reactions Reaction[]
 
   @@index([memberId])
   @@index([channelId])
@@ -193,6 +197,7 @@ model DirectMessage {
   content     String  @db.Text
   fileUrl     String? @db.Text
   isImportant Boolean @default(false)
+  isPinned    Boolean @default(false)
 
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
@@ -204,6 +209,8 @@ model DirectMessage {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  reactions Reaction[]
 
   @@index([conversationId])
   @@index([memberId])
@@ -235,4 +242,27 @@ model ConversationReadStatus {
   @@unique([userId, conversationId])
   @@index([userId])
   @@index([conversationId])
+}
+
+model Reaction {
+  id    String @id @default(cuid())
+  emoji String
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  messageId String?
+  message   Message? @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  directMessageId String?
+  directMessage   DirectMessage? @relation(fields: [directMessageId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, messageId, emoji])
+  @@unique([memberId, directMessageId, emoji])
+  @@index([memberId])
+  @@index([messageId])
+  @@index([directMessageId])
 }

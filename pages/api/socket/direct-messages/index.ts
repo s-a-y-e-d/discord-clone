@@ -70,6 +70,15 @@ export default async function handler(
           include: {
             user: true
           }
+        },
+        reactions: {
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            }
+          }
         }
       }
     });
@@ -130,7 +139,10 @@ export default async function handler(
               conversationId: conversationId as string,
               memberId: otherMember.id,
             },
-            include: { member: { include: { user: true } } },
+            include: {
+              member: { include: { user: true } },
+              reactions: { include: { member: { include: { user: true } } } }
+            },
           });
           res?.socket?.server?.io?.emit(channelKey, botMessage);
           res?.socket?.server?.io?.emit(activityKey, { memberId: otherMember.id, otherMemberId: member.id, conversationId });
@@ -138,7 +150,8 @@ export default async function handler(
           return;
         }
 
-        const botResponseText = await generateBotResponse(content, formattedHistory, decryptedKey);
+        const senderName = member.user?.name || "User";
+        const botResponseText = await generateBotResponse(`${senderName}: ${content}`, formattedHistory, decryptedKey);
 
         const botMessage = await db.directMessage.create({
           data: {
@@ -152,6 +165,15 @@ export default async function handler(
                 user: true,
               },
             },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
+            }
           },
         });
 

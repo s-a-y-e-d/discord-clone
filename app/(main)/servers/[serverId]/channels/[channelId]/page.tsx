@@ -8,6 +8,7 @@ import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 import { ChannelType } from "@/generated/prisma"; // Or from @prisma/client
 import { MobileRightSidebarContent } from "@/components/mobile-right-sidebar-content";
+import { ChatPinnedMessages } from "@/components/chat/chat-pinned-messages";
 
 interface ChannelIdPageProps {
   params: Promise<{
@@ -78,6 +79,19 @@ const ChannelIdPage = async (props: ChannelIdPageProps) => {
         showUnlockAi={showUnlockAi}
         profile={profile}
         rightSidebar={<MobileRightSidebarContent serverId={channel.serverId} />}
+        pinnedMessagesSidebar={
+          <ChatPinnedMessages
+            chatId={channel.id}
+            type="channel"
+            apiUrl={`/api/channels/${channel.id}/pinned`}
+            socketUrl="/api/socket/messages"
+            socketQuery={{
+              channelId: channel.id,
+              serverId: channel.serverId,
+            }}
+            currentMember={member}
+          />
+        }
       />
       {channel.type === ChannelType.TEXT && (
         <>

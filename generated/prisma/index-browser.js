@@ -204,6 +204,7 @@ exports.Prisma.MessageScalarFieldEnum = {
   content: 'content',
   fileUrl: 'fileUrl',
   isImportant: 'isImportant',
+  isPinned: 'isPinned',
   memberId: 'memberId',
   channelId: 'channelId',
   deleted: 'deleted',
@@ -222,6 +223,7 @@ exports.Prisma.DirectMessageScalarFieldEnum = {
   content: 'content',
   fileUrl: 'fileUrl',
   isImportant: 'isImportant',
+  isPinned: 'isPinned',
   conversationId: 'conversationId',
   memberId: 'memberId',
   deleted: 'deleted',
@@ -241,6 +243,16 @@ exports.Prisma.ConversationReadStatusScalarFieldEnum = {
   userId: 'userId',
   conversationId: 'conversationId',
   lastReadAt: 'lastReadAt'
+};
+
+exports.Prisma.ReactionScalarFieldEnum = {
+  id: 'id',
+  emoji: 'emoji',
+  memberId: 'memberId',
+  messageId: 'messageId',
+  directMessageId: 'directMessageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -281,7 +293,8 @@ exports.Prisma.ModelName = {
   Conversation: 'Conversation',
   DirectMessage: 'DirectMessage',
   ChannelReadStatus: 'ChannelReadStatus',
-  ConversationReadStatus: 'ConversationReadStatus'
+  ConversationReadStatus: 'ConversationReadStatus',
+  Reaction: 'Reaction'
 };
 
 /**

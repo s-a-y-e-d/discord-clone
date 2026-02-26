@@ -14,7 +14,7 @@ export default async function handler(
 
   try {
     const profile = await currentProfilePages(req);
-    const { content } = req.body;
+    const { content, emoji } = req.body;
     const { serverId, channelId, messageId } = req.query;
 
     if (!profile) return res.status(401).json({ error: "Unauthorized" });
@@ -69,6 +69,15 @@ export default async function handler(
           include: {
             user: true
           }
+        },
+        reactions: {
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            }
+          }
         }
       }
     });
@@ -81,9 +90,9 @@ export default async function handler(
     const isModerator = member.role === MemberRole.MODERATOR;
     const canModify = isMessageOwner || isAdmin || isModerator;
 
-    if (!canModify) return res.status(401).json({ error: "Unauthorized" });
-
     if (req.method === "DELETE") {
+      if (!canModify) return res.status(401).json({ error: "Unauthorized" });
+
       message = await db.message.update({
         where: {
           id: messageId as string
@@ -98,30 +107,114 @@ export default async function handler(
             include: {
               user: true
             }
+          },
+          reactions: {
+            include: {
+              member: {
+                include: {
+                  user: true
+                }
+              }
+            }
           }
         }
       });
     }
 
     if (req.method === "PATCH") {
-      if (!isMessageOwner)
-        return res.status(401).json({ error: "Unauthorized" });
+      if (emoji) {
+        // Toggle reaction
+        const existingReaction = await db.reaction.findFirst({
+          where: {
+            messageId: messageId as string,
+            memberId: member.id,
+            emoji
+          }
+        });
 
-      message = await db.message.update({
-        where: {
-          id: messageId as string
-        },
-        data: {
-          content
-        },
-        include: {
-          member: {
-            include: {
-              user: true
+        if (existingReaction) {
+          await db.reaction.delete({
+            where: {
+              id: existingReaction.id
+            }
+          });
+        } else {
+          await db.reaction.create({
+            data: {
+              messageId: messageId as string,
+              memberId: member.id,
+              emoji
+            }
+          });
+        }
+
+        // Refetch message to get updated reactions
+        message = await db.message.findFirst({
+          where: {
+            id: messageId as string,
+          },
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
             }
           }
-        }
-      });
+        });
+      }
+
+      // Handle pin toggle and content edit (outside emoji block)
+      const isPinnedToggle = req.body.isPinned !== undefined;
+      if (isPinnedToggle && !canModify) {
+        return res.status(401).json({ error: "Unauthorized to pin/unpin" });
+      }
+
+      const dataToUpdate: { content?: string; isPinned?: boolean; updatedAt?: Date } = {};
+      if (content !== undefined && isMessageOwner) {
+        dataToUpdate.content = content;
+      }
+      if (isPinnedToggle) {
+        dataToUpdate.isPinned = req.body.isPinned;
+      }
+
+      // Preserve updatedAt when only pin status changes (no content edit)
+      if (isPinnedToggle && !dataToUpdate.content) {
+        dataToUpdate.updatedAt = message!.updatedAt;
+      }
+
+      if (Object.keys(dataToUpdate).length > 0) {
+        message = await db.message.update({
+          where: {
+            id: messageId as string
+          },
+          data: dataToUpdate,
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
     }
 
     const updateKey = `chat:${channelId}:messages:update`;

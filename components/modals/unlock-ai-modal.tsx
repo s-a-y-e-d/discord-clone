@@ -55,8 +55,12 @@ export const UnlockAiModal = () => {
       form.reset();
       router.refresh();
       onClose();
-    } catch (error) {
+    } catch (error: unknown) {
       console.log(error);
+      const message = (error instanceof Error && 'response' in error)
+        ? (error as { response?: { data?: string } }).response?.data
+        : undefined;
+      alert(message || "Something went wrong saving your API key.");
     }
   };
 

@@ -14,7 +14,7 @@ export default async function handler(
 
   try {
     const profile = await currentProfilePages(req);
-    const { content } = req.body;
+    const { content, emoji } = req.body;
     const { directMessageId, conversationId } = req.query;
 
     if (!profile) return res.status(401).json({ error: "Unauthorized" });
@@ -57,6 +57,15 @@ export default async function handler(
           include: {
             user: true
           }
+        },
+        reactions: {
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            }
+          }
         }
       }
     });
@@ -69,9 +78,9 @@ export default async function handler(
     const isModerator = member.role === MemberRole.MODERATOR;
     const canModify = isMessageOwner || isAdmin || isModerator;
 
-    if (!canModify) return res.status(401).json({ error: "Unauthorized" });
-
     if (req.method === "DELETE") {
+      if (!canModify) return res.status(401).json({ error: "Unauthorized" });
+
       directMessage = await db.directMessage.update({
         where: {
           id: directMessageId as string
@@ -86,30 +95,114 @@ export default async function handler(
             include: {
               user: true
             }
+          },
+          reactions: {
+            include: {
+              member: {
+                include: {
+                  user: true
+                }
+              }
+            }
           }
         }
       });
     }
 
     if (req.method === "PATCH") {
-      if (!isMessageOwner)
-        return res.status(401).json({ error: "Unauthorized" });
+      if (emoji) {
+        // Toggle reaction
+        const existingReaction = await db.reaction.findFirst({
+          where: {
+            directMessageId: directMessageId as string,
+            memberId: member.id,
+            emoji
+          }
+        });
 
-      directMessage = await db.directMessage.update({
-        where: {
-          id: directMessageId as string
-        },
-        data: {
-          content
-        },
-        include: {
-          member: {
-            include: {
-              user: true
+        if (existingReaction) {
+          await db.reaction.delete({
+            where: {
+              id: existingReaction.id
+            }
+          });
+        } else {
+          await db.reaction.create({
+            data: {
+              directMessageId: directMessageId as string,
+              memberId: member.id,
+              emoji
+            }
+          });
+        }
+
+        // Refetch message to get updated reactions
+        directMessage = await db.directMessage.findFirst({
+          where: {
+            id: directMessageId as string,
+          },
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
             }
           }
-        }
-      });
+        });
+      }
+
+      // Handle pin toggle and content edit (outside emoji block)
+      const isPinnedToggle = req.body.isPinned !== undefined;
+      if (isPinnedToggle && !canModify) {
+        return res.status(401).json({ error: "Unauthorized to pin/unpin" });
+      }
+
+      const dataToUpdate: { content?: string; isPinned?: boolean; updatedAt?: Date } = {};
+      if (content !== undefined && isMessageOwner) {
+        dataToUpdate.content = content;
+      }
+      if (isPinnedToggle) {
+        dataToUpdate.isPinned = req.body.isPinned;
+      }
+
+      // Preserve updatedAt when only pin status changes (no content edit)
+      if (isPinnedToggle && !dataToUpdate.content) {
+        dataToUpdate.updatedAt = directMessage!.updatedAt;
+      }
+
+      if (Object.keys(dataToUpdate).length > 0) {
+        directMessage = await db.directMessage.update({
+          where: {
+            id: directMessageId as string
+          },
+          data: dataToUpdate,
+          include: {
+            member: {
+              include: {
+                user: true
+              }
+            },
+            reactions: {
+              include: {
+                member: {
+                  include: {
+                    user: true
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
     }
 
     const updateKey = `chat:${conversationId}:messages:update`;

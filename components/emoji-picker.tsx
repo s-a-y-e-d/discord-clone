@@ -13,17 +13,25 @@ import {
 
 interface EmojiPickerProps {
   onChange: (value: string) => void;
+  children?: React.ReactNode;
 }
 
 export const EmojiPicker = ({
   onChange,
+  children
 }: EmojiPickerProps) => {
   const { resolvedTheme } = useTheme();
 
   return (
     <Popover>
-      <PopoverTrigger>
-        <Smile className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition" />
+      <PopoverTrigger asChild>
+        {children ? (
+          children
+        ) : (
+          <button type="button" className="flex items-center">
+            <Smile className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition" />
+          </button>
+        )}
       </PopoverTrigger>
       <PopoverContent
         side="right"
