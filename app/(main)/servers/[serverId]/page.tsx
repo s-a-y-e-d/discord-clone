@@ -54,11 +54,11 @@ const ServerIdPage = async (props: ServerIdPageProps) => {
       <DesktopRedirect url={channelUrl} />
 
       {/* On mobile, show NavigationSidebar + ServerSidebar side by side */}
-      <div className="md:hidden h-full flex">
+      <div className="md:hidden h-full flex overflow-hidden">
         <div className="w-18 flex-shrink-0">
           <NavigationSidebar />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 min-w-0 h-full">
           <ServerSidebar serverId={params.serverId} />
         </div>
       </div>

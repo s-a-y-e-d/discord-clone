@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
-import { Loader2, ServerCrash, Hash } from "lucide-react";
+import { Loader2, ServerCrash } from "lucide-react";
 import { Message, Member, User, Reaction } from "@/generated/prisma";
 import { ChatItem } from "./chat-item";
 import { useScrollToMessage } from "@/hooks/use-scroll-to-message";
